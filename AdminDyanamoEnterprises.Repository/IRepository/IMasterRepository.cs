@@ -9,6 +9,8 @@ namespace AdminDyanamoEnterprises.Repository
 {
     public interface IMasterRepository
     {
-        public int AddCategory(CategoryType categoryType);
+       
+        public void AddCategory(CategoryTypePageViewModel addCategoryType);
+        public List<CategoryType> GetAllListType();
     }
 }

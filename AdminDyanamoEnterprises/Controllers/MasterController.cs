@@ -2,6 +2,7 @@
 using AdminDyanamoEnterprises.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace AdminDyanamoEnterprises.Controllers
 {
@@ -29,17 +30,24 @@ namespace AdminDyanamoEnterprises.Controllers
         // GET: MasterController/Category
         public ActionResult CategoryType()
         {
+            CategoryTypePageViewModel model = new CategoryTypePageViewModel
+            {
+                AddCategory = new AddCategoryType(), // Empty form
+                CategoryTypeList = _imasterrepository.GetAllListType() // From database or service
+            };
             return View();
+            /* return View(model);*/
         }
 
         // POST: MasterController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CategoryType(AddCategoryType addCategoryType)
+        public ActionResult CategoryType(CategoryTypePageViewModel addCategoryType)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _imasterrepository.AddCategory(addCategoryType);
+                return View();
             }
             catch
             {

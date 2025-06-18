@@ -1,4 +1,6 @@
 using AdminDyanamoEnterprises.Repository;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
-
+builder.Services.AddNotyf(config =>
+{
+    config.DurationInSeconds = 20;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopRight;
+}
+);
 
 var app = builder.Build();
 
@@ -30,5 +38,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
+app.UseNotyf();
 app.Run();

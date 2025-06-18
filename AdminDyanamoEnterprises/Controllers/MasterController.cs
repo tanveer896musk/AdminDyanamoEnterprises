@@ -1,5 +1,6 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
 using AdminDyanamoEnterprises.Repository;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
@@ -9,15 +10,17 @@ namespace AdminDyanamoEnterprises.Controllers
     public class MasterController : Controller
     {
         private readonly IMasterRepository _imasterrepository;
+        private readonly INotyfService _notyf;
 
-        public MasterController(IMasterRepository imasterrepository)
+        public MasterController(IMasterRepository imasterrepository, INotyfService notyf)
         {
             _imasterrepository = imasterrepository;
+            _notyf = notyf;
         }
         // GET: MasterController
         public ActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -46,8 +49,9 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                _imasterrepository.AddCategory(addCategoryType);
-                return View();
+                _imasterrepository.InsertorUpdateCategoryType(addCategoryType);
+                _notyf.Success("Success Notification");
+                return RedirectToAction("CategoryType");
             }
             catch
             {
@@ -55,40 +59,15 @@ namespace AdminDyanamoEnterprises.Controllers
             }
         }
 
-        // GET: MasterController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: MasterController/Edit/5
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: MasterController/Delete/5
-        /*  public ActionResult Delete(int id)
-          {
-              return View();
-          }*/
-
-        // POST: MasterController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id,DeleteCategoryType dt)
-        {
-            dt.CategoryID = id;
-            _imasterrepository.DeleteCategory(dt);
+            _imasterrepository.DeleteCategory(id);
             return Json(new { success = true });
         }
 

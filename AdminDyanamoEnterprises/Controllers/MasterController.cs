@@ -50,7 +50,7 @@ namespace AdminDyanamoEnterprises.Controllers
             try
             {
                 _imasterrepository.InsertorUpdateCategoryType(addCategoryType);
-                _notyf.Success("Success Notification");
+                _notyf.Success("Success ");
                 return RedirectToAction("CategoryType");
             }
             catch
@@ -60,11 +60,7 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
 
-
-
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             _imasterrepository.DeleteCategory(id);

@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using Microsoft.Data.SqlClient; 
 using Microsoft.Extensions.Configuration;
 using System;
@@ -90,6 +91,69 @@ namespace AdminDyanamoEnterprises.Repository
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
-        }    
+        }
+        public void InsertOrUpdateOrDeleteFabric(FabricTypePageViewModel FabricType)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+
+                using (SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@FabricId", FabricType.AddFabric.FabricID <= 0 ? 0 : FabricType.AddFabric.FabricID);
+                    cmd.Parameters.AddWithValue("@FAbricName", FabricType.AddFabric.FabricName);
+                    cmd.Parameters.AddWithValue("@Action", DBNull.Value); // not needed unless delete
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public List<FabricType> GetAllFabricType()
+        {
+            List<FabricType> FabricNames = new List<FabricType>();
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@Action", "select");
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    // Add each row's value to your list
+                    FabricType obj = new FabricType()
+                    {
+                        FabricName = dr["FabricName"].ToString(),
+                        FabricID = Convert.ToInt32(dr["FabricID"])
+                    };
+
+                    FabricNames.Add(obj);
+                    /*categorynames.Add(new CategoryType
+                    {
+                        Name = dr["CategoryName"].ToString()
+                    });*/
+                }
+            }
+            return FabricNames;
+        }
+        public void DeleteFabric(int id)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Action", "delete");
+                cmd.Parameters.AddWithValue("@FabricId", id);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

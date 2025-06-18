@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -72,6 +73,18 @@ namespace AdminDyanamoEnterprises.Controllers
            
             return View();
            
+        }
+
+        // GET: MasterFabricController/Create
+        public ActionResult FabricType()
+        {
+          /*  FabricTypePageViewModel viewModel = new FabricTypePageViewModel()
+            {
+                AddFabric = new AddFabricType(),
+                FabricList = _imasterFabricRepository.GetAllListType()
+
+            };*/
+            return View();
         }
     }
 }

@@ -66,6 +66,12 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository.DeleteCategory(id);
             return Json(new { success = true });
         }
-
+        
+        public ActionResult MasterCategoryType()
+        {
+           
+            return View();
+           
+        }
     }
 }

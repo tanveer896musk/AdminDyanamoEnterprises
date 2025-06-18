@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -66,12 +67,12 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository.DeleteCategory(id);
             return Json(new { success = true });
         }
-        
-        public ActionResult MasterCategoryType()
+
+        public ActionResult SubCategoryType()
         {
-           
-            return View();
-           
+            SubCategoryTypeJoinModel subCategory= new SubCategoryTypeJoinModel();
+            subCategory.CategoryList = _imasterrepository.GetAllListType();
+            return View(subCategory);
         }
     }
 }

@@ -31,14 +31,15 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="card-body pt-0">
-                            @using (Html.BeginForm("CategoryType", "Master", FormMethod.Post))
+                            @using (Html.BeginForm("SubCategoryType", "Master", FormMethod.Post))
                             {
                                 @Html.HiddenFor(model => model.AddCategory.CategoryID, new { id = "editCategoryId" })
 
                                 <div class="row align-items-end">
                                     <div class="col-md-4 mb-3">
-                                        <label class="form-label">@Html.DisplayNameFor(model => model.AddCategory.CategoryID)</label>
+                                        <label class="form-label">@Html.DisplayNameFor(model => model.AddCategory.CategoryName)</label>
                                         @Html.TextBoxFor(model => model.AddCategory.CategoryName, new { @class = "form-control", id = "editCategoryName" })
+
                                     </div>
 
                                     <div class="col-md-4 mb-3">

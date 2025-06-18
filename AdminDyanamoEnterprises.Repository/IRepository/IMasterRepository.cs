@@ -12,5 +12,7 @@ namespace AdminDyanamoEnterprises.Repository
        
         public void AddCategory(CategoryTypePageViewModel addCategoryType);
         public List<CategoryType> GetAllListType();
+
+        public void DeleteCategory(DeleteCategoryType CategoryID);
     }
 }

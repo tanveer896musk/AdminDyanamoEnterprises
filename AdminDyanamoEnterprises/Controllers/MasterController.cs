@@ -33,9 +33,9 @@ namespace AdminDyanamoEnterprises.Controllers
             CategoryTypePageViewModel model = new CategoryTypePageViewModel
             {
                 AddCategory = new AddCategoryType(), // Empty form
-                CategoryTypeList = _imasterrepository.GetAllListType() // From database or service
+                CategoryList = _imasterrepository.GetAllListType() // From database or service
             };
-            return View();
+            return View(model);
             /* return View(model);*/
         }
 
@@ -77,24 +77,20 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // GET: MasterController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        /*  public ActionResult Delete(int id)
+          {
+              return View();
+          }*/
 
         // POST: MasterController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id,DeleteCategoryType dt)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            dt.CategoryID = id;
+            _imasterrepository.DeleteCategory(dt);
+            return Json(new { success = true });
         }
+
     }
 }

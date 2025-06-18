@@ -8,7 +8,8 @@ namespace AdminDyanamoEnterprises.DTOs
 {
     public class CategoryType
     {
-        public string? Name { get; set; }
+        public string ? Name { get; set; }
+        public int CategoryID { get; set; }
     }
     public class AddCategoryType
     {
@@ -18,10 +19,15 @@ namespace AdminDyanamoEnterprises.DTOs
     {
         public string ? Name { get; set; }
     }
+    public class DeleteCategoryType
+    {
+        public int ? CategoryID { get; set; }
+    }
+
     public class CategoryTypePageViewModel
     {
         public AddCategoryType AddCategory { get; set; } = new(); 
-        public List<CategoryType> CategoryTypeList { get; set; } = new();
+        public List<CategoryType> CategoryList { get; set; } = new();
     }
 
 }

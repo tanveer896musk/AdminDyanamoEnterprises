@@ -66,7 +66,8 @@ namespace AdminDyanamoEnterprises.Repository
                     // Add each row's value to your list
                     CategoryType obj = new CategoryType()
                     {
-                        Name = dr["CategoryName"].ToString()
+                        Name = dr["CategoryName"].ToString(),
+                        CategoryID = Convert.ToInt32(dr["CategoryID"])
                     };
                     
                     categorynames.Add(obj);
@@ -77,6 +78,18 @@ namespace AdminDyanamoEnterprises.Repository
                 }
             }
             return categorynames;
+        }
+
+        public void DeleteCategory(DeleteCategoryType model)
+        {
+            using (SqlConnection con = new SqlConnection(SqlCon()))
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertCategory", con);
+                cmd.Parameters.AddWithValue("@Action", "delete");
+                cmd.Parameters.AddWithValue("@CategoryId", model.CategoryID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
 
 

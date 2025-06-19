@@ -23,10 +23,12 @@ namespace AdminDyanamoEnterprises.Repository
         public void DeletePattern(int id);
 
 
+
         public void InsertOrUpdateSubCategory(SubAddCategoryType model);
-        public void UpdateSubCategory(SubAddCategoryType model);
+        public void DeleteSubCategory(int subCategoryId);
 
         public List<SubCategoryType> GetAllSubCategoriesWithCategoryName();
+
 
     }
 }

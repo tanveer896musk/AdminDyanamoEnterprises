@@ -151,7 +151,7 @@ namespace AdminDyanamoEnterprises.Repository
                 cmd.ExecuteNonQuery();
             }
         }
-        }
+        
         public void InsertOrUpdateSubCategory(SubAddCategoryType model)
         {
             using (SqlConnection conn = new SqlConnection(sqlConnection()))
@@ -180,7 +180,7 @@ namespace AdminDyanamoEnterprises.Repository
 
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete_MasterSubCategory", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Action", "Select");
@@ -195,6 +195,7 @@ namespace AdminDyanamoEnterprises.Repository
                         list.Add(new SubCategoryType
                         {
                             SubCategoryName = dr["SubCategoryName"].ToString(),
+                            SubCategoryID = Convert.ToInt32(dr["SubCategoryID"]),
                             CategoryName = new CategoryType
                             {
                                 CategoryName = dr["CategoryName"].ToString()
@@ -206,7 +207,18 @@ namespace AdminDyanamoEnterprises.Repository
 
             return list;
         }
+        public void DeleteSubCategory(int subCategoryId)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete_MasterSubCategory", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@SubCategoryId", subCategoryId);
+                cmd.Parameters.AddWithValue("@Action", "delete");
 
-
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

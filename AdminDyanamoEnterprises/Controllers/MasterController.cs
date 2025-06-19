@@ -84,17 +84,8 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             if (model.SubAddCategory != null)
             {
-                if (model.SubAddCategory.SubCategoryID == null || model.SubAddCategory.SubCategoryID <= 0)
-                {
-                    // Insert logic
-                    _imasterrepository.InsertSubCategory(model.SubAddCategory);
-                    _notyf.Success("SuccessFully Data Entered");
-                }
-                else
-                {
-                    // Update logic
-                    _imasterrepository.UpdateSubCategory(model.SubAddCategory);
-                }
+                _imasterrepository.InsertOrUpdateSubCategory(model.SubAddCategory);
+                _notyf.Success("Sub-Category saved successfully.");
             }
 
             return RedirectToAction("SubCategoryType");
@@ -133,6 +124,20 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository.DeletePattern(id);
             return Json(new { success = true });
         }
+        [HttpPost]
+        public JsonResult DeleteSubCategory(int id)
+        {
+            try
+            {
+                _imasterrepository.DeleteSubCategory(id);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
 
     }
 }

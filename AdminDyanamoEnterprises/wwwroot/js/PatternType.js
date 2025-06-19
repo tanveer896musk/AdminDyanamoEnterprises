@@ -1,37 +1,39 @@
-﻿
-let categoryId = 0;
+﻿let patternId = 0;
 
-$(document).on('click', '.edit-category', function (e) {
+$(document).on('click', '.edit-pattern', function (e) {
     debugger
     e.preventDefault();
     let id = $(this).data('id');
     let name = $(this).data('name');
 
-    $('#editCategoryId').val(id);
-    $('#editCategoryName').val(name);
+    $('#editPatternId').val(id);
+    $('#editPatternName').val(name);
     $('#saveButton').text('Update'); // Optional: change button text
 });
 
 
-$(document).on('click', '.delete-category', function () {
-    categoryId = $(this).data('id');
+$(document).on('click', '.delete-pattern', function () {
+    patternId = $(this).data('id');
     let name = $(this).data('name');
     $('#deleteItemName').text(name);
     $('#deleteModal').modal('show');
 });
 
 $('#confirmDeleteBtn').click(function () {
+    let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
-        url: '/Master/Delete',
+        url: '/Master/DeletePattern',
         type: 'POST',
         data: {
-            id: categoryId,
-
+            id: patternId
+        },
+        headers: {
+            "RequestVerificationToken": token // ✅ Add token in header
         },
         success: function (response) {
             if (response.success) {
                 $('#deleteModal').modal('hide');
-                location.reload(); // or remove the row using JS
+                location.reload();
             } else {
                 alert("Error deleting");
             }
@@ -41,7 +43,3 @@ $('#confirmDeleteBtn').click(function () {
         }
     });
 });
-
-
-
-

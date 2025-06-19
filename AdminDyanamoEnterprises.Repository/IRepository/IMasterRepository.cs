@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,7 +16,12 @@ namespace AdminDyanamoEnterprises.Repository
         public List<CategoryType>GetAllListType();
 
         public void DeleteCategory(int id);
+        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel addPatternType);
 
-         
+        public List<PatternType> GetAllPatternType();
+
+        public void DeletePattern(int id);
+
+
     }
 }

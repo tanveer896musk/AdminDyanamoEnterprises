@@ -74,5 +74,39 @@ namespace AdminDyanamoEnterprises.Controllers
             subCategory.CategoryList = _imasterrepository.GetAllListType();
             return View(subCategory);
         }
+
+        public ActionResult PatternType()
+        {
+            PatternTypePageViewModel model = new PatternTypePageViewModel
+            {
+                AddPattern = new AddPatternType(), // Empty form
+                PatternList = _imasterrepository.GetAllPatternType() // From database or service
+            };
+            return View(model);
+            /* return View(model);*/
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PatternType(PatternTypePageViewModel addPatternType)
+        {
+            try
+            {
+                _imasterrepository.InsertOrUpdateOrDeletePattern(addPatternType);
+                _notyf.Success("Success ");
+                return RedirectToAction("PatternType");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeletePattern(int id)
+        {
+            _imasterrepository.DeletePattern(id);
+            return Json(new { success = true });
+        }
     }
 }

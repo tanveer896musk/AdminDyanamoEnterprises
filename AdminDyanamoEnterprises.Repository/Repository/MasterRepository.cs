@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using Microsoft.Data.SqlClient; 
 using Microsoft.Extensions.Configuration;
 using System;
@@ -90,6 +91,65 @@ namespace AdminDyanamoEnterprises.Repository
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
-        }    
+        }
+        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel PatternType)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@PatternId", PatternType.AddPattern.PatternID <= 0 ? 0 : PatternType.AddPattern.PatternID);
+                    cmd.Parameters.AddWithValue("@PatternName", PatternType.AddPattern.PatternName ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Action", PatternType.AddPattern.PatternID > 0 ? "update" : "insert");
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public List<PatternType> GetAllPatternType()
+        {
+            List<PatternType> PatternNames = new List<PatternType>();
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@Action", "select");
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                sda.Fill(dt);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    // Add each row's value to your list
+                    PatternType obj = new PatternType()
+                    {
+                        PatternName = dr["PatternName"].ToString(),
+                        PatternID = Convert.ToInt32(dr["PatternID"])
+                    };
+
+                    PatternNames.Add(obj);
+                }
+            }
+            return PatternNames;
+        }
+        public void DeletePattern(int id)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Action", "delete");
+                cmd.Parameters.AddWithValue("@PatternID", id);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

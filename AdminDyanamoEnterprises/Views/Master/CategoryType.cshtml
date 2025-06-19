@@ -31,7 +31,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="card-body pt-0">
-                            @using (Html.BeginForm("SubCategoryType", "Master", FormMethod.Post))
+                            @using (Html.BeginForm("CategoryType", "Master", FormMethod.Post))
                             {
                                 @Html.HiddenFor(model => model.AddCategory.CategoryID, new { id = "editCategoryId" })
 

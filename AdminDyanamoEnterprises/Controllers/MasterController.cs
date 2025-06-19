@@ -37,7 +37,7 @@ namespace AdminDyanamoEnterprises.Controllers
             CategoryTypePageViewModel model = new CategoryTypePageViewModel
             {
                 AddCategory = new AddCategoryType(), // Empty form
-                CategoryList = _imasterrepository.GetAllListType() // From database or service
+                CategoryList = _imasterrepository.GetAllCategoryType() // From database or service
             };
             return View(model);
             /* return View(model);*/
@@ -70,9 +70,35 @@ namespace AdminDyanamoEnterprises.Controllers
 
         public ActionResult SubCategoryType()
         {
-            SubCategoryTypeJoinModel subCategory= new SubCategoryTypeJoinModel();
-            subCategory.CategoryList = _imasterrepository.GetAllListType();
-            return View(subCategory);
+            SubCategoryTypeJoinModel model = new SubCategoryTypeJoinModel();
+            model.CategoryList = _imasterrepository.GetAllCategoryType();
+            /*model.SubCategoryList = _imasterrepository.GetAllSubCategoriesWithCategoryName(); */// Join query
+            model.SubCategoryList = _imasterrepository.GetAllSubCategoriesWithCategoryName();
+
+            return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubCategoryType(SubCategoryTypeJoinModel model)
+        {
+            if (model.SubAddCategory != null)
+            {
+                if (model.SubAddCategory.SubCategoryID == null || model.SubAddCategory.SubCategoryID <= 0)
+                {
+                    // Insert logic
+                    _imasterrepository.InsertSubCategory(model.SubAddCategory);
+                    _notyf.Success("SuccessFully Data Entered");
+                }
+                else
+                {
+                    // Update logic
+                    _imasterrepository.UpdateSubCategory(model.SubAddCategory);
+                }
+            }
+
+            return RedirectToAction("SubCategoryType");
+        }
+
     }
 }

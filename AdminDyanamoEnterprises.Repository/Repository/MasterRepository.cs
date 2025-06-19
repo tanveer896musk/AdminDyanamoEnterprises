@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using Microsoft.Data.SqlClient; 
 using Microsoft.Extensions.Configuration;
 using System;
@@ -31,7 +32,7 @@ namespace AdminDyanamoEnterprises.Repository
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
               
-                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteCategory", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -44,7 +45,7 @@ namespace AdminDyanamoEnterprises.Repository
             }
         }
 
-        public List<CategoryType>GetAllListType()
+        public List<CategoryType>GetAllCategoryType()
         {
             List<CategoryType> categorynames = new List<CategoryType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
@@ -90,6 +91,62 @@ namespace AdminDyanamoEnterprises.Repository
                 con.Open();
                 cmd.ExecuteNonQuery();
             }
-        }    
+        }
+        public void InsertOrUpdateSubCategory(SubAddCategoryType model)
+        {
+            using (SqlConnection conn = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete_MasterSubCategory", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Pass actual values
+                    cmd.Parameters.AddWithValue("@SubCategoryId", model.SubCategoryID ?? 0);
+                    cmd.Parameters.AddWithValue("@CategoryId", model.CategoryID);
+                    cmd.Parameters.AddWithValue("@SubCategoryName", model.SubCategoryName ?? string.Empty);
+
+                    // Do not pass @Action for insert/update
+                    // cmd.Parameters.AddWithValue("@Action", DBNull.Value); // optional
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<SubCategoryType> GetAllSubCategoriesWithCategoryName()
+        {
+            var list = new List<SubCategoryType>();
+
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Action", "Select");
+
+                    con.Open();
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        list.Add(new SubCategoryType
+                        {
+                            SubCategoryName = dr["SubCategoryName"].ToString(),
+                            CategoryName = new CategoryType
+                            {
+                                CategoryName = dr["CategoryName"].ToString()
+                            }
+                        });
+                    }
+                }
+            }
+
+            return list;
+        }
+
+
     }
 }

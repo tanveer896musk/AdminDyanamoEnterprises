@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,10 +13,14 @@ namespace AdminDyanamoEnterprises.Repository
     {
        
         public void InsertorUpdateCategoryType(CategoryTypePageViewModel addCategoryType);
-        public List<CategoryType>GetAllListType();
+        public List<CategoryType>GetAllCategoryType();
 
         public void DeleteCategory(int id);
 
-         
+        public void InsertOrUpdateSubCategory(SubAddCategoryType model);
+        public void UpdateSubCategory(SubAddCategoryType model);
+
+        public List<SubCategoryType> GetAllSubCategoriesWithCategoryName();
+
     }
 }

@@ -29,7 +29,7 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="card-body pt-0">
-                        @using (Html.BeginForm("CategoryType", "Master", FormMethod.Post))
+                        @using (Html.BeginForm("SubCategoryType", "Master", FormMethod.Post))
                         {
                             @Html.HiddenFor(model => model.SubAddCategory.SubCategoryID, new { id = "editCategoryId" })
 
@@ -65,21 +65,38 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr id="">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <a href="" class="edit-category">
-                                        <i class="las la-pen text-secondary fs-18"></i>
-                                    </a>
-                                    <a href="#" class="delete-category" data-id="" data-name="">
-                                        <i class="las la-trash-alt text-secondary fs-18"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @if (Model.SubCategoryList != null && Model.SubCategoryList.Any())
+                            {
+                                int serial = 1;
+                                foreach (var item in Model.SubCategoryList)
+                                {
+                                    <tr>
+                                        <td>@serial</td>
+                                        <td>@item.CategoryName?.CategoryName</td>
+                                        <td>@item.SubCategoryName</td>
+                                        <td>
+                                            <a href="#" class="edit-category"
+                                               data-id="@item.SubCategoryID"
+                                               data-name="@item.SubCategoryName"
+                                               data-categoryid="@item.CategoryID">
+                                                <i class="las la-pen text-secondary fs-18"></i>
+                                            </a>
+                                            <a href="#" class="delete-category" data-id="@item.SubCategoryID" data-name="@item.SubCategoryName">
+                                                <i class="las la-trash-alt text-secondary fs-18"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    serial++;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center text-danger">No sub-categories found.</td>
+                                </tr>
+                            }
                         </tbody>
+
                     </table>
                 </div>
             </div>

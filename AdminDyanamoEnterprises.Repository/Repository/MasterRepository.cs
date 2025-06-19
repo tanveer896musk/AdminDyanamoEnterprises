@@ -92,29 +92,29 @@ namespace AdminDyanamoEnterprises.Repository
                 cmd.ExecuteNonQuery();
             }
         }
-        public void InsertOrUpdateOrDeleteFabric(FabricTypePageViewModel FabricType)
+        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel PatternType)
         {
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-
-                using (SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con))
+                using (SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@FabricId", FabricType.AddFabric.FabricID <= 0 ? 0 : FabricType.AddFabric.FabricID);
-                    cmd.Parameters.AddWithValue("@FAbricName", FabricType.AddFabric.FabricName);
-                    cmd.Parameters.AddWithValue("@Action", DBNull.Value); // not needed unless delete
+                    cmd.Parameters.AddWithValue("@PatternId", PatternType.AddPattern.PatternID <= 0 ? 0 : PatternType.AddPattern.PatternID);
+                    cmd.Parameters.AddWithValue("@PatternName", PatternType.AddPattern.PatternName ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Action", PatternType.AddPattern.PatternID > 0 ? "update" : "insert");
+
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
             }
         }
-        public List<FabricType> GetAllFabricType()
+        public List<PatternType> GetAllPatternType()
         {
-            List<FabricType> FabricNames = new List<FabricType>();
+            List<PatternType> PatternNames = new List<PatternType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con);
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
@@ -126,30 +126,26 @@ namespace AdminDyanamoEnterprises.Repository
                 foreach (DataRow dr in dt.Rows)
                 {
                     // Add each row's value to your list
-                    FabricType obj = new FabricType()
+                    PatternType obj = new PatternType()
                     {
-                        FabricName = dr["FabricName"].ToString(),
-                        FabricID = Convert.ToInt32(dr["FabricID"])
+                        PatternName = dr["PatternName"].ToString(),
+                        PatternID = Convert.ToInt32(dr["PatternID"])
                     };
 
-                    FabricNames.Add(obj);
-                    /*categorynames.Add(new CategoryType
-                    {
-                        Name = dr["CategoryName"].ToString()
-                    });*/
+                    PatternNames.Add(obj);
                 }
             }
-            return FabricNames;
+            return PatternNames;
         }
-        public void DeleteFabric(int id)
+        public void DeletePattern(int id)
         {
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeleteFabric", con);
+                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Action", "delete");
-                cmd.Parameters.AddWithValue("@FabricId", id);
+                cmd.Parameters.AddWithValue("@PatternID", id);
 
                 con.Open();
                 cmd.ExecuteNonQuery();

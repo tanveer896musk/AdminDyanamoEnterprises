@@ -16,11 +16,11 @@ namespace AdminDyanamoEnterprises.Repository
         public List<CategoryType>GetAllListType();
 
         public void DeleteCategory(int id);
-        public void InsertOrUpdateOrDeleteFabric(FabricTypePageViewModel addFabricType);
+        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel addPatternType);
 
-        public List<FabricType> GetAllFabricType();
+        public List<PatternType> GetAllPatternType();
 
-        public void DeleteFabric(int id);
+        public void DeletePattern(int id);
 
 
     }

@@ -7,36 +7,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AdminDyanamoEnterprises.Controllers
 {
-    public class FabricTypeController : Controller
+    public class ColorTypeController : Controller
     {
-        private readonly IFabricRepository _ifabricrepository;
+        private readonly IColorRepository _icolorrepository;
         private readonly INotyfService _notyf;
 
-        public FabricTypeController(IFabricRepository ifabricrepository, INotyfService notyf)
+        public ColorTypeController(IColorRepository icolorrepository, INotyfService notyf)
         {
-            _ifabricrepository = ifabricrepository;
+            _icolorrepository = icolorrepository;
             _notyf = notyf;
         }
 
-        // GET: FabricType
+        // GET: ColorType
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Masterfabric typeController/Details/5
+        // GET: Colorfabric typeController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: FabricType/fabricType
-        public ActionResult FabricType()
+        // GET: ColorType/ColorType
+        public ActionResult ColorType()
         {
-            FabricTypePageViewModel model = new FabricTypePageViewModel
+            ColorTypePageViewModel model = new ColorTypePageViewModel
             {
-                AddFabric = new AddFabricType(), // Empty form
-                FabricList = _ifabricrepository.GetAllListType() // ✅ Correct usage
+                AddColor = new AddColorType(), // Empty form
+                ColorList = _icolorrepository.GetAllListType() // ✅ Correct usage
             };
             return View(model);
         }
@@ -44,44 +44,36 @@ namespace AdminDyanamoEnterprises.Controllers
         // POST: FabricType/FabricType
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FabricType(FabricTypePageViewModel addFabricType)
+        public ActionResult ColorType(ColorTypePageViewModel addColorType)
         {
             try
             {
-                _ifabricrepository.Sp_InsertOrUpdateOrDeleteFabric(addFabricType); // ✅ Correct usage
-                _notyf.Success("Fabric type saved successfully!");
-                return RedirectToAction("FabricType");
+                _icolorrepository.Sp_InsertOrUpdateOrDeleteColor(addColorType); // ✅ Correct usage
+                _notyf.Success("Color type saved successfully!");
+                return RedirectToAction("ColorType");
             }
             catch
             {
                 _notyf.Error("An error occurred while saving.");
-                return View(addFabricType);
+                return View(addColorType);
             }
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             try
             {
-                _ifabricrepository.DeleteFabric(id);
-                _notyf.Success("Fabric deleted successfully!");
+                _icolorrepository.DeleteColor(id);
                 return Json(new { success = true });
             }
             catch (Exception ex)
             {
-                // Optionally log error
                 return Json(new { success = false, error = ex.Message });
             }
         }
-
-
-        public ActionResult MasterFabricType()
-        {
-
-            return View();
-
-        }
     }
 }
+

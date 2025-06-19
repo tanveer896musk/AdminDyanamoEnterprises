@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.Repository.Repository
 {
-    public class FabricRepository : IFabricRepository
+    public class ColorRepository : IColorRepository
     {
         private readonly IConfiguration _config;
 
-        public FabricRepository(IConfiguration config)
+        public ColorRepository(IConfiguration config)
         {
             this._config = config;
         }
@@ -28,19 +28,19 @@ namespace AdminDyanamoEnterprises.Repository.Repository
         }
 
 
-        public void Sp_InsertOrUpdateOrDeleteFabric(FabricTypePageViewModel fabricType)
+        public void Sp_InsertOrUpdateOrDeleteColor(ColorTypePageViewModel colorType)
         {
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteFabric", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteColor", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    int id = fabricType.AddFabric.FabricID;
+                    int id = colorType.AddColor.ColorID;
                     string action = id <= 0 ? "insert" : "update";
 
-                    cmd.Parameters.AddWithValue("@FabricID", id);
-                    cmd.Parameters.AddWithValue("@FabricName", fabricType.AddFabric.FabricName);
+                    cmd.Parameters.AddWithValue("@ColorID", id);
+                    cmd.Parameters.AddWithValue("@ColorName", colorType.AddColor.ColorName);
                     cmd.Parameters.AddWithValue("@Action", action);
 
                     con.Open();
@@ -50,17 +50,17 @@ namespace AdminDyanamoEnterprises.Repository.Repository
         }
 
 
-        public List<FabricType> GetAllListType()
+        public List<ColorType> GetAllListType()
         {
-            List<FabricType> fabricnames = new List<FabricType>();
+            List<ColorType> colornames = new List<ColorType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteFabric", con);
+                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteColor", con);
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
-                cmd.Parameters.AddWithValue("@FabricID", 0); // Dummy value
-                cmd.Parameters.AddWithValue("@FabricName", DBNull.Value); // Dummy value
+                cmd.Parameters.AddWithValue("@ColorID", 0); // Dummy value
+                cmd.Parameters.AddWithValue("@ColorName", DBNull.Value); // Dummy value
                 cmd.Parameters.AddWithValue("@Action", "select");
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -69,28 +69,28 @@ namespace AdminDyanamoEnterprises.Repository.Repository
                 foreach (DataRow dr in dt.Rows)
                 {
                     // Add each row's value to your list
-                    FabricType obj = new FabricType()
+                    ColorType obj = new ColorType()
                     {
-                        FabricName = dr["FabricName"].ToString(),
-                        FabricID = Convert.ToInt32(dr["FabricID"])
+                        ColorName = dr["ColorName"].ToString(),
+                        ColorID = Convert.ToInt32(dr["ColorID"])
                     };
 
-                    fabricnames.Add(obj);
+                    colornames.Add(obj);
                 }
             }
-            return fabricnames;
+            return colornames;
         }
 
-        public void DeleteFabric(int id)
+        public void DeleteColor(int id)
         {
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteFabric", con);
+                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteColor", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Action", "delete"); 
-                cmd.Parameters.AddWithValue("@FabricID", id);
-                cmd.Parameters.AddWithValue("@FabricName", DBNull.Value);
+                cmd.Parameters.AddWithValue("@Action", "delete");
+                cmd.Parameters.AddWithValue("@ColorID", id);
+                cmd.Parameters.AddWithValue("@ColorName", DBNull.Value); // ✅ ADD THIS
 
                 con.Open();
                 cmd.ExecuteNonQuery();

@@ -1,5 +1,4 @@
-﻿
-let materialId = 0;
+﻿let materialId = 0;
 
 $(document).on('click', '.edit-material', function (e) {
     debugger
@@ -14,28 +13,32 @@ $(document).on('click', '.edit-material', function (e) {
 
 
 $(document).on('click', '.delete-material', function () {
-    categoryId = $(this).data('id');
+    materialId = $(this).data('id');
     let name = $(this).data('name');
     $('#deleteItemName').text(name);
     $('#deleteModal').modal('show');
 });
 
 $('#confirmDeleteBtn').click(function () {
+    let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
         url: '/MaterialType/Delete',
         type: 'POST',
         data: {
-            id: materialId,
-
+            id: materialId
+        },
+        headers: {
+            "RequestVerificationToken": token // ✅ Add token in header
         },
         success: function (response) {
             if (response.success) {
                 $('#deleteModal').modal('hide');
-                location.reload(); // or remove the row using JS
+                location.reload();
             } else {
-                alert("Error deleting");
+                alert("Error deleting: " + response.error); // 👈 show actual error
             }
         },
+
         error: function () {
             alert("Something went wrong.");
         }

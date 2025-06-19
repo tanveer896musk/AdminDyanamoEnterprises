@@ -12,6 +12,7 @@ builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
 builder.Services.AddTransient<IMaterialRepository, MaterialRepository>();
 builder.Services.AddTransient<IFabricRepository, FabricRepository>();
+builder.Services.AddTransient<IColorRepository, ColorRepository>();
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 20;

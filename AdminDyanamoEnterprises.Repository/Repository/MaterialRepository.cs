@@ -90,6 +90,7 @@ namespace AdminDyanamoEnterprises.Repository.Repository
 
                 cmd.Parameters.AddWithValue("@Action", "delete");
                 cmd.Parameters.AddWithValue("@MaterialID", id);
+                cmd.Parameters.AddWithValue("@MaterialName", DBNull.Value);
 
                 con.Open();
                 cmd.ExecuteNonQuery();

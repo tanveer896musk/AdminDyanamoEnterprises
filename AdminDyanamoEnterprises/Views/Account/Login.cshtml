@@ -1,0 +1,296 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Index";
+}
+<head>
+<style>
+    :root {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        --bs-body-font-family: Arial, sans-serif;
+        --bs-body-font-size: 1rem;
+        --bs-body-font-weight: 400;
+        --bs-body-line-height: 1.5;
+        --bs-body-color: #212529;
+        --bs-body-bg: #f8f9fa;
+        --bs-secondary-color: #6c757d;
+        --bs-card-spacer-x: 1.5rem;
+        --bs-card-spacer-y: 1rem;
+        --bs-card-color: inherit;
+    }
+
+    body {
+        margin: 0;
+        font-family: var(--bs-body-font-family);
+        font-size: var(--bs-body-font-size);
+        font-weight: var(--bs-body-font-weight);
+        line-height: var(--bs-body-line-height);
+        color: var(--bs-body-color);
+        background-color: var(--bs-body-bg);
+    }
+
+    .container-xxl {
+        width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: calc(-1 * var(--bs-gutter-y));
+        margin-right: calc(-.5 * var(--bs-gutter-x));
+        margin-left: calc(-.5 * var(--bs-gutter-x));
+    }
+
+    .vh-100 {
+        height: 100vh;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
+
+    .align-self-center {
+        align-self: center;
+    }
+
+    .col-12, .col-lg-4 {
+        position: relative;
+        width: 100%;
+    }
+
+    .col-lg-4 {
+        max-width: 400px;
+        margin: auto;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+        color: var(--bs-card-color);
+    }
+
+    .bg-black {
+        background-color: #000;
+    }
+
+    .auth-header-box {
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .auth-logo {
+        height: 50px;
+    }
+
+    .form-label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+    }
+
+    .form-check {
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5em;
+        margin-bottom: 0.125rem;
+    }
+
+    .form-check-input {
+        width: 1em;
+        height: 1em;
+        margin-top: 0.25em;
+        vertical-align: top;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .d-grid {
+        display: grid;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .text-primary {
+        color: #007bff;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    .thumb-md {
+        width: 40px;
+        height: 40px;
+    }
+
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+
+    .ms-2 {
+        margin-left: 0.5rem;
+    }
+
+    .bg-blue-subtle {
+        background-color: #e6f0ff;
+    }
+
+    .bg-info-subtle {
+        background-color: #d1f3f9;
+    }
+
+    .bg-danger-subtle {
+        background-color: #fdecea;
+    }
+
+    .text-blue {
+        color: #0085ff;
+    }
+
+    .text-info {
+        color: #41cbd8;
+    }
+
+    .text-danger {
+        color: #e16449;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+</head>
+<body>
+    <div class="container-xxl">
+        <div class="row vh-100 d-flex justify-content-center">
+            <div class="col-12 align-self-center">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 mx-auto">
+                            <div class="card">
+                                <div class="card-body p-0 bg-black auth-header-box rounded-top">
+                                    <div class="text-center p-3">
+                                        <a href="index.html" class="logo logo-admin">
+                                            <img src="assets/images/logo-sm.png" height="50" alt="logo" class="auth-logo">
+                                        </a>
+                                        <h4 class="mt-3 mb-1 fw-semibold text-white fs-18">Let's Get Started Mifty</h4>
+                                        <p class="text-muted fw-medium mb-0">Sign in to continue to Mifty.</p>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-0">
+                                    <form class="my-4" action="index.html">
+                                        <div class="form-group mb-2">
+                                            <label class="form-label" for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="userpassword">Password</label>
+                                            <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group row mt-3">
+                                            <div class="col-sm-6">
+                                                <div class="form-check form-switch form-switch-success">
+                                                    <input class="form-check-input" type="checkbox" id="customSwitchSuccess">
+                                                    <label class="form-check-label" for="customSwitchSuccess">Remember me</label>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-sm-6 text-end">
+                                                <a href="auth-recover-pw.html" class="text-muted font-13"><i class="dripicons-lock"></i> Forgot password?</a>
+                                            </div><!--end col-->
+                                        </div><!--end form-group-->
+
+                                        <div class="form-group mb-0 row">
+                                            <div class="col-12">
+                                                <div class="d-grid mt-3">
+                                                    <button class="btn btn-primary" type="button">Log In <i class="fas fa-sign-in-alt ms-1"></i></button>
+                                                </div>
+                                            </div><!--end col-->
+                                        </div> <!--end form-group-->
+                                    </form><!--end form-->
+                                    <div class="text-center  mb-2">
+                                        <p class="text-muted">Don't have an account ?  <a href="auth-register.html" class="text-primary ms-2">Free Resister</a></p>
+                                        <h6 class="px-3 d-inline-block">Or Login With</h6>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="" class="d-flex justify-content-center align-items-center thumb-md bg-blue-subtle text-blue rounded-circle me-2">
+                                            <i class="fab fa-facebook align-self-center"></i>
+                                        </a>
+                                        <a href="" class="d-flex justify-content-center align-items-center thumb-md bg-info-subtle text-info rounded-circle me-2">
+                                            <i class="fab fa-twitter align-self-center"></i>
+                                        </a>
+                                        <a href="" class="d-flex justify-content-center align-items-center thumb-md bg-danger-subtle text-danger rounded-circle">
+                                            <i class="fab fa-google align-self-center"></i>
+                                        </a>
+                                    </div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end card-body-->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!-- container -->
+
+
+</body>
+
+

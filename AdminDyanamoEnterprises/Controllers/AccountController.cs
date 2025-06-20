@@ -6,7 +6,7 @@ namespace AdminDyanamoEnterprises.Controllers
     public class AccountController : Controller
     {
         // GET: AccountController
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
         }

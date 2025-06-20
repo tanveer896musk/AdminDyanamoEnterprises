@@ -259,11 +259,23 @@ namespace AdminDyanamoEnterprises.Repository
                 }
             }
         }
+
         public List<FabricType> GetAllListFabricType()
+
         {
             List<FabricType> fabricnames = new List<FabricType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
+
+                SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Required params
+                cmd.Parameters.AddWithValue("@PatternID", DBNull.Value);
+                cmd.Parameters.AddWithValue("@PatternName", DBNull.Value);
+                cmd.Parameters.AddWithValue("@Action", "select");
+
+
                 SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteFabric", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -284,18 +296,27 @@ namespace AdminDyanamoEnterprises.Repository
                 };
                 cmd.Parameters.Add(returnMessageParam);
 
+
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
                 foreach (DataRow dr in dt.Rows)
                 {
+
+                    PatternType obj = new PatternType()
+
                     FabricType obj = new FabricType()
+
                     {
                         FabricName = dr["FabricName"].ToString(),
                         FabricID = Convert.ToInt32(dr["FabricID"])
                     };
+
+                    PatternNames.Add(obj);
+
                     fabricnames.Add(obj);
+
                 }
 
                 // Optional: check output values

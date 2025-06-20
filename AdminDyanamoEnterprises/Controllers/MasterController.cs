@@ -261,6 +261,11 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
 
+
+        }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMaterial(int id)
@@ -276,5 +281,6 @@ namespace AdminDyanamoEnterprises.Controllers
 
         }
         #endregion
+
     }
 }

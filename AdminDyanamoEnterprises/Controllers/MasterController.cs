@@ -108,5 +108,7 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository.DeletePattern(id);
             return Json(new { success = true });
         }
+
+
     }
 }

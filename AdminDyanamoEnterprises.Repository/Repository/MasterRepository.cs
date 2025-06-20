@@ -109,29 +109,33 @@ namespace AdminDyanamoEnterprises.Repository
                 }
             }
         }
+
+
+
         public List<PatternType> GetAllPatternType()
         {
             List<PatternType> PatternNames = new List<PatternType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
-
+                SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
+
+                // Required params
+                cmd.Parameters.AddWithValue("@PatternID", DBNull.Value);
+                cmd.Parameters.AddWithValue("@PatternName", DBNull.Value);
                 cmd.Parameters.AddWithValue("@Action", "select");
+
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    // Add each row's value to your list
                     PatternType obj = new PatternType()
                     {
                         PatternName = dr["PatternName"].ToString(),
                         PatternID = Convert.ToInt32(dr["PatternID"])
                     };
-
                     PatternNames.Add(obj);
                 }
             }

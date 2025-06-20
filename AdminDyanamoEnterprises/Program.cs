@@ -1,6 +1,8 @@
 using AdminDyanamoEnterprises.Repository;
-using AdminDyanamoEnterprises.Repository.IRepository;
-using AdminDyanamoEnterprises.Repository.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 
@@ -22,7 +24,7 @@ builder.Services.AddNotyf(config =>
 );
 //I am Narayan 
 var app = builder.Build();
-//I am BASHAt
+//I am BASHAT Parween
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

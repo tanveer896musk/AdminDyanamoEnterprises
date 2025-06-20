@@ -22,7 +22,7 @@ $(document).on('click', '.delete-material', function () {
 $('#confirmDeleteBtn').click(function () {
     let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
-        url: '/MaterialType/Delete',
+        url: '/Master/DeleteMaterial',
         type: 'POST',
         data: {
             id: materialId

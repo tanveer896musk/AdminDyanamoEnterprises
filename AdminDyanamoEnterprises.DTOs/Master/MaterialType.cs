@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AdminDyanamoEnterprises.DTOs.Master
 {
     public class MaterialType
-    { 
+    {
         public int MaterialID { get; set; }
         public string MaterialName { get; set; }
     }
@@ -15,7 +15,7 @@ namespace AdminDyanamoEnterprises.DTOs.Master
     {
         public int MaterialID { get; set; }
         public string? MaterialName { get; set; }
-        
+
     }
 
     public class MaterialTypePageViewModel

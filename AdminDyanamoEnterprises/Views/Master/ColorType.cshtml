@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="card-body pt-0">
-                            @using (Html.BeginForm("ColorType", "ColorType", FormMethod.Post))
+                            @using (Html.BeginForm("ColorType", "Master", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
                                 @Html.HiddenFor(model => model.AddColor.ColorID, new { id = "editColorId" })
@@ -115,5 +115,31 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        var status = '@TempData["Status"]';
+        var message = '@TempData["Message"]';
+        var actionType = '@TempData["ActionType"]';
 
-<script src="@Url.Content("~/js/ColorType.js")"></script>
+        if (message) {
+            if (status === '0') {
+                if (actionType === 'insert') {
+                    notyf.open({
+                        type: 'info',
+                        message: message
+                    });
+                } else if (actionType === 'update') {
+                    notyf.success(message); // ✅ green
+                } else if (actionType === 'delete') {
+                    notyf.success(message); // ✅ green
+                } else {
+                    notyf.success(message); // default green
+                }
+            } else {
+                notyf.error(message); // ❌ red
+            }
+        }
+    </script>
+
+    <script src="@Url.Content("~/js/ColorType.js")"></script>
+}

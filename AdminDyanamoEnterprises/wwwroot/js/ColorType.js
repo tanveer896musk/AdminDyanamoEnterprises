@@ -22,7 +22,7 @@ $(document).on('click', '.delete-color', function () {
 $('#confirmDeleteBtn').click(function () {
     let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
-        url: '/ColorType/Delete',
+        url: '/Master/DeleteColor',
         type: 'POST',
         data: {
             id: colorId

@@ -44,22 +44,32 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // POST: MasterController/Create
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CategoryType(CategoryTypePageViewModel addCategoryType)
         {
             try
             {
-                _imasterrepository.InsertorUpdateCategoryType(addCategoryType);
-                _notyf.Success("Success ");
+                var result = _imasterrepository.InsertorUpdateCategoryType(addCategoryType);
+
+                if (result.ErrorCode == 0)
+                {
+                    _notyf.Success(result.ReturnMessage); // e.g., "Insert successful."
+                }
+                else
+                {
+                    _notyf.Error(result.ReturnMessage); // e.g., "Category already exists."
+                }
+
                 return RedirectToAction("CategoryType");
             }
             catch
             {
+                _notyf.Error("Something went wrong.");
                 return View();
             }
         }
-
 
         [HttpPost]
         public IActionResult Delete(int id)

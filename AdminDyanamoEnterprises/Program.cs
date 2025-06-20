@@ -10,7 +10,7 @@ builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 20;
+    config.DurationInSeconds = 30;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.Repository
 {
-    internal class IBlogRepository
+    public class IBlogRepository
     {
+
     }
 }

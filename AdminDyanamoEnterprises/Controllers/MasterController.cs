@@ -37,7 +37,7 @@ namespace AdminDyanamoEnterprises.Controllers
             CategoryTypePageViewModel model = new CategoryTypePageViewModel
             {
                 AddCategory = new AddCategoryType(), // Empty form
-                CategoryList = _imasterrepository.GetAllListType() // From database or service
+                CategoryList = _imasterrepository.GetAllCategoryType() // From database or service
             };
             return View(model);
             /* return View(model);*/
@@ -67,12 +67,28 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository.DeleteCategory(id);
             return Json(new { success = true });
         }
-        
-        public ActionResult MasterCategoryType()
+
+        public ActionResult SubCategoryType()
         {
-           
-            return View();
-           
+            SubCategoryTypeJoinModel model = new SubCategoryTypeJoinModel();
+            model.CategoryList = _imasterrepository.GetAllCategoryType();
+            /*model.SubCategoryList = _imasterrepository.GetAllSubCategoriesWithCategoryName(); */// Join query
+            model.SubCategoryList = _imasterrepository.GetAllSubCategoriesWithCategoryName();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubCategoryType(SubCategoryTypeJoinModel model)
+        {
+            if (model.SubAddCategory != null)
+            {
+                _imasterrepository.InsertOrUpdateSubCategory(model.SubAddCategory);
+                _notyf.Success("Sub-Category saved successfully.");
+            }
+
+            return RedirectToAction("SubCategoryType");
         }
 
         public ActionResult PatternType()
@@ -107,6 +123,22 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             _imasterrepository.DeletePattern(id);
             return Json(new { success = true });
+        }
+        [HttpPost]
+        public JsonResult DeleteSubCategory(int id)
+        {
+            try
+            {
+                _imasterrepository.DeleteSubCategory(id);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
         }
 
 

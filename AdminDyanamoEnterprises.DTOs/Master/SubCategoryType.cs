@@ -8,12 +8,11 @@ namespace AdminDyanamoEnterprises.DTOs.Master
 {
     public class SubCategoryType
     {
-        public class SubsCategoryType
-        {
             public int ? SubCategoryID { get; set; }
             public string? SubCategoryName { get; set; }
             public int CategoryID { get; set; }
-        }
+            public CategoryType? CategoryName { get; set; }
+    }
         public class SubAddCategoryType
         {
             public int? SubCategoryID { get; set; }
@@ -22,8 +21,9 @@ namespace AdminDyanamoEnterprises.DTOs.Master
         }
         public class SubCategoryTypeJoinModel
         {
-            public SubAddCategoryType? SubCategory { get; set; }
-            public List<SubsCategoryType> SubCategoryList { get; set; } = new();
-        }
+            public SubAddCategoryType? SubAddCategory { get; set; }
+            public List<SubCategoryType> SubCategoryList { get; set; } = new();
+            public List<CategoryType> CategoryList { get; set; } = new();
     }
+    
 }

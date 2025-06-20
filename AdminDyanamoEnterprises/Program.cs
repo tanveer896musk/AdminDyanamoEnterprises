@@ -14,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
+builder.Services.AddTransient<IColorRepository, MasterRepository>();
+builder.Services.AddTransient<IFabricRepository, MasterRepository>();
+builder.Services.AddTransient<IMaterialRepository, MasterRepository>();
+
+
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 20;

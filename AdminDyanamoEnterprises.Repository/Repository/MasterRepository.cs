@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.Repository
 {
-    public class MasterRepository : IMasterRepository
+    public class MasterRepository : IMasterRepository, IColorRepository, IFabricRepository, IMaterialRepository
     {
         private readonly IConfiguration _config;
 

@@ -13,12 +13,14 @@ builder.Services.AddTransient<IMasterRepository, MasterRepository>();
 builder.Services.AddTransient<IMaterialRepository, MaterialRepository>();
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 20;
+    config.DurationInSeconds = 30;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 }
 );
 //I am Narayan 
+
+//I am Arif
 var app = builder.Build();
 //I am BASHAt
 // Configure the HTTP request pipeline.

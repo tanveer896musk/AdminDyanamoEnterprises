@@ -5,15 +5,22 @@ $(document).ready(function () {
     // EDIT logic
     $(document).on('click', '.edit-Subcategory', function (e) {
         e.preventDefault();
+
         let id = $(this).data('id');
         let name = $(this).data('name');
         let categoryId = $(this).data('categoryid');
 
+        // Set form values
         $('#editCategoryId').val(id);
         $('#editCategoryName').val(name);
-        $('#categoryDropdown').val(categoryId);
+
+        // Select the option in dropdown that matches the categoryId
+        $('#categoryDropdown').val(categoryId).trigger('change');
+
+        // Change button text
         $('#saveButton').text('Update');
     });
+
 
    
 

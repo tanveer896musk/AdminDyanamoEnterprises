@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Common;
 using AdminDyanamoEnterprises.DTOs.Master;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace AdminDyanamoEnterprises.Repository
     public interface IMasterRepository
     {
        
-        public void InsertorUpdateCategoryType(CategoryTypePageViewModel addCategoryType);
+        public MasterResponse InsertorUpdateCategoryType(CategoryTypePageViewModel addCategoryType);
         public List<CategoryType>GetAllCategoryType();
 
         public void DeleteCategory(int id);

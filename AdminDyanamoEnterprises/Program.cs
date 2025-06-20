@@ -1,6 +1,10 @@
 using AdminDyanamoEnterprises.Repository;
-using AdminDyanamoEnterprises.Repository.IRepository;
-using AdminDyanamoEnterprises.Repository.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 
@@ -10,19 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
-builder.Services.AddTransient<IMaterialRepository, MaterialRepository>();
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 30;
+    config.DurationInSeconds = 20;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 }
 );
 //I am Narayan 
-
-//I am Arif
 var app = builder.Build();
-//I am BASHAt
+//I am BASHAT Parween
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

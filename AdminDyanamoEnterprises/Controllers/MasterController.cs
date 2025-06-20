@@ -18,20 +18,7 @@ namespace AdminDyanamoEnterprises.Controllers
             _imasterrepository = imasterrepository;
             _notyf = notyf;
         }
-        // GET: MasterController
-        public ActionResult Index()
-        {
-
-            return View();
-        }
-
-        // GET: MasterController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: MasterController/Category
+      
         public ActionResult CategoryType()
         {
             CategoryTypePageViewModel model = new CategoryTypePageViewModel

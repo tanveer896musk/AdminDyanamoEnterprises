@@ -1,4 +1,6 @@
 using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository.IRepository;
+using AdminDyanamoEnterprises.Repository.Repository;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 builder.Services.AddTransient<IMasterRepository, MasterRepository>();
+builder.Services.AddTransient<IMaterialRepository, MaterialRepository>();
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 30;

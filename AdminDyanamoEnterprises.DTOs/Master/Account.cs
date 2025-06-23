@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.DTOs.Master
 {
-    public class LoginType
+    public class Account
     {
         public int Userid { get; set; }
         public string Emailid { get; set; }
@@ -14,4 +14,5 @@ namespace AdminDyanamoEnterprises.DTOs.Master
         public string Password { get; set; }
        
     }
+    
 }

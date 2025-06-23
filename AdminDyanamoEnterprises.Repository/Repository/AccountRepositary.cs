@@ -1,4 +1,5 @@
-﻿using AdminDyanamoEnterprises.Repository.IRepository;
+﻿using AdminDyanamoEnterprises.DTOs.Master;
+using AdminDyanamoEnterprises.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.Repository.Repository
 {
-    public class AccountRepositary:IAccountRepositary
+    public class AccountRepositary : IAccountRepositary
     {
+       
 
+        List<LoginType> IAccountRepositary.GetAllListType()
+        {
+            return new List<LoginType>();
+        }
     }
 }

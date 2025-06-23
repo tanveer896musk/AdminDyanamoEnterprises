@@ -315,19 +315,44 @@ namespace AdminDyanamoEnterprises.Repository
             return list;
         }
 
-        public void DeleteSubCategory(int subCategoryId)
+        public string DeleteSubCategory(int subCategoryId)
         {
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete_MasterSubCategory", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@SubCategoryId", subCategoryId);
-                cmd.Parameters.AddWithValue("@Action", "delete");
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDelete_MasterSubCategory", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                con.Open();
-                cmd.ExecuteNonQuery();
+                    // Required inputs
+                    cmd.Parameters.AddWithValue("@SubCategoryId", subCategoryId);
+                    cmd.Parameters.AddWithValue("@Action", "delete");
+
+                    // Dummy inputs for unused fields
+                    cmd.Parameters.AddWithValue("@CategoryId", 0);
+                    cmd.Parameters.AddWithValue("@SubCategoryName", DBNull.Value);
+
+                    // Output parameters
+                    SqlParameter errorCodeParam = new SqlParameter("@ErrorCode", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    SqlParameter returnMessageParam = new SqlParameter("@ReturnMessage", SqlDbType.NVarChar, 200)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    cmd.Parameters.Add(errorCodeParam);
+                    cmd.Parameters.Add(returnMessageParam);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                    string returnMessage = returnMessageParam.Value?.ToString();
+                    return returnMessage;
+                }
             }
         }
+
 
         #region============================Color Repository================================
         public string Sp_InsertOrUpdateOrDeleteColor(ColorTypePageViewModel colorType)

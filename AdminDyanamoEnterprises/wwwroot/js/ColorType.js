@@ -1,19 +1,19 @@
-﻿let materialId = 0;
+﻿let colorId = 0;
 
-$(document).on('click', '.edit-material', function (e) {
+$(document).on('click', '.edit-color', function (e) {
     debugger
     e.preventDefault();
     let id = $(this).data('id');
     let name = $(this).data('name');
 
-    $('#editMaterialId').val(id);
-    $('#editMaterialName').val(name);
+    $('#editColorId').val(id);
+    $('#editColorName').val(name);
     $('#saveButton').text('Update'); // Optional: change button text
 });
 
 
-$(document).on('click', '.delete-material', function () {
-    materialId = $(this).data('id');
+$(document).on('click', '.delete-color', function () {
+    colorId = $(this).data('id');
     let name = $(this).data('name');
     $('#deleteItemName').text(name);
     $('#deleteModal').modal('show');
@@ -22,10 +22,10 @@ $(document).on('click', '.delete-material', function () {
 $('#confirmDeleteBtn').click(function () {
     let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
-        url: '/Master/DeleteMaterial',
+        url: '/Master/DeleteColor',
         type: 'POST',
         data: {
-            id: materialId
+            id: colorId
         },
         headers: {
             "RequestVerificationToken": token // ✅ Add token in header
@@ -35,10 +35,9 @@ $('#confirmDeleteBtn').click(function () {
                 $('#deleteModal').modal('hide');
                 location.reload();
             } else {
-                alert("Error deleting: " + response.error); // 👈 show actual error
+                alert("Error deleting");
             }
         },
-
         error: function () {
             alert("Something went wrong.");
         }

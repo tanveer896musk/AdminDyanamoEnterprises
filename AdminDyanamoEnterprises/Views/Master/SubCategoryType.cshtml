@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.AntiForgeryToken()
-<h4 class="page-title">Sub-Category Type</h4>
 <div class="row">
     <div class="col-sm-12">
         <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-            <h4 class="page-title">Category Type</h4>
+            <h4 class="page-title">Sub-Category Type</h4>
             <div>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="#">Mifty</a></li>
@@ -35,7 +34,7 @@
 
                             <div class="row align-items-end">
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label">Category Name</label>
+                                    <label class="form-label">Sub-Category Name</label>
                                     @Html.DropDownListFor(model => model.SubAddCategory.CategoryID,
                                     new SelectList(Model.CategoryList, "CategoryID", "CategoryName"),"-- Select Category --",
                                                                 new { @class = "form-select", id = "categoryDropdown" })

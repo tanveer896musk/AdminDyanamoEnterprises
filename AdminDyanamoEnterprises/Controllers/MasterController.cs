@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Common;
 using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
@@ -81,12 +82,21 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             if (model.SubAddCategory != null)
             {
-                _imasterrepository.InsertOrUpdateSubCategory(model.SubAddCategory);
-                _notyf.Success("Sub-Category saved successfully.");
+                MasterResponse result = _imasterrepository.InsertOrUpdateSubCategory(model.SubAddCategory);
+
+                if (result.ErrorCode == 0)
+                {
+                    _notyf.Success(result.ReturnMessage);
+                }
+                else
+                {
+                    _notyf.Error(result.ReturnMessage);
+                }
             }
 
             return RedirectToAction("SubCategoryType");
         }
+
 
         public ActionResult PatternType()
         {

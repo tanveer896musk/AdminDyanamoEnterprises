@@ -25,7 +25,7 @@ namespace AdminDyanamoEnterprises.Repository
 
 
 
-        public void InsertOrUpdateSubCategory(SubAddCategoryType model);
+        public MasterResponse InsertOrUpdateSubCategory(SubAddCategoryType model);
         public void DeleteSubCategory(int subCategoryId);
 
         public List<SubCategoryType> GetAllSubCategoriesWithCategoryName();

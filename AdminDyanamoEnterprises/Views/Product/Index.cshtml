@@ -113,7 +113,9 @@
                                             </div><!--end col-->
 
                                             <div class="col-auto">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBoard"><i class="fa-solid fa-plus me-1"></i> Add Product</button>
+                                        <a href="@Url.Action("CreateProduct", "Product")" class="btn btn-primary">
+                                            <i class="fa-solid fa-plus me-1"></i> Add Product
+                                        </a>
                                             </div><!--end col-->
                                         </form>
                                     </div><!--end col-->
@@ -526,7 +528,21 @@
                     </div><!--end /div-->
                 </div><!--end offcanvas-body-->
             </div>
-        
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
+                <h4 class="page-title">Sub-Category Type</h4>
+                <div>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Mifty</a></li>
+                        <li class="breadcrumb-item"><a href="#">Apps</a></li>
+                        <li class="breadcrumb-item active">Category Type</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 <!--end body-->

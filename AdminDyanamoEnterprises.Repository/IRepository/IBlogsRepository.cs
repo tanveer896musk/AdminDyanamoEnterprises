@@ -11,8 +11,9 @@ namespace AdminDyanamoEnterprises.Repository
     {
         IEnumerable<BlogsModel> GetAllBlogs();
         BlogsModel GetBlogById(int id);
-        void InsertBlog(BlogsModel blog);
-        void UpdateBlog(BlogsModel blog);
-        void DeleteBlog(int id);
+        string InsertBlog(BlogsModel model);
+        string UpdateBlog(BlogsModel model);
+        string DeleteBlog(int id);
     }
+
 }

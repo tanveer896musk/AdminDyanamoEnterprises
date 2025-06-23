@@ -1,130 +1,143 @@
-﻿using AdminDyanamoEnterprises.DTOs;
-using AdminDyanamoEnterprises.DTOs.Master;
+﻿using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 public class BlogsRepository : IBlogsRepository
 {
-    private readonly string _connectionString;
-    private readonly IConfiguration _config;
+    private readonly IConfiguration _configuration;
 
     public BlogsRepository(IConfiguration configuration)
     {
-        _connectionString = configuration.GetConnectionString("DyanamoEnterprises_DB");
+        _configuration = configuration;
     }
+
+    private string ConnectionString => _configuration.GetConnectionString("DyanamoEnterprises_DB");
+
     public IEnumerable<BlogsModel> GetAllBlogs()
     {
-        List<BlogsModel> blogsmodel = new List<BlogsModel>();
-        using (SqlConnection con = new SqlConnection(_connectionString))
+        var blogs = new List<BlogsModel>();
+
+        using (SqlConnection con = new SqlConnection(ConnectionString))
         {
-            SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con);
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            con.Open();
-            cmd.Parameters.AddWithValue("@Action", "GET");
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            foreach (DataRow dr in dt.Rows)
+            SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con)
             {
-                // Add each row's value to your list
-                BlogsModel obj = new BlogsModel()
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@Action", "GET");
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                blogs.Add(new BlogsModel
                 {
-                    BlogId = Convert.ToInt32(dr["BlogId"]),
-                    Title = dr["Title"].ToString(),
-                    Category = dr["Category"].ToString(),
-                    PublishDate = Convert.ToDateTime(dr["PublishDate"]),
-                    Description = dr["Description"].ToString(),
-                    Author = dr["Author"].ToString(),
-                    ImageUrl = dr["ImageUrl"].ToString()
-                };
-                blogsmodel.Add(obj);
+                    BlogId = dr["BlogId"] != DBNull.Value ? Convert.ToInt32(dr["BlogId"]) : 0,
+                    Title = dr["Title"]?.ToString(),
+                    Category = dr["Category"]?.ToString(),
+                    PublishDate = dr["PublishDate"] != DBNull.Value ? Convert.ToDateTime(dr["PublishDate"]) : DateTime.MinValue,
+                    Description = dr["Description"]?.ToString(),
+                    Author = dr["Author"]?.ToString(),
+                    ImageUrl = dr["ImageUrl"]?.ToString(),
+                    Published = dr["Published"] != DBNull.Value && Convert.ToBoolean(dr["Published"])
+                });
             }
         }
-        return blogsmodel;
+
+        return blogs;
     }
+
     public BlogsModel GetBlogById(int id)
     {
         BlogsModel blog = null;
-
-        using (SqlConnection con = new SqlConnection(_connectionString)) // Replace with your actual connection method
+        using (SqlConnection con = new SqlConnection(ConnectionString))
         {
-            SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con);
+            SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Action", "GETBYID");
             cmd.Parameters.AddWithValue("@BlogId", id);
 
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            if (dt.Rows.Count > 0)
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
             {
-                DataRow dr = dt.Rows[0];
-                blog = new BlogsModel()
+                blog = new BlogsModel
                 {
                     BlogId = Convert.ToInt32(dr["BlogId"]),
-                    Title = dr["Title"].ToString(),
-                    Category = dr["Category"].ToString(),
-                    PublishDate = Convert.ToDateTime(dr["PublishDate"]),
-                    Description = dr["Description"].ToString(),
-                    Author = dr["Author"].ToString(),
-                    ImageUrl = dr["ImageUrl"].ToString()
+                    Title = dr["Title"]?.ToString(),
+                    Category = dr["Category"]?.ToString(),
+                    PublishDate = dr["PublishDate"] != DBNull.Value ? Convert.ToDateTime(dr["PublishDate"]) : DateTime.MinValue,
+                    Description = dr["Description"]?.ToString(),
+                    Author = dr["Author"]?.ToString(),
+                    ImageUrl = dr["ImageUrl"]?.ToString(),
+                    Published = dr["Published"] != DBNull.Value && Convert.ToBoolean(dr["Published"])
                 };
             }
         }
         return blog;
     }
 
-
-    public void InsertBlog(BlogsModel blog)
+    public string InsertBlog(BlogsModel model)
     {
-        ExecuteCommand("INSERT", blog);
-    }
-
-    public void UpdateBlog(BlogsModel blog)
-    {
-        ExecuteCommand("UPDATE", blog);
-    }
-
-    public void DeleteBlog(int id)
-    {
-        using (SqlConnection con = new SqlConnection(_connectionString))
+        using (SqlConnection con = new SqlConnection(ConnectionString))
         {
-            SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.AddWithValue("@Action", "INSERT");
+            cmd.Parameters.AddWithValue("@Title", model.Title);
+            cmd.Parameters.AddWithValue("@Category", model.Category);
+            cmd.Parameters.AddWithValue("@PublishDate", model.PublishDate);
+            cmd.Parameters.AddWithValue("@Description", model.Description);
+            cmd.Parameters.AddWithValue("@Author", model.Author);
+            cmd.Parameters.AddWithValue("@ImageUrl", model.ImageUrl ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Published", model.Published);
 
+            con.Open();
+            cmd.ExecuteNonQuery();
+        }
+
+        return "Blog inserted successfully.";
+    }
+
+    public string UpdateBlog(BlogsModel model)
+    {
+        using (SqlConnection con = new SqlConnection(ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Action", "UPDATE");
+            cmd.Parameters.AddWithValue("@BlogId", model.BlogId);
+            cmd.Parameters.AddWithValue("@Title", model.Title);
+            cmd.Parameters.AddWithValue("@Category", model.Category);
+            cmd.Parameters.AddWithValue("@PublishDate", model.PublishDate);
+            cmd.Parameters.AddWithValue("@Description", model.Description);
+            cmd.Parameters.AddWithValue("@Author", model.Author);
+            cmd.Parameters.AddWithValue("@ImageUrl", model.ImageUrl ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Published", model.Published);
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+        }
+        return "Blog updated successfully.";
+    }
+
+    public string DeleteBlog(int id)
+    {
+        using (SqlConnection con = new SqlConnection(ConnectionString))
+        {
+            SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Action", "DELETE");
             cmd.Parameters.AddWithValue("@BlogId", id);
 
             con.Open();
             cmd.ExecuteNonQuery();
         }
-    }
-
-    private void ExecuteCommand(string action, BlogsModel blog)
-    {
-        using (SqlConnection con = new SqlConnection(_connectionString))
-        {
-            SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-            cmd.Parameters.AddWithValue("@Action", action);
-            cmd.Parameters.AddWithValue("@BlogId", blog.BlogId);
-            cmd.Parameters.AddWithValue("@Title", blog.Title);
-            cmd.Parameters.AddWithValue("@Category", blog.Category);
-            cmd.Parameters.AddWithValue("@PublishDate", blog.PublishDate);
-            cmd.Parameters.AddWithValue("@Description", blog.Description);
-            cmd.Parameters.AddWithValue("@Author", blog.Author);
-            cmd.Parameters.AddWithValue("@ImageUrl", blog.ImageUrl);
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-        }
+        return "Blog deleted successfully.";
     }
 }

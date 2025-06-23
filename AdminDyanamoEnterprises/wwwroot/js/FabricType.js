@@ -1,19 +1,19 @@
-﻿let materialId = 0;
+﻿let fabricId = 0;
 
-$(document).on('click', '.edit-material', function (e) {
+$(document).on('click', '.edit-fabric', function (e) {
     debugger
     e.preventDefault();
     let id = $(this).data('id');
     let name = $(this).data('name');
 
-    $('#editMaterialId').val(id);
-    $('#editMaterialName').val(name);
+    $('#editFabricId').val(id);
+    $('#editFabricName').val(name);
     $('#saveButton').text('Update'); // Optional: change button text
 });
 
 
-$(document).on('click', '.delete-material', function () {
-    materialId = $(this).data('id');
+$(document).on('click', '.delete-fabric', function () {
+    fabricId = $(this).data('id');
     let name = $(this).data('name');
     $('#deleteItemName').text(name);
     $('#deleteModal').modal('show');
@@ -22,10 +22,10 @@ $(document).on('click', '.delete-material', function () {
 $('#confirmDeleteBtn').click(function () {
     let token = $('input[name="__RequestVerificationToken"]').val();
     $.ajax({
-        url: '/Master/DeleteMaterial',
+        url: '/Master/DeleteFabric',
         type: 'POST',
         data: {
-            id: materialId
+            id: fabricId
         },
         headers: {
             "RequestVerificationToken": token // ✅ Add token in header

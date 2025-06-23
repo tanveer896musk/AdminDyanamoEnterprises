@@ -17,7 +17,11 @@ builder.Services.AddTransient<IColorRepository, MasterRepository>();
 builder.Services.AddTransient<IFabricRepository, MasterRepository>();
 builder.Services.AddTransient<IMaterialRepository, MasterRepository>();
 builder.Services.AddTransient<IBlogsRepository, BlogsRepository>();
+
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+
 
 
 

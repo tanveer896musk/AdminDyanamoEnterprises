@@ -1,3 +1,4 @@
+
 ﻿using AdminDyanamoEnterprises.DTOs;
 using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository.IRepository;
@@ -8,6 +9,7 @@ using static AdminDyanamoEnterprises.Repository.AccountRepository;
 namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
+
     {
         private readonly IAccountRepository _iaccountRepository;
         private readonly INotyfService _notyf;
@@ -19,6 +21,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             _iaccountRepository = iaccountRepository;
             _notyf = notyf; 
+
         }
 
         // GET: AccountController

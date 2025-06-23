@@ -17,4 +17,8 @@
     <ProjectReference Include="..\AdminDyanamoEnterprises.Repository\AdminDyanamoEnterprises.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\BannerImage\" />
+  </ItemGroup>
+
 </Project>

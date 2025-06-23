@@ -14,4 +14,5 @@ namespace AdminDyanamoEnterprises.DTOs.Master
         public string Password { get; set; }
        
     }
+    
 }

@@ -1,14 +1,48 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AdminDyanamoEnterprises.DTOs.Master;
+using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository.IRepository;
+using AdminDyanamoEnterprises.Repository.Repository;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IAccountRepositary AccountRepositary;
+        private readonly INotyfService _notyf;
+
+        public AccountController(IAccountRepositary iaccountrepository, INotyfService notyf)
+        {
+            _iAccountrepository = iaccountrepository;
+            _notyf = notyf;
+
+        }
         // GET: AccountController
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult Login(LoginType model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                bool isValidUser = _accountRepository.CheckLogin(model);
+                if (isValidUser)
+                {
+                    // You can set session/cookies here as needed
+                    return RedirectToAction("Master", "Account");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid email or password");
+                }
+            }
+
+            return View(model);
         }
 
         // GET: AccountController/Details/5

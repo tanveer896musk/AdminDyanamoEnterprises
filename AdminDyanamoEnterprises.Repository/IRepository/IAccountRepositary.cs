@@ -9,7 +9,6 @@ namespace AdminDyanamoEnterprises.Repository.IRepository
 {
     public interface IAccountRepositary
     {
-        List<LoginType> GetAllListType();
-
+        bool CheckLogin(LoginType loginType);
     }
 }

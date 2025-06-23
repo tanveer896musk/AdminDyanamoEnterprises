@@ -121,50 +121,80 @@ namespace AdminDyanamoEnterprises.Repository
                 cmd.ExecuteNonQuery();
             }
         }
-        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel PatternType)
+        public MasterResponse InsertOrUpdateOrDeletePattern(PatternTypePageViewModel patternTypeViewModel)
         {
+            MasterResponse response = new MasterResponse();
+
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con))
+                using (SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@PatternId", PatternType.AddPattern.PatternID <= 0 ? 0 : PatternType.AddPattern.PatternID);
-                    cmd.Parameters.AddWithValue("@PatternName", PatternType.AddPattern.PatternName ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Action", PatternType.AddPattern.PatternID > 0 ? "update" : "insert");
+                    int patternId = patternTypeViewModel.AddPattern.PatternID <= 0 ? 0 : patternTypeViewModel.AddPattern.PatternID;
+                    string action = patternId == 0 ? "insert" : "update";
+
+                    cmd.Parameters.AddWithValue("@PatternID", patternId == 0 ? (object)DBNull.Value : patternId); // Pass DBNull for insert to match SP's NULL default
+                    cmd.Parameters.AddWithValue("@PatternName", patternTypeViewModel.AddPattern.PatternName ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Action", action);
+
+                    // Add OUTPUT parameters
+                    SqlParameter errorCodeParam = new SqlParameter("@ErrorCode", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    SqlParameter returnMsgParam = new SqlParameter("@ReturnMessage", SqlDbType.NVarChar, 200)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+
+                    cmd.Parameters.Add(errorCodeParam);
+                    cmd.Parameters.Add(returnMsgParam);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
+
+                    response.ErrorCode = (int)errorCodeParam.Value;
+                    response.ReturnMessage = returnMsgParam.Value.ToString();
                 }
             }
+
+            return response;
         }
         public List<PatternType> GetAllPatternType()
         {
-            List<PatternType> PatternNames = new List<PatternType>();
+            List<PatternType> patternNames = new List<PatternType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("SP_InsertOrUpdateOrDeletePattern", con);
-
+                SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                con.Open();
+
+                // Pass appropriate values for 'select' action
+                cmd.Parameters.AddWithValue("@PatternID", DBNull.Value);
+                cmd.Parameters.AddWithValue("@PatternName", DBNull.Value);
                 cmd.Parameters.AddWithValue("@Action", "select");
+
+                // Add dummy output parameters as the SP expects them
+                cmd.Parameters.Add("@ErrorCode", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@ReturnMessage", SqlDbType.NVarChar, 200).Direction = ParameterDirection.Output;
+
+                con.Open();
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    // Add each row's value to your list
                     PatternType obj = new PatternType()
                     {
                         PatternName = dr["PatternName"].ToString(),
                         PatternID = Convert.ToInt32(dr["PatternID"])
                     };
 
-                    PatternNames.Add(obj);
+                    patternNames.Add(obj);
                 }
             }
-            return PatternNames;
+            return patternNames;
         }
         public void DeletePattern(int id)
         {
@@ -175,10 +205,27 @@ namespace AdminDyanamoEnterprises.Repository
 
                 cmd.Parameters.AddWithValue("@Action", "delete");
                 cmd.Parameters.AddWithValue("@PatternID", id);
+                cmd.Parameters.AddWithValue("@PatternName", DBNull.Value);
+
+                SqlParameter errorCodeParam = new SqlParameter("@ErrorCode", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                SqlParameter returnMsgParam = new SqlParameter("@ReturnMessage", SqlDbType.NVarChar, 200)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                cmd.Parameters.Add(errorCodeParam);
+                cmd.Parameters.Add(returnMsgParam);
+
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+
             }
+
+
         }
 
         public MasterResponse InsertOrUpdateSubCategory(SubAddCategoryType model)

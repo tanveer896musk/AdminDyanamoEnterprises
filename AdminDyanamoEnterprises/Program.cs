@@ -1,8 +1,10 @@
 using AdminDyanamoEnterprises.Repository;
 using AdminDyanamoEnterprises.Repository;
 using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.Repository.IRepository;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
+using static AdminDyanamoEnterprises.Repository.IMasterRepository;
 using static AdminDyanamoEnterprises.Repository.IMasterRepository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ builder.Services.AddTransient<IColorRepository, MasterRepository>();
 builder.Services.AddTransient<IFabricRepository, MasterRepository>();
 builder.Services.AddTransient<IMaterialRepository, MasterRepository>();
 builder.Services.AddTransient<IBlogsRepository, BlogsRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+
+
 
 builder.Services.AddNotyf(config =>
 {
@@ -23,6 +28,8 @@ builder.Services.AddNotyf(config =>
     config.Position = NotyfPosition.TopRight;
 }
 );
+
+
 //I am Narayan 
 
 //I am Arif

@@ -1,51 +1,60 @@
-﻿using AdminDyanamoEnterprises.DTOs.Master;
-using AdminDyanamoEnterprises.Repository;
+﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Master;
 using AdminDyanamoEnterprises.Repository.IRepository;
-using AdminDyanamoEnterprises.Repository.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static AdminDyanamoEnterprises.Repository.AccountRepository;
 
 namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IAccountRepositary AccountRepositary;
+        private readonly IAccountRepository _iaccountRepository;
         private readonly INotyfService _notyf;
+       public AccountController(
 
-        public AccountController(IAccountRepositary iaccountrepository, INotyfService notyf)
+           IAccountRepository iaccountRepository,
+           INotyfService notyf
+           )
         {
-            _iAccountrepository = iaccountrepository;
-            _notyf = notyf;
-
+            _iaccountRepository = iaccountRepository;
+            _notyf = notyf; 
         }
+
         // GET: AccountController
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
-
-        public ActionResult Login(LoginType model)
+        [HttpPost]
+        public ActionResult Login(Account model)
         {
             if (ModelState.IsValid)
             {
 
-                bool isValidUser = _accountRepository.CheckLogin(model);
+                bool isValidUser = _iaccountRepository.CheckLogin(model);
                 if (isValidUser)
                 {
                     // You can set session/cookies here as needed
+                   /* HttpContext.Session.SetString("Email", model.Emailid);*/
+                    _notyf.Success("Login successful!");
                     return RedirectToAction("Master", "Account");
                 }
                 else
                 {
+                    _notyf.Error("Invalid email or password.");
                     ModelState.AddModelError("", "Invalid email or password");
                 }
             }
-
             return View(model);
         }
 
         // GET: AccountController/Details/5
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult Details(int id)
         {
             return View();

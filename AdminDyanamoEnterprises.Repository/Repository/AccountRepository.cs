@@ -12,13 +12,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminDyanamoEnterprises.Repository.Repository
+namespace AdminDyanamoEnterprises.Repository
 {
-    public class AccountRepositary : IAccountRepositary
+    public class AccountRepository : IAccountRepository
     {
         private readonly IConfiguration _config;
 
-        public AccountRepositary(IConfiguration config)
+        public AccountRepository(IConfiguration config)
         {
             this._config = config;
         }
@@ -26,9 +26,9 @@ namespace AdminDyanamoEnterprises.Repository.Repository
         {
             return _config.GetConnectionString("DyanamoEnterprises_DB").ToString();
         }
-        public bool CheckLogin(LoginType loginType)
+        public bool CheckLogin(Account loginType)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_Loginuser", con))
                 {
@@ -37,18 +37,15 @@ namespace AdminDyanamoEnterprises.Repository.Repository
                     cmd.Parameters.AddWithValue("@Emailid", loginType.Emailid);
                     cmd.Parameters.AddWithValue("@password", loginType.Password);
 
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                    {
-                        DataTable dt = new DataTable();
-                        adapter.Fill(dt);
+                    con.Open();
+                    var result = cmd.ExecuteScalar();
 
-                        return dt.Rows.Count > 0;
-                    }
+                    return result != null && Convert.ToInt32(result) == 1;
                 }
-
-
             }
         }
+
+
     }
 }
 

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AdminDyanamoEnterprises.Repository.IRepository
 {
-    public interface IAccountRepositary
+    public interface IAccountRepository
     {
-        bool CheckLogin(LoginType loginType);
+        public bool CheckLogin(Account loginType);
     }
 }

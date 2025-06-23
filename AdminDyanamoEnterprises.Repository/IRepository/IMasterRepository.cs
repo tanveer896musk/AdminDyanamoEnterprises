@@ -17,7 +17,7 @@ namespace AdminDyanamoEnterprises.Repository
         public List<CategoryType>GetAllCategoryType();
 
         public void DeleteCategory(int id);
-        public void InsertOrUpdateOrDeletePattern(PatternTypePageViewModel addPatternType);
+        public MasterResponse InsertOrUpdateOrDeletePattern(PatternTypePageViewModel addPatternType);
 
         public List<PatternType> GetAllPatternType();
 

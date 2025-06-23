@@ -115,12 +115,21 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                _imasterrepository.InsertOrUpdateOrDeletePattern(addPatternType);
-                _notyf.Success("Success ");
+                var result = _imasterrepository.InsertOrUpdateOrDeletePattern(addPatternType);
+                if (result.ErrorCode == 0)
+                {
+                    _notyf.Success(result.ReturnMessage); // e.g., "Insert successful."
+                }
+                else
+                {
+                    _notyf.Error(result.ReturnMessage); // e.g., "Category already exists."
+                }
+
                 return RedirectToAction("PatternType");
             }
             catch
             {
+                _notyf.Error("Something went wrong.");
                 return View();
             }
         }

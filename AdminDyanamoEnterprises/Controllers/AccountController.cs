@@ -1,10 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AdminDyanamoEnterprises.Repository;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
-    {
+    { 
+        private readonly IProductRepository _productRepository;
+        private readonly INotyfService _notyf;
+        public AccountController(IProductRepository productRepository, INotyfService notyfService)
+        {
+            _productRepository = productRepository;
+            _notyf = notyfService;
+        }
+
         // GET: AccountController
         public ActionResult Index()
         {

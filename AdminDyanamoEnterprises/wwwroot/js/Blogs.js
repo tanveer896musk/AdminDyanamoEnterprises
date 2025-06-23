@@ -1,9 +1,39 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".read-more").forEach(button => {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
-            alert("You clicked Read More for blog ID: " + this.dataset.id);
-            // Add dynamic content loading here if needed
+﻿$(document).ready(function () {
+    // Search filter
+    $("#search").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#blogsTable tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+    });
+
+    // Select all checkboxes
+    $("#selectAll").on("click", function () {
+        $("input[type='checkbox']").prop('checked', this.checked);
+    });
+
+    // Publish toggle via AJAX
+    $('.publish-toggle').on('change', function () {
+        var checkbox = $(this);
+        var blogId = checkbox.data('id');
+        var isChecked = checkbox.is(':checked');
+
+        $.ajax({
+            url: '/Blogs/TogglePublish',
+            type: 'POST',
+            data: { id: blogId, published: isChecked },
+            success: function () {
+                var status = checkbox.closest('td').find('.publish-status');
+                if (isChecked) {
+                    status.text('Published').removeClass('text-danger').addClass('text-success');
+                } else {
+                    status.text('Not Published').removeClass('text-success').addClass('text-danger');
+                }
+            },
+            error: function () {
+                alert('Failed to update publish status.');
+                checkbox.prop('checked', !isChecked); // revert toggle
+            }
         });
     });
 });

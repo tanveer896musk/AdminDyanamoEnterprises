@@ -18,7 +18,7 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // GET: ProductController/Create
-        public ActionResult Create()
+        public ActionResult CreateProduct()
         {
             return View();
         }

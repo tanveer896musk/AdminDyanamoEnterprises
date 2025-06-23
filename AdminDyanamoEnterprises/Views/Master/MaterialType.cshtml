@@ -1,6 +1,7 @@
-﻿@model AdminDyanamoEnterprises.DTOs.Master.MaterialTypePageViewModel
+﻿@model AdminDyanamoEnterprises.DTOs.MaterialTypePageViewModel
+
 @{
-    ViewData["Title"] = "CategoryType";
+    ViewData["Title"] = "MaterialType";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -28,7 +29,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="card-body pt-0">
-                            @using (Html.BeginForm("MaterialType", "MaterialType", FormMethod.Post))
+                            @using (Html.BeginForm("MaterialType", "Master", FormMethod.Post))
                             {
                                 @Html.HiddenFor(model => model.AddMaterial.MaterialID, new { id = "editMaterialId" })
 
@@ -36,7 +37,7 @@
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label">
                                             @Html.DisplayNameFor(model => model.AddMaterial.MaterialID)
-                                            </label>
+                                        </label>
                                         @Html.TextBoxFor(model => model.AddMaterial.MaterialName, new { @class = "form-control", id = "editMaterialName" })
                                     </div>
 
@@ -99,7 +100,7 @@
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-material">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Delete</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -115,5 +116,31 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        var status = '@TempData["Status"]';
+        var message = '@TempData["Message"]';
+        var actionType = '@TempData["ActionType"]';
 
-<script src="@Url.Content("~/js/MaterialType.js")"></script>
+        if (message) {
+            if (status === '0') {
+                if (actionType === 'insert') {
+                    notyf.open({
+                        type: 'info',
+                        message: message
+                    });
+                } else if (actionType === 'update') {
+                    notyf.success(message); // ✅ blue
+                } else if (actionType === 'delete') {
+                    notyf.success(message); // ✅ green
+                } else {
+                    notyf.success(message); // default green
+                }
+            } else {
+                notyf.error(message); // ❌ red
+            }
+        }
+    </script>
+
+    <script src="@Url.Content("~/js/MaterialType.js")"></script>
+}

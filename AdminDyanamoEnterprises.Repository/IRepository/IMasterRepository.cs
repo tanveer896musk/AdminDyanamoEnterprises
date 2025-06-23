@@ -30,6 +30,38 @@ namespace AdminDyanamoEnterprises.Repository
 
         public List<SubCategoryType> GetAllSubCategoriesWithCategoryName();
 
+        #region==================IColor Repository==============================================
+        public interface IColorRepository
+        {
+            List<ColorType> GetAllListColorType();
+
+            string Sp_InsertOrUpdateOrDeleteColor(ColorTypePageViewModel colorType);
+
+            string DeleteColor(int id);
+        }
+        #endregion
+
+        #region==================IFabric Repository==============================================
+        public interface IFabricRepository
+        {
+            List<FabricType> GetAllListFabricType();
+
+            string Sp_InsertOrUpdateOrDeleteFabric(FabricTypePageViewModel fabricType);
+
+            string DeleteFabric(int id);
+        }
+        #endregion
+        #region==================IMaterial Repository==============================================
+        public interface IMaterialRepository
+        {
+            List<MaterialType> GetAllListMaterialType();
+
+            string Sp_InsertOrUpdateOrDeleteMaterialType(MaterialTypePageViewModel materialType);
+
+            string DeleteMaterial(int id);
+        }
+        #endregion
+
 
     }
 }

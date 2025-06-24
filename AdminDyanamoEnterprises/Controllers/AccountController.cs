@@ -42,7 +42,7 @@ namespace AdminDyanamoEnterprises.Controllers
                     // You can set session/cookies here as needed
                    /* HttpContext.Session.SetString("Email", model.Emailid);*/
                     _notyf.Success("Login successful!");
-                    return RedirectToAction("Master", "Account");
+                    return RedirectToAction("CategoryType", "Master");
                 }
                 else
                 {

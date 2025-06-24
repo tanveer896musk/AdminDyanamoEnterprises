@@ -1,4 +1,4 @@
-﻿using AdminDyanamoEnterprises.DTOs.Master;
+﻿using AdminDyanamoEnterprises.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

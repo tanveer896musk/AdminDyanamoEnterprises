@@ -1,4 +1,5 @@
-﻿using AdminDyanamoEnterprises.Repository;
+﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,88 +7,45 @@ using Microsoft.AspNetCore.Mvc;
 namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
-    { 
-        private readonly IProductRepository _productRepository;
+    {
+        private readonly IAccountRepository _iaccountRepository;
         private readonly INotyfService _notyf;
-        public AccountController(IProductRepository productRepository, INotyfService notyfService)
+        public AccountController(
+
+            IAccountRepository iaccountRepository,
+            INotyfService notyf
+            )
         {
-            _productRepository = productRepository;
-            _notyf = notyfService;
+            _iaccountRepository = iaccountRepository;
+            _notyf = notyf;
+
         }
 
-        // GET: AccountController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: AccountController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AccountController/Create
-        public ActionResult Create()
+        
+        [HttpGet]
+        public ActionResult Login()
         {
             return View();
         }
-
-        // POST: AccountController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Login(LoginType model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: AccountController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
+                bool isValidUser = _iaccountRepository.CheckLogin(model);
+                if (isValidUser)
+                {
+                    _notyf.Success("Login successful!");
+                    return RedirectToAction("CategoryType", "Master");
+                }
+                else
+                {
+                    _notyf.Error("Invalid email or password.");
+                    ModelState.AddModelError("", "Invalid email or password");
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AccountController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AccountController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }

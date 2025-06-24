@@ -1,20 +1,46 @@
-﻿using AdminDyanamoEnterprises.DTOs.Master;
-using AdminDyanamoEnterprises.Repository.IRepository;
+﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.Repository;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminDyanamoEnterprises.Repository.Repository
+namespace AdminDyanamoEnterprises.Repository
 {
-    public class AccountRepositary : IAccountRepositary
+    public class AccountRepository : IAccountRepository
     {
-       
+        private readonly IConfiguration _config;
 
-        List<LoginType> IAccountRepositary.GetAllListType()
+        public AccountRepository(IConfiguration config)
         {
-            return new List<LoginType>();
+            this._config = config;
         }
+        public string sqlConnection()
+        {
+            return _config.GetConnectionString("DyanamoEnterprises_DB").ToString();
+        }
+        public bool CheckLogin(LoginType loginType)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_Loginuser", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Emailid", loginType.Emailid);
+                    cmd.Parameters.AddWithValue("@password", loginType.Password);
+
+                    con.Open();
+                    var result = cmd.ExecuteScalar();
+
+                    return result != null && Convert.ToInt32(result) == 1;
+                }
+            }
+        }
+
     }
 }

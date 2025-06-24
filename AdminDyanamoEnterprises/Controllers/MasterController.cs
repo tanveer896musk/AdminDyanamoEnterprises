@@ -1,7 +1,4 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
-using AdminDyanamoEnterprises.DTOs.Common;
-using AdminDyanamoEnterprises.DTOs.Master;
-using AdminDyanamoEnterprises.Repository;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -14,24 +11,17 @@ namespace AdminDyanamoEnterprises.Controllers
 {
     public class MasterController : Controller
     {
-        private readonly IColorRepository _icolorrepository;
-        private readonly IFabricRepository _ifabricrepository;
-        private readonly IMaterialRepository _imaterialrepository;
+
         private readonly IMasterRepository _imasterrepository;
         private readonly INotyfService _notyf;
 
         public MasterController(
             IMasterRepository imasterrepository,
-            IColorRepository icolorrepository,
-            IFabricRepository ifabricrepository,
-            IMaterialRepository imaterialrepository,
+    
             INotyfService notyf
             )
         {
-            _imasterrepository = imasterrepository;
-            _icolorrepository = icolorrepository;
-            _ifabricrepository = ifabricrepository;
-            _imaterialrepository = imaterialrepository;
+            _imasterrepository = imasterrepository;          
             _notyf = notyf;
         }
       
@@ -178,7 +168,7 @@ namespace AdminDyanamoEnterprises.Controllers
             ColorTypePageViewModel model = new ColorTypePageViewModel
             {
                 AddColor = new AddColorType(), // Empty form
-                ColorList = _icolorrepository.GetAllListColorType() // ✅ Correct usage
+                ColorList = _imasterrepository.GetAllListColorType() // ✅ Correct usage
             };
             return View(model);
         }
@@ -190,7 +180,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                string result = _icolorrepository.Sp_InsertOrUpdateOrDeleteColor(addColorType);
+                string result = _imasterrepository.Sp_InsertOrUpdateOrDeleteColor(addColorType);
 
                 // Example: "Status: 0, Message: Insert successful., ActionType: insert"
                 var statusMatch = Regex.Match(result, @"Status:\s*(\d+)");
@@ -226,7 +216,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                _icolorrepository.DeleteColor(id);
+                _imasterrepository.DeleteColor(id);
                 return Json(new { success = true });
             }
             catch (Exception ex)
@@ -235,6 +225,7 @@ namespace AdminDyanamoEnterprises.Controllers
             }
         }
         #endregion
+
         #region ================********** Fabric Type **************===============================
         // GET: FabricType/fabricType
         public ActionResult FabricType()
@@ -242,7 +233,7 @@ namespace AdminDyanamoEnterprises.Controllers
             FabricTypePageViewModel model = new FabricTypePageViewModel
             {
                 AddFabric = new AddFabricType(), // Empty form
-                FabricList = _ifabricrepository.GetAllListFabricType() // ✅ Correct usage
+                FabricList = _imasterrepository.GetAllListFabricType() // ✅ Correct usage
             };
             return View(model);
         }
@@ -254,7 +245,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                string result = _ifabricrepository.Sp_InsertOrUpdateOrDeleteFabric(addFabricType);
+                string result = _imasterrepository.Sp_InsertOrUpdateOrDeleteFabric(addFabricType);
 
                 // Example: "Status: 0, Message: Insert successful., ActionType: insert"
                 var statusMatch = Regex.Match(result, @"Status:\s*(\d+)");
@@ -291,7 +282,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                _ifabricrepository.DeleteFabric(id);
+                _imasterrepository.DeleteFabric(id);
                 _notyf.Success("Fabric deleted successfully!");
                 return Json(new { success = true });
             }
@@ -303,6 +294,7 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         #endregion
+
         #region ===================================*****Material Type *************====================
 
         // GET: MaterialType/MaterialType
@@ -311,7 +303,7 @@ namespace AdminDyanamoEnterprises.Controllers
             MaterialTypePageViewModel model = new MaterialTypePageViewModel
             {
                 AddMaterial = new AddMaterialType(), // Empty form
-                MaterialList = _imaterialrepository.GetAllListMaterialType() // ✅ Correct usage
+                MaterialList = _imasterrepository.GetAllListMaterialType() // ✅ Correct usage
             };
             return View(model);
         }
@@ -323,7 +315,7 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             try
             {
-                string result = _imaterialrepository.Sp_InsertOrUpdateOrDeleteMaterialType(addMaterialType);
+                string result = _imasterrepository.Sp_InsertOrUpdateOrDeleteMaterialType(addMaterialType);
 
                 // Example: "Status: 0, Message: Insert successful., ActionType: insert"
                 var statusMatch = Regex.Match(result, @"Status:\s*(\d+)");
@@ -359,7 +351,7 @@ namespace AdminDyanamoEnterprises.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteMaterial(int id)
         {
-            _imaterialrepository.DeleteMaterial(id); // ✅ Correct usage
+            _imasterrepository.DeleteMaterial(id); // ✅ Correct usage
             _notyf.Success("Material deleted successfully!");
             return Json(new { success = true });
         }

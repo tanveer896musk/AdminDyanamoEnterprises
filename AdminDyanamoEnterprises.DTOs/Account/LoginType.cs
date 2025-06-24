@@ -13,7 +13,8 @@ namespace AdminDyanamoEnterprises.DTOs
 
         [Required(ErrorMessage = "Email is required")]
         public string? Emailid { get; set; }
-        
+
+        [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
        
     }

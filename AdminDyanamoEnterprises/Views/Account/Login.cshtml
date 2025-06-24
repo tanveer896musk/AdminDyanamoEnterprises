@@ -41,13 +41,13 @@
                                         <div class="form-group mb-3">
                                             @Html.LabelFor(model => model.Emailid, htmlAttributes: new { @class = "form-label" })
                                             @Html.TextBoxFor(model => model.Emailid, new { @class = "form-control", placeholder = "Enter your email address" })
-                                            @Html.ValidationMessageFor(model => model.Emailid, "", new { @class ="field-validation-error" })
+                                            <span style="color: red;">@Html.ValidationMessageFor(model => model.Emailid, "", new { @class ="field-validation-error" })</span>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
                                             @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Enter your password" })
-                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "field-validation-error" })
+                                            <span style="color: red;"> @Html.ValidationMessageFor(model => model.Password, "", new { @class = "field-validation-error" })</span> 
                                         </div>
 
                                         <div class="form-group row mt-3">

@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Edit">
+                    <form asp-action="EditBlog" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                         
                         <input asp-for="BlogId" type="hidden" />
@@ -80,7 +80,7 @@
                                     <i class="las la-image me-1"></i>Featured Image
                                 </label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="imageUpload" accept="image/*" />
+                                    <input type="file" class="form-control" id="imageUpload" accept="image/*" name="imageFile" />
                                     <button class="btn btn-outline-secondary" type="button" id="clearImage">
                                         <i class="las la-times"></i>
                                     </button>
@@ -93,7 +93,7 @@
                                     <div class="border rounded p-2 bg-light">
                                         <label class="form-label fw-semibold small">Current Image:</label>
                                         <div class="text-center position-relative">
-                                            <img id="currentImg" src="@Model?.ImageUrl" alt="Current Image" class="img-fluid rounded" style="max-height: 200px; max-width: 100%;" />
+                                            <img id="currentImg" src="@Url.Content("~/" + Model.ImageUrl)" alt="Current Image" class="img-fluid rounded" style="max-height: 200px; max-width: 100%;" />
                                         </div>
                                         <div class="mt-2">
                                             <small class="text-muted">

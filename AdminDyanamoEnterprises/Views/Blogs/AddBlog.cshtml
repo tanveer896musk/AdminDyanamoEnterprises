@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Create">
+                    <form asp-action="AddBlog" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                         
                         <div class="row">
@@ -78,7 +78,7 @@
                                     <i class="las la-image me-1"></i>Featured Image
                                 </label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="imageUpload" accept="image/*" />
+                                    <input type="file" class="form-control" id="imageUpload" name="imageFile" accept="image/*" />
                                     <button class="btn btn-outline-secondary" type="button" id="clearImage">
                                         <i class="las la-times"></i>
                                     </button>

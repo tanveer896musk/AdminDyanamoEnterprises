@@ -56,7 +56,7 @@
                                 </label>
                                 @Html.DropDownListFor(model => model.AddProduct.SubCategoryID,
                                     new SelectList(Model.SubCategoryList, "SubCategoryID", "SubCategoryName", Model.AddProduct?.SubCategoryID),"-- Select Sub-Category --",
-                                    new { @class = "form-select", id = "categoryDropdown2" })
+                                                        new { @class = "form-select", id = "SubCategoryID" })
                             </div>
 
                             <div class="col-md-6 mb-3">
@@ -393,13 +393,15 @@
         
         // Cascading Dropdown for Category and SubCategory
         document.getElementById('categoryType').addEventListener('change', function() {
+            
             const categoryId = this.value;
-            const subCategoryDropdown = document.getElementById('categoryDropdown2');
+                const subCategoryDropdown = document.getElementById('SubCategoryID');
             
             // Clear existing options
             subCategoryDropdown.innerHTML = '<option value="">-- Select Sub-Category --</option>';
             
             if (categoryId && categoryId !== '') {
+                    debugger
                 // Show loading state
                 subCategoryDropdown.innerHTML = '<option value="">Loading...</option>';
                 
@@ -417,9 +419,10 @@
                         
                         // Populate dropdown with subcategories
                         data.forEach(function(subCategory) {
+
                             const option = document.createElement('option');
-                            option.value = subCategory.SubCategoryID;
-                            option.textContent = subCategory.SubCategoryName;
+                            option.value = subCategory.subCategoryID;
+                            option.textContent = subCategory.subCategoryName;
                             subCategoryDropdown.appendChild(option);
                         });
                     })

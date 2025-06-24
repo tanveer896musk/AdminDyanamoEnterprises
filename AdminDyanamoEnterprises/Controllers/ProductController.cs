@@ -73,6 +73,7 @@ namespace AdminDyanamoEnterprises.Controllers
             {
                 var subCategories = _imasterrepository.GetSubCategoriesByCategoryId(categoryId);
                 var result = subCategories.Select(s => new {
+                    categoryId = s.CategoryID,
                     SubCategoryID = s.SubCategoryID,
                     SubCategoryName = s.SubCategoryName
                 }).ToList();

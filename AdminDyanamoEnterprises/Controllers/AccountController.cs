@@ -29,23 +29,23 @@ namespace AdminDyanamoEnterprises.Controllers
         }
         [HttpPost]
         public ActionResult Login(LoginType model)
-        {
-            if (ModelState.IsValid)
-            {
-
-                bool isValidUser = _iaccountRepository.CheckLogin(model);
-                if (isValidUser)
+        {     
+                if (ModelState.IsValid)
                 {
-                    _notyf.Success("Login successful!");
-                    return RedirectToAction("CategoryType", "Master");
+                    bool isValidUser = _iaccountRepository.CheckLogin(model);
+                    if (isValidUser)
+                    {
+                        _notyf.Success("Login successful!");
+                        return RedirectToAction("CategoryType", "Master");
+                    }
                 }
                 else
                 {
                     _notyf.Error("Invalid email or password.");
                     ModelState.AddModelError("", "Invalid email or password");
                 }
-            }
-            return View(model);
+            
+            return View();
         }
     }
 }

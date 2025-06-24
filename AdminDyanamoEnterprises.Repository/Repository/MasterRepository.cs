@@ -1,21 +1,15 @@
-﻿using AdminDyanamoEnterprises.DTOs;
-using AdminDyanamoEnterprises.DTOs.Common;
-using AdminDyanamoEnterprises.DTOs.Master;
+﻿
+using AdminDyanamoEnterprises.DTOs;
 using Microsoft.Data.SqlClient; 
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static AdminDyanamoEnterprises.Repository.IMasterRepository;
+
 
 namespace AdminDyanamoEnterprises.Repository
 {
-    public class MasterRepository: IMasterRepository, IColorRepository, IFabricRepository, IMaterialRepository
+    public class MasterRepository: IMasterRepository
     {
         private readonly IConfiguration _config;
 
@@ -309,6 +303,37 @@ namespace AdminDyanamoEnterprises.Repository
                     
                     var errorCode = errorCodeParam.Value;
                     var returnMsg = returnMessageParam.Value?.ToString();
+                }
+            }
+
+            return list;
+        }
+
+        public List<SubCategoryType> GetSubCategoriesByCategoryId(int categoryId)
+        {
+            var list = new List<SubCategoryType>();
+
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT SubCategoryId, CategoryId, SubCategoryName FROM [DynamoEnterprise].[Dynamo].[MasterSubCategory] WHERE CategoryId = @CategoryId", con))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@CategoryId", categoryId);
+
+                    con.Open();
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        list.Add(new SubCategoryType
+                        {
+                            SubCategoryName = dr["SubCategoryName"].ToString(),
+                            SubCategoryID = Convert.ToInt32(dr["SubCategoryId"]),
+                            CategoryID = Convert.ToInt32(dr["CategoryId"])
+                        });
+                    }
                 }
             }
 

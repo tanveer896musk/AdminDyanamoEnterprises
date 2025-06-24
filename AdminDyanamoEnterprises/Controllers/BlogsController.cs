@@ -1,4 +1,4 @@
-﻿using AdminDyanamoEnterprises.DTOs.Master;
+﻿using AdminDyanamoEnterprises.DTOs;
 using AdminDyanamoEnterprises.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +21,7 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // GET: /Blogs/Create
-        public IActionResult Create()
+        public IActionResult AddBlog()
         {
             return View();
         }
@@ -29,7 +29,7 @@ namespace AdminDyanamoEnterprises.Controllers
         // POST: /Blogs/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(BlogsModel model)
+        public IActionResult AddBlog(BlogsModel model)
         {
             if (ModelState.IsValid)
             {
@@ -40,14 +40,14 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // GET: /Blogs/Edit/{id}
-        public IActionResult Edit(int id)
+        public IActionResult EditBlog(int id)
         {
             var blog = _repository.GetBlogById(id);
             return View(blog);
         }
 
         [HttpPost]
-        public IActionResult Edit(BlogsModel model)
+        public IActionResult EditBlog(BlogsModel model)
         {
             if (ModelState.IsValid)
             {

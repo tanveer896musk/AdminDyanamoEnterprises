@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminDyanamoEnterprises.DTOs.Common
+namespace AdminDyanamoEnterprises.DTOs
 {
     public class MasterResponse
     {

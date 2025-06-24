@@ -7,13 +7,7 @@ namespace AdminDyanamoEnterprises.Controllers
 {
     public class AccountController : Controller
     { 
-        private readonly IProductRepository _productRepository;
-        private readonly INotyfService _notyf;
-        public AccountController(IProductRepository productRepository, INotyfService notyfService)
-        {
-            _productRepository = productRepository;
-            _notyf = notyfService;
-        }
+      
 
         // GET: AccountController
         public ActionResult Index()

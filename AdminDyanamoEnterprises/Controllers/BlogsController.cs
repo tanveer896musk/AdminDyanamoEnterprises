@@ -57,21 +57,24 @@ namespace AdminDyanamoEnterprises.Controllers
             return View(model);
         }
 
-        // GET: /Blogs/Delete/{id}
-        public IActionResult Delete(int id)
-        {
-            var blog = _repository.GetBlogById(id);
-            return View(blog);
-        }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
+            if (id == 0)
+            {
+                TempData["ErrorMessage"] = "Invalid Blog ID.";
+                return RedirectToAction("List");
+            }
+
             _repository.DeleteBlog(id);
+            TempData["SuccessMessage"] = "Blog post deleted successfully.";
             return RedirectToAction("List");
         }
 
-        // Optional: GET /Blogs/Details/{id}
+
+
         public IActionResult Details(int id)
         {
             var blog = _repository.GetBlogById(id);

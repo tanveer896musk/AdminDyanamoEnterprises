@@ -17,33 +17,40 @@ namespace AdminDyanamoEnterprises.Repository
             _config = config;
         }
 
-        private string sqlConnection()
+        public string sqlConnection()
         {
-            return _config.GetConnectionString("DyanamoEnterprises_DB");
+            return _config.GetConnectionString("DyanamoEnterprises_DB").ToString();
         }
 
-
-        public List<BannerImage> GetBanners(bool? isActive = null)
+        public List<BannerImage> GetBanners(string bannerType = null)
         {
-            var banners = new List<BannerImage>();
+            List<BannerImage> banners = new List<BannerImage>();
 
-            using (var conn = new SqlConnection(sqlConnection()))
-            using (var cmd = new SqlCommand("GetBanners", conn))
+            using (SqlConnection conn = new SqlConnection(sqlConnection()))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@IsActive", (object?)isActive ?? DBNull.Value);
-
-                conn.Open();
-                using (var reader = cmd.ExecuteReader())
+                using (SqlCommand cmd = new SqlCommand("GetBanners", conn))
                 {
-                    while (reader.Read())
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IsActive", true);
+
+                    if (!string.IsNullOrEmpty(bannerType))
+                        cmd.Parameters.AddWithValue("@BannerType", bannerType);
+                    else
+                        cmd.Parameters.AddWithValue("@BannerType", DBNull.Value);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    foreach (DataRow row in dt.Rows)
                     {
                         banners.Add(new BannerImage
                         {
-                            BannerID = Convert.ToInt32(reader["BannerID"]),
-                            Image = reader["Image"].ToString(),
-                            CreatedDate = Convert.ToDateTime(reader["CreatedDate"]),
-                            Active = Convert.ToBoolean(reader["Active"])
+                            BannerID = Convert.ToInt32(row["BannerID"]),
+                            Image = row["Image"].ToString(),
+                            CreatedDate = Convert.ToDateTime(row["CreatedDate"]),
+                            Active = Convert.ToBoolean(row["Active"]),
+                            BannerType = row["BannerType"].ToString()
                         });
                     }
                 }
@@ -52,32 +59,36 @@ namespace AdminDyanamoEnterprises.Repository
             return banners;
         }
 
-        public void AddBanner(string fileName)
+        public void AddBanner(string fileName, string bannerType)
         {
-            using (var conn = new SqlConnection(sqlConnection()))
-            using (var cmd = new SqlCommand("AddBanner", conn))
+            using (SqlConnection conn = new SqlConnection(sqlConnection()))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Image", fileName);
-                cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
-                cmd.Parameters.AddWithValue("@Active", true);
+                using (SqlCommand cmd = new SqlCommand("AddBanner", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Image", fileName);
+                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Active", true);
+                    cmd.Parameters.AddWithValue("@BannerType", bannerType);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
-
         public void DeleteBanner(int bannerId)
         {
-            using (var conn = new SqlConnection(sqlConnection()))
-            using (var cmd = new SqlCommand("DeleteBanner", conn))
+            using (SqlConnection conn = new SqlConnection(sqlConnection()))
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@BannerID", bannerId);
+                using (SqlCommand cmd = new SqlCommand("DeleteBanner", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@BannerID", bannerId);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }

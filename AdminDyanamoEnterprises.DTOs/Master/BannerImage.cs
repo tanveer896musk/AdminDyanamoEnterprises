@@ -12,5 +12,7 @@ namespace AdminDyanamoEnterprises.DTOs.Master
         public string Image { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Active { get; set; }
+
+        public string BannerType { get; set; }
     }
 }

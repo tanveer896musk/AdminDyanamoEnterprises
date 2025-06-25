@@ -20,59 +20,53 @@ namespace AdminDyanamoEnterprises.Controllers
             _env = env;
         }
 
-        // ✅ Show all banners
-        public IActionResult Index()
+        // ✅ Show banners with filter
+        public IActionResult Banner(string type = null)
         {
-            var banners = _repo.GetBanners();
+            var banners = _repo.GetBanners(type);
+            ViewBag.BannerType = type;
+            ViewBag.BannerTypes = new List<string> { "Home", "Category", "SubCategory", "Product", "Fabric", "Pattern", "Colors" };
             return View(banners);
         }
 
         // ✅ Add banner (GET)
         public IActionResult Create()
         {
+            ViewBag.BannerTypes = new List<string> { "Home", "Category", "SubCategory", "Product", "Fabric" ,"Pattern" ,"Colors" };
             return View();
         }
 
-        // ✅ Add banner (POST) - Multiple Upload
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(List<IFormFile> ImageFile)
+        public IActionResult Create(List<IFormFile> ImageFile, string bannerType)
         {
-            if (ImageFile != null && ImageFile.Count > 0)
+            if (ImageFile != null && ImageFile.Count > 0 && !string.IsNullOrEmpty(bannerType))
             {
                 foreach (var file in ImageFile)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string filePath = Path.Combine(_env.WebRootPath, "uploads", fileName);
+                    string savePath = Path.Combine(_env.WebRootPath, "uploads", fileName);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(savePath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
 
-                    _repo.AddBanner(fileName);
+                    _repo.AddBanner(fileName, bannerType);
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { type = bannerType });
             }
 
-            ViewBag.Message = "Please select at least one image.";
-            return View();
+            TempData["Error"] = "Please select image(s) and banner type.";
+            return RedirectToAction("Index");
         }
 
         // ✅ Delete banner
         public IActionResult Delete(int id)
         {
             _repo.DeleteBanner(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
-
-        public IActionResult Index(bool? active)
-        {
-            var banners = _repo.GetBanners(active);
-            ViewBag.Active = active;
-            return View(banners);
-        }
-
     }
 }

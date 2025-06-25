@@ -23,7 +23,7 @@ builder.Services.AddTransient<IBlogsRepository, BlogsRepository>();
 
 
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
-
+builder.Services.AddTransient<IBannerRepository, BannerRepository>();
 
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 

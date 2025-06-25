@@ -1,5 +1,6 @@
-using AdminDyanamoEnterprises.Repository;
+using AdminDyanamoEnterprises.IRepository;
 using AdminDyanamoEnterprises.Repository.IRepository;
+
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 

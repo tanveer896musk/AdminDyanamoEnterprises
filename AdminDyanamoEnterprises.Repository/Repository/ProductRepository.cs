@@ -1,5 +1,7 @@
+
 ﻿using AdminDyanamoEnterprises.DTOs;
 using Microsoft.Data.SqlClient;
+﻿using AdminDyanamoEnterprises.IRepository;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -16,12 +18,12 @@ namespace AdminDyanamoEnterprises.Repository
 
         public ProductRepository(IConfiguration config)
         {
-            this._config = config;
-        }
-        
+            _config = config;
+        }        
         public string sqlConnection()
+
         {
-            return _config.GetConnectionString("DyanamoEnterprises_DB").ToString();
+            return _config.GetConnectionString("DyanamoEnterprises_DB");
         }
 
         public List<ProductType> GetAllProducts()

@@ -403,6 +403,12 @@
                                 <span>Blogs</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","Blogs")">
+                                <i class="fab fa-blogger menu-icon"></i>
+                                <span>Banner</span>
+                            </a>
+                        </li>
                     </ul>
                    
                 </div>
@@ -441,7 +447,7 @@
     </div>
 
 
-
+   @*  @RenderSection("Scripts", required: false) *@
     <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <script src="~/libs/simplebar/simplebar.min.js"></script>

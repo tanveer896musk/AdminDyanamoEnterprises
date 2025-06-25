@@ -21,10 +21,14 @@ namespace AdminDyanamoEnterprises.Controllers
         }
 
         // ✅ Show all banners
-        public IActionResult Index()
+
+        public IActionResult Banner()
         {
             var banners = _repo.GetBanners();
-            return View(banners);
+             return View(banners);
+           
+
+      
         }
 
         // ✅ Add banner (GET)

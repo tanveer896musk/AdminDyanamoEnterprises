@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminDyanamoEnterprises.Repository
+namespace AdminDyanamoEnterprises.IRepository
 {
     public interface IProductRepository
     {

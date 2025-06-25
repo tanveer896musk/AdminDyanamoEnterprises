@@ -9,8 +9,8 @@ namespace AdminDyanamoEnterprises.Repository.IRepository
 {
     public interface IBannerRepository
     {
-        List<BannerImage> GetBanners(bool? isActive = null);
-        void AddBanner(string fileName);
+        List<BannerImage> GetBanners(string bannerType = null);
+        void AddBanner(string fileName, string bannerType);
         void DeleteBanner(int bannerId);
     }
 }

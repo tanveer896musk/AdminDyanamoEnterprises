@@ -1,5 +1,6 @@
 
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.IRepository;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 

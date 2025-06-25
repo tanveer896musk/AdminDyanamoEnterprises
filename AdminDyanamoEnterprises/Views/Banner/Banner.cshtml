@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Banner Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -327,3 +327,70 @@
     </script>
 }
 
+ *@
+@model List<AdminDyanamoEnterprises.DTOs.Master.BannerImage>
+
+@if (Model != null && Model.Any())
+{
+    <!-- ✅ Bootstrap Carousel Slider -->
+    <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="@Url.Content("~/uploads/" + Model[i].Image)" class="d-block w-100" style="height:300px;object-fit:cover;" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 class="text-light bg-dark bg-opacity-50 p-2 rounded">@Model[i].BannerType</h5>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- ✅ Original Table Below -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>BannerType</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var banner in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Content("~/uploads/" + banner.Image)" class="img-thumbnail" style="width:100px;height:40px;object-fit:cover;" />
+                    </td>
+                    <td>@banner.BannerType</td>
+                    <td>@banner.CreatedDate.ToShortDateString()</td>
+                    <td>
+                        @if (banner.Active)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@banner.BannerID" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this banner?')">
+                            <i class="las la-trash-alt"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

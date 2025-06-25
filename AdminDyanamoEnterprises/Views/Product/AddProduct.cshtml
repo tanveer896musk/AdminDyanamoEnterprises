@@ -1,0 +1,445 @@
+﻿@model AdminDyanamoEnterprises.DTOs.ProductPageViewModel
+
+@{
+    bool isEdit = Model.AddProduct != null && Model.AddProduct.ProductID > 0;
+    ViewData["Title"] = isEdit ? "Edit Product" : "Add Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
+                <h4 class="page-title">@(isEdit ? "Edit Product" : "Add Product")</h4>
+                <div>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Mifty</a></li>
+                        <li class="breadcrumb-item"><a href="#">Apps</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Product")">Products</a></li>
+                        <li class="breadcrumb-item active">@(isEdit ? "Edit Product" : "Add Product")</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title mb-0">
+                                <i class="las la-@(isEdit ? "edit" : "box") me-2"></i>@(isEdit ? "Edit" : "Add") Product Information
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("AddProduct", "Product", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.AddProduct.ProductID)
+                        <div class="row">
+                            <!-- Category Information Section -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-layer-group me-1"></i>Category Type <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.CategoryID,
+                                    new SelectList(Model.CategoryList, "CategoryID", "CategoryName", Model.AddProduct?.CategoryID), "-- Select Category --",
+                                    new { @class = "form-select", id = "categoryType" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-sitemap me-1"></i>Sub-Category Type <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.SubCategoryID,
+                                    new SelectList(Model.SubCategoryList, "SubCategoryID", "SubCategoryName", Model.AddProduct?.SubCategoryID),"-- Select Sub-Category --",
+                                                        new { @class = "form-select", id = "SubCategoryID" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-industry me-1"></i>Material Composition <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.MaterialID,
+                                    new SelectList(Model.MaterialList, "MaterialID", "MaterialName", Model.AddProduct?.MaterialID),"-- Select Material --",
+                                    new { @class = "form-select", id = "categoryDropdown3" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-tshirt me-1"></i>Fabric Type <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.FabricID,
+                                    new SelectList(Model.FabricList, "FabricID", "FabricName", Model.AddProduct?.FabricID),"-- Select Fabric --",
+                                    new { @class = "form-select", id = "fabricDropdown" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-shapes me-1"></i>Pattern <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.PatternID,
+                                    new SelectList(Model.PatternList, "PatternID", "PatternName", Model.AddProduct?.PatternID),"-- Select Pattern --",
+                                    new { @class = "form-select", id = "patternDropdown" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-paint-brush me-1"></i>Color <span class="text-danger">*</span>
+                                </label>
+                                @Html.DropDownListFor(model => model.AddProduct.ColorID,
+                                    new SelectList(Model.ColorList, "ColorID", "ColorName", Model.AddProduct?.ColorID),"-- Select Color --",
+                                    new { @class = "form-select", id = "colorDropdown" })
+                            </div>
+
+                            <!-- Product Details Section -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-tag me-1"></i>Product Name <span class="text-danger">*</span>
+                                </label>
+                                @Html.TextBoxFor(model => model.AddProduct.ProductName, new { @class = "form-control", id = "productName", placeholder = "Enter product name..." })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="productPrice" class="form-label fw-semibold">
+                                    <i class="las la-money-bill me-1"></i>Price (₹) <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    @Html.TextBoxFor(model => model.AddProduct.Price, new { @class = "form-control", id = "productPrice", placeholder = "Enter price in INR", min = "0", step = "0.01", type = "number" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="inStock" class="form-label fw-semibold">
+                                    <i class="las la-boxes me-1"></i>Stock Quantity <span class="text-danger">*</span>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="las la-warehouse"></i>
+                                    </span>
+                                    @Html.TextBoxFor(model => model.AddProduct.InStock, new { @class = "form-control", id = "inStock", min = "0", placeholder = "Enter available stock", title = "Enter the quantity available in stock", type = "number" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-toggle-on me-1"></i>Product Status
+                                </label>
+                                <div class="form-check form-switch mt-2">
+                                    @Html.CheckBoxFor(model => model.AddProduct.IsActive, new { @class = "form-check-input form-switch-success", id = "statusSwitch" })
+                                    <label class="form-check-label fw-medium" for="statusSwitch">
+                                        <span id="statusText">@(Model.AddProduct?.IsActive == true ? "Active" : "Inactive")</span>
+                                    </label>
+                                </div>
+                                <small class="text-muted">Toggle to activate or deactivate product</small>
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label for="description" class="form-label fw-semibold">
+                                    <i class="las la-align-left me-1"></i>Product Description
+                                </label>
+                                @Html.TextAreaFor(model => model.AddProduct.Description, new { @class = "form-control", id = "description", rows = "5", placeholder = "Enter detailed product description..." })
+                                <small class="text-muted">Provide a detailed description of the product</small>
+                            </div>
+
+                            <!-- Product Images Section -->
+                            <div class="col-12 mb-4">
+                                <label class="form-label fw-semibold">
+                                    <i class="las la-images me-1"></i>Product Images
+                                </label>
+                                <div class="border border-dashed rounded p-4" id="imageUploadArea">
+                                    <div class="text-center">
+                                        <i class="las la-cloud-upload-alt fs-48 text-muted mb-3 d-block"></i>
+                                        <h5 class="mb-2">Drag & Drop Images Here</h5>
+                                        <p class="text-muted mb-3">or</p>
+                                        <div class="input-group justify-content-center">
+                                            <input type="file" class="form-control" id="productImages" multiple accept="image/*" style="display: none;" />
+                                            <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('productImages').click()">
+                                                <i class="las la-folder-open me-1"></i>Choose Images
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small class="text-muted">Upload multiple product images (JPG, PNG, GIF). Maximum 5MB per image, up to 10 images.</small>
+                                
+                                <!-- Image Preview Container -->
+                                <div id="imagePreviewContainer" class="mt-3" style="display: none;">
+                                    <div class="row" id="imagePreviewGrid">
+                                        <!-- Image previews will be inserted here -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Hidden input to store image data -->
+                                @Html.HiddenFor(model => model.AddProduct.ProductImages, new { id = "hiddenImageData" })
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="col-12">
+                                <div class="d-flex gap-2 justify-content-end">
+                                    <a href="@Url.Action("Index", "Product")" class="btn btn-light">
+                                        <i class="las la-arrow-left me-1"></i>Back to List
+                                    </a>
+                                    <button type="reset" class="btn btn-outline-secondary">
+                                        <i class="las la-undo me-1"></i>Reset Form
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="las la-save me-1"></i>@(isEdit ? "Update Product" : "Add Product")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    <script>
+        let selectedImages = [];
+        const maxImages = 10;
+        const maxFileSize = 5 * 1024 * 1024; // 5MB
+        
+        // Toggle product status text
+        document.getElementById('statusSwitch').addEventListener('change', function() {
+            const statusText = document.getElementById('statusText');
+            statusText.textContent = this.checked ? 'Active' : 'Inactive';
+        });
+        
+        // Multiple Image Upload Functionality
+        document.getElementById('productImages').addEventListener('change', function(e) {
+            handleImageSelection(e.target.files);
+        });
+        
+        // Drag and Drop Functionality
+        const uploadArea = document.getElementById('imageUploadArea');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight(e) {
+            uploadArea.classList.add('border-primary', 'bg-light');
+        }
+        
+        function unhighlight(e) {
+            uploadArea.classList.remove('border-primary', 'bg-light');
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleImageSelection(files);
+        }
+        
+        function handleImageSelection(files) {
+            if (files.length === 0) return;
+            
+            // Check if adding these files would exceed the limit
+            if (selectedImages.length + files.length > maxImages) {
+                alert(`You can only upload up to ${maxImages} images. Currently selected: ${selectedImages.length}`);
+                return;
+            }
+            
+            Array.from(files).forEach(file => {
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert(`${file.name} is not a valid image file. Please select JPG, PNG, or GIF files.`);
+                    return;
+                }
+                
+                // Validate file size
+                if (file.size > maxFileSize) {
+                    alert(`${file.name} is too large. Maximum file size is 5MB.`);
+                    return;
+                }
+                
+                // Add to selected images
+                const imageId = Date.now() + Math.random();
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const imageData = {
+                        id: imageId,
+                        name: file.name,
+                        size: file.size,
+                        dataUrl: e.target.result
+                    };
+                    
+                    selectedImages.push(imageData);
+                    addImagePreview(imageData);
+                    updateHiddenInput();
+                    showImageContainer();
+                };
+                
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function addImagePreview(imageData) {
+            const previewGrid = document.getElementById('imagePreviewGrid');
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col-md-3 col-sm-4 col-6 mb-3';
+            colDiv.setAttribute('data-image-id', imageData.id);
+            
+            colDiv.innerHTML = `
+                <div class="card">
+                    <div class="position-relative">
+                        <img src="${imageData.dataUrl}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="${imageData.name}">
+                        <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="removeImage(${imageData.id})">
+                            <i class="las la-times"></i>
+                        </button>
+                    </div>
+                    <div class="card-body p-2">
+                        <small class="text-muted d-block text-truncate" title="${imageData.name}">${imageData.name}</small>
+                        <small class="text-muted">${formatFileSize(imageData.size)}</small>
+                    </div>
+                </div>
+            `;
+            
+            previewGrid.appendChild(colDiv);
+        }
+        
+        function removeImage(imageId) {
+            // Remove from selectedImages array
+            selectedImages = selectedImages.filter(img => img.id !== imageId);
+            
+            // Remove from DOM
+            const imageElement = document.querySelector(`[data-image-id="${imageId}"]`);
+            if (imageElement) {
+                imageElement.remove();
+            }
+            
+            // Update hidden input
+            updateHiddenInput();
+            
+            // Hide container if no images
+            if (selectedImages.length === 0) {
+                document.getElementById('imagePreviewContainer').style.display = 'none';
+            }
+            
+            // Reset file input
+            document.getElementById('productImages').value = '';
+        }
+        
+        function showImageContainer() {
+            document.getElementById('imagePreviewContainer').style.display = 'block';
+        }
+        
+        function updateHiddenInput() {
+            const hiddenInput = document.getElementById('hiddenImageData');
+            hiddenInput.value = JSON.stringify(selectedImages);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            let isValid = true;
+            const requiredFields = ['AddProduct.CategoryID', 'AddProduct.ProductName', 'AddProduct.Price', 'AddProduct.InStock', 'AddProduct.ColorID'];
+            
+            requiredFields.forEach(function(fieldName) {
+                const field = document.querySelector(`[name="${fieldName}"]`);
+                if (field && !field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else if (field) {
+                    field.classList.remove('is-invalid');
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields.');
+            }
+        });
+        
+        // Remove validation styling on input
+        document.querySelectorAll('input, select, textarea').forEach(function(element) {
+            element.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+        });
+        
+        // Make removeImage function global
+        window.removeImage = removeImage;
+        
+        // Cascading Dropdown for Category and SubCategory
+        document.getElementById('categoryType').addEventListener('change', function() {
+            
+            const categoryId = this.value;
+                const subCategoryDropdown = document.getElementById('SubCategoryID');
+            
+            // Clear existing options
+            subCategoryDropdown.innerHTML = '<option value="">-- Select Sub-Category --</option>';
+            
+            if (categoryId && categoryId !== '') {
+                    debugger
+                // Show loading state
+                subCategoryDropdown.innerHTML = '<option value="">Loading...</option>';
+                
+                // Make AJAX call to get subcategories
+                fetch(`/Product/GetSubCategoriesByCategory?categoryId=${categoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Clear loading state
+                        subCategoryDropdown.innerHTML = '<option value="">-- Select Sub-Category --</option>';
+                        
+                        if (data.error) {
+                            console.error('Error fetching subcategories:', data.error);
+                            return;
+                        }
+                        
+                        // Populate dropdown with subcategories
+                        data.forEach(function(subCategory) {
+
+                            const option = document.createElement('option');
+                            option.value = subCategory.subCategoryID;
+                            option.textContent = subCategory.subCategoryName;
+                            subCategoryDropdown.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        subCategoryDropdown.innerHTML = '<option value="">Error loading subcategories</option>';
+                    });
+            }
+        });
+    </script>
+}
+
+
+
+    
+
+
+   
+
+

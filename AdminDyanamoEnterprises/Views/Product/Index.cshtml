@@ -1,550 +1,241 @@
-﻿
+﻿@model AdminDyanamoEnterprises.DTOs.ProductPageViewModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr" data-startbar="light" data-bs-theme="light">
-
-<head>
-
-
-    <meta charset="utf-8" />
-    <title>Products | Mifty - Admin & Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-
-    <link href="assets/libs/simple-datatables/style.css" rel="stylesheet" type="text/css" />
-    <!-- App css -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
-</head>
-
-
-   <body>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                            <h4 class="page-title">Products</h4>
-                            <div class="">
-                                <ol class="breadcrumb mb-0">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Mifty</a>
-                                    </li><!--end nav-item-->
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Ecommerce</a>
-                                    </li><!--end nav-item-->
-                                    <li class="breadcrumb-item active">Products</li>
-                                </ol>
-                            </div>
-                        </div><!--end page-title-box-->
-                    </div><!--end col-->
-                </div><!--end row-->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h4 class="card-title">Products</h4>
-                                    </div><!--end col-->
-                                    <div class="col-auto">
-                                        <form class="row g-2">
-                                            <div class="col-auto">
-                                                <a class="btn bg-primary-subtle text-primary dropdown-toggle d-flex align-items-center arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" data-bs-auto-close="outside">
-                                                    <i class="iconoir-filter-alt me-1"></i> Filter
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-start">
-                                                    <div class="p-2">
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-all">
-                                                            <label class="form-check-label" for="filter-all">
-                                                                All
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-one">
-                                                            <label class="form-check-label" for="filter-one">
-                                                                Fashion
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-two">
-                                                            <label class="form-check-label" for="filter-two">
-                                                                Plants
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-three">
-                                                            <label class="form-check-label" for="filter-three">
-                                                                Toys
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-four">
-                                                            <label class="form-check-label" for="filter-four">
-                                                                Gadgets
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mb-2">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-five">
-                                                            <label class="form-check-label" for="filter-five">
-                                                                Food
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" checked id="filter-six">
-                                                            <label class="form-check-label" for="filter-six">
-                                                                Drinks
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!--end col-->
-
-                                            <div class="col-auto">
-                                        <a href="@Url.Action("CreateProduct", "Product")" class="btn btn-primary">
-                                            <i class="fa-solid fa-plus me-1"></i> Add Product
-                                        </a>
-                                            </div><!--end col-->
-                                        </form>
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                            </div><!--end card-header-->
-                            <div class="card-body pt-0">
-
-                                <div class="table-responsive">
-                                    <table class="table mb-0 checkbox-all" id="datatable_1">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th style="width: 16px;">
-                                                    <div class="form-check mb-0 ms-n1">
-                                                        <input type="checkbox" class="form-check-input" name="select-all" id="select-all">
-                                                    </div>
-                                                </th>
-                                                <th class="ps-0">Product Name</th>
-                                                <th>Category</th>
-                                                <th>Pics</th>
-                                                <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Created At</th>
-                                                <th class="text-end">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck1">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/04.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Apple Watch</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Size-05 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Sports</td>
-                                                <td>32</td>
-                                                <td>$39</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>14 Jan 2024, 10:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck2">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/01.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Morden Chair</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Size-Mediam (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Interior</td>
-                                                <td>10</td>
-                                                <td>$99</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>18 Jan 2024, 12:10am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck3">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/05.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Reebok Shoes</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-08 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Footwear</td>
-                                                <td>24</td>
-                                                <td>$49</td>
-                                                <td><span class="badge bg-danger-subtle text-danger"><i class="fas fa-xmark me-1"></i> Inactive</span></td>
-                                                <td>
-                                                    <span>24 Jan 2024, 09:10pm</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck4">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/06.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Cosco Vollyboll</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-04 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Sports</td>
-                                                <td>8</td>
-                                                <td>$49</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>08 Feb 2024, 03:30pm</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck5">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/04.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Royal Purse</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Pure Lether 100%</span>
-                                                    </p>
-                                                </td>
-                                                <td>Life Style</td>
-                                                <td>52</td>
-                                                <td>$89</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>20 Feb 2024, 11:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck6">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/03.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">New Morden Chair</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-05 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Interior</td>
-                                                <td>6</td>
-                                                <td>$20</td>
-                                                <td><span class="badge bg-secondary-subtle text-secondary"><i class="fas fa-box-archive me-1"></i> Draft</span></td>
-                                                <td>
-                                                    <span>14 Jan 2024, 10:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck7">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/02.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Important Chair</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-05 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Interior</td>
-                                                <td>32</td>
-                                                <td>$39</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>02 Mar 2024, 10:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck8">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/02.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Nivya Footboll</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Size-05 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Sports</td>
-                                                <td>32</td>
-                                                <td>$39</td>
-                                                <td><span class="badge bg-danger-subtle text-danger"><i class="fas fa-xmark me-1"></i> Inactive</span></td>
-                                                <td>
-                                                    <span>11 Mar 2024, 05:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck9">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/01.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Green Morden Chair</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Size-Mediam (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Interior</td>
-                                                <td>10</td>
-                                                <td>$99</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>28 Mar 2024, 08:45am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck10">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/01.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Bata Shoes</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-08 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Footwear</td>
-                                                <td>24</td>
-                                                <td>$49</td>
-                                                <td><span class="badge bg-secondary-subtle text-secondary"><i class="fas fa-box-archive me-1"></i> Draft</span></td>
-                                                <td>
-                                                    <span>05 Apr 2024, 12:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck11">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/06.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Cosco Vollyboll</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-04 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Sports</td>
-                                                <td>8</td>
-                                                <td>$49</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>10 Apr 2024, 10:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck12">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/04.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">Royal Purse</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">Pure Lether 100%</span>
-                                                    </p>
-                                                </td>
-                                                <td>Life Style</td>
-                                                <td>52</td>
-                                                <td>$89</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>20 Apr 2024, 10:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 16px;">
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" name="check" id="customCheck13">
-                                                    </div>
-                                                </td>
-                                                <td class="ps-0">
-                                                    <img src="assets/images/products/03.png" alt="" height="40" class="rounded me-1">
-                                                    <p class="d-inline-block align-middle mb-0">
-                                                        <a href="ecommerce-order-details.html" class="d-inline-block align-middle mb-0 product-name">New Morden Chair</a>
-                                                        <br>
-                                                        <span class="text-muted font-13">size-05 (Model 2021)</span>
-                                                    </p>
-                                                </td>
-                                                <td>Interior</td>
-                                                <td>6</td>
-                                                <td>$20</td>
-                                                <td><span class="badge bg-success-subtle text-success"><i class="fas fa-check me-1"></i> Published</span></td>
-                                                <td>
-                                                    <span>08 May 2024, 01:30am</span>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
-                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
-            </div><!-- container -->
-            <!--Start Rightbar-->
-            <!--Start Rightbar/offcanvas-->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="Appearance" aria-labelledby="AppearanceLabel">
-                <div class="offcanvas-header border-bottom justify-content-between">
-                    <h5 class="m-0 font-14" id="AppearanceLabel">Appearance</h5>
-                    <button type="button" class="btn-close text-reset p-0 m-0 align-self-center" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <h6>Account Settings</h6>
-                    <div class="p-2 text-start mt-3">
-                        <div class="form-check form-switch mb-2">
-                            <input class="form-check-input" type="checkbox" id="settings-switch1">
-                            <label class="form-check-label" for="settings-switch1">Auto updates</label>
-                        </div><!--end form-switch-->
-                        <div class="form-check form-switch mb-2">
-                            <input class="form-check-input" type="checkbox" id="settings-switch2" checked>
-                            <label class="form-check-label" for="settings-switch2">Location Permission</label>
-                        </div><!--end form-switch-->
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="settings-switch3">
-                            <label class="form-check-label" for="settings-switch3">Show offline Contacts</label>
-                        </div><!--end form-switch-->
-                    </div><!--end /div-->
-                    <h6>General Settings</h6>
-                    <div class="p-2 text-start mt-3">
-                        <div class="form-check form-switch mb-2">
-                            <input class="form-check-input" type="checkbox" id="settings-switch4">
-                            <label class="form-check-label" for="settings-switch4">Show me Online</label>
-                        </div><!--end form-switch-->
-                        <div class="form-check form-switch mb-2">
-                            <input class="form-check-input" type="checkbox" id="settings-switch5" checked>
-                            <label class="form-check-label" for="settings-switch5">Status visible to all</label>
-                        </div><!--end form-switch-->
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="settings-switch6">
-                            <label class="form-check-label" for="settings-switch6">Notifications Popup</label>
-                        </div><!--end form-switch-->
-                    </div><!--end /div-->
-                </div><!--end offcanvas-body-->
-            </div>
-
+<div class="container-fluid">
+    <!-- Page Title -->
     <div class="row">
         <div class="col-sm-12">
             <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                <h4 class="page-title">Sub-Category Type</h4>
+                <h4 class="page-title">Products</h4>
                 <div>
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#">Mifty</a></li>
                         <li class="breadcrumb-item"><a href="#">Apps</a></li>
-                        <li class="breadcrumb-item active">Category Type</li>
+                        <li class="breadcrumb-item active">Products</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-</body>
-<!--end body-->
-</html>
+    <!-- Products Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">
+                                <i class="las la-box me-2"></i>Products Management
+                            </h4>
+                        </div>
+                        <div class="col-auto">
+                            <a href="@Url.Action("AddProduct", "Product")" class="btn btn-primary">
+                                <i class="fa-solid fa-plus me-1"></i> Add Product
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    @if (Model.ProductList != null && Model.ProductList.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0" id="productTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 16px;">
+                                            <div class="form-check mb-0 ms-n1">
+                                                <input type="checkbox" class="form-check-input" name="select-all" id="select-all">
+                                            </div>
+                                        </th>
+                                        <th class="ps-0">Product Name</th>
+                                        <th>Stock</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Description</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model.ProductList)
+                                    {
+                                        <tr>
+                                            <td style="width: 16px;">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="check" id="customCheck@(product.ProductID)">
+                                                </div>
+                                            </td>
+                                            <td class="ps-0">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <div class="avatar-sm bg-primary-subtle text-primary rounded">
+                                                            <i class="las la-box fs-18"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="mb-1 fw-semibold product-name">@product.ProductName</h6>
+                                                        <p class="text-muted mb-0 small">Product ID: #@product.ProductID</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge @(product.InStock > 10 ? "bg-success-subtle text-success" : product.InStock > 0 ? "bg-warning-subtle text-warning" : "bg-danger-subtle text-danger")">
+                                                    @product.InStock units
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="fw-semibold text-success">₹@product.Price.ToString("N2")</span>
+                                            </td>
+                                            <td>
+                                                @if (product.IsActive)
+                                                {
+                                                    <span class="badge bg-success-subtle text-success">
+                                                        <i class="fas fa-check me-1"></i> Active
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger-subtle text-danger">
+                                                        <i class="fas fa-xmark me-1"></i> Inactive
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <span class="text-muted">
+                                                    @if (!string.IsNullOrEmpty(product.Description))
+                                                    {
+                                                        @(product.Description.Length > 50 ? product.Description.Substring(0, 50) + "..." : product.Description)
+                                                    }
+                                                    else
+                                                    {
+                                                        <em>No description</em>
+                                                    }
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="d-flex justify-content-end gap-2">
+                                                    <a href="@Url.Action("Edit", "Product", new { id = product.ProductID })" 
+                                                       class="btn btn-sm btn-outline-primary" 
+                                                       title="Edit Product">
+                                                        <i class="las la-pen"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger delete-product" 
+                                                       data-id="@product.ProductID" 
+                                                       data-name="@product.ProductName"
+                                                       title="Delete Product">
+                                                        <i class="las la-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <div class="avatar-lg bg-light rounded-circle mx-auto mb-4">
+                                <i class="las la-box-open fs-48 text-muted"></i>
+                            </div>
+                            <h5 class="text-muted mb-3">No Products Found</h5>
+                            <p class="text-muted mb-4">You haven't added any products yet. Start by adding your first product.</p>
+                            <a href="@Url.Action("AddProduct", "Product")" class="btn btn-primary">
+                                <i class="fa-solid fa-plus me-1"></i> Add Your First Product
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal (same as CategoryType) -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete <strong id="deleteItemName"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let productId = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle select all checkbox
+        const selectAll = document.getElementById('select-all');
+        const checkboxes = document.querySelectorAll('input[name="check"]');
+        
+        if (selectAll) {
+            selectAll.addEventListener('change', function() {
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+        }
+        
+        // Initialize DataTable if products exist
+        @if (Model.ProductList != null && Model.ProductList.Count > 0)
+        {
+            <text>
+            if (typeof $('#productTable').DataTable === 'function') {
+                $('#productTable').DataTable({
+                    "pageLength": 10,
+                    "responsive": true,
+                    "order": [[1, "asc"]],
+                    "columnDefs": [
+                        { "orderable": false, "targets": [0, 6] }
+                    ]
+                });
+            }
+            </text>
+        }
+
+        // Delete product functionality (same pattern as CategoryType)
+        $(document).on('click', '.delete-product', function () {
+            productId = $(this).data('id');
+            let name = $(this).data('name');
+            $('#deleteItemName').text(name);
+            $('#deleteModal').modal('show');
+        });
+
+        $('#confirmDeleteBtn').click(function () {
+            $.ajax({
+                url: '/Product/Delete',
+                type: 'POST',
+                data: {
+                    id: productId,
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('#deleteModal').modal('hide');
+                        location.reload(); // Reload to show updated list
+                    } else {
+                        alert("Error deleting: " + (response.message || "Unknown error"));
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong.");
+                }
+            });
+        });
+    });
+</script>
 

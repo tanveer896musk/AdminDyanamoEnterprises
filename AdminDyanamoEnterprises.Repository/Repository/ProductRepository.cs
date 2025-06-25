@@ -221,48 +221,49 @@ namespace AdminDyanamoEnterprises.Repository
         public AddProductType GetProductForEdit(int productId)
         {
             AddProductType product = null;
-            
+
             using (SqlConnection con = new SqlConnection(sqlConnection()))
+            using (SqlCommand cmd = new SqlCommand("[Dynamo].[SP_ProductDetails]", con))
             {
-                // We need a separate query to get the actual IDs since the SP joins return names
-                string query = @"
-                    SELECT p.ProductId, p.ProductName, p.SubCategoryId, p.MaterialID, 
-                           p.ColorId, p.Price, p.Discription, p.Instock, p.FabricID, 
-                           p.PatternID, p.Active, sc.CategoryId
-                    FROM Products p
-                    INNER JOIN MasterSubCategory sc ON p.SubCategoryId = sc.SubCategoryId
-                    WHERE p.ProductId = @ProductId";
-                
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Mode", "EDIT");
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+
+                // Only add these two output parameters
+                cmd.Parameters.Add("@ErrorCode", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@ErrorMessage", SqlDbType.VarChar, 250).Direction = ParameterDirection.Output;
+
+                con.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    cmd.Parameters.AddWithValue("@ProductId", productId);
-                    
-                    con.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
+                        product = new AddProductType()
                         {
-                            product = new AddProductType()
-                            {
-                                ProductID = Convert.ToInt32(reader["ProductId"]),
-                                ProductName = reader["ProductName"].ToString(),
-                                SubCategoryID = Convert.ToInt32(reader["SubCategoryId"]),
-                                MaterialID = Convert.ToInt32(reader["MaterialID"]),
-                                ColorID = Convert.ToInt32(reader["ColorId"]),
-                                Price = Convert.ToDecimal(reader["Price"]),
-                                Description = reader["Discription"].ToString(),
-                                InStock = Convert.ToInt32(reader["Instock"]),
-                                FabricID = Convert.ToInt32(reader["FabricID"]),
-                                PatternID = Convert.ToInt32(reader["PatternID"]),
-                                IsActive = Convert.ToBoolean(reader["Active"]),
-                                CategoryID = Convert.ToInt32(reader["CategoryId"])
-                            };
-                        }
+                            ProductID = Convert.ToInt32(reader["ProductId"]),
+                            ProductName = reader["ProductName"].ToString(),
+                            SubCategoryID = Convert.ToInt32(reader["SubCategoryId"]),
+                            MaterialID = Convert.ToInt32(reader["MaterialID"]),
+                            ColorID = Convert.ToInt32(reader["ColorId"]),
+                            Price = Convert.ToDecimal(reader["Price"]),
+                            Description = reader["Discription"].ToString(),
+                            InStock = Convert.ToInt32(reader["Instock"]),
+                            FabricID = Convert.ToInt32(reader["FabricID"]),
+                            PatternID = Convert.ToInt32(reader["PatternID"]),
+                            IsActive = Convert.ToBoolean(reader["Active"]),
+                            CategoryID = Convert.ToInt32(reader["CategoryId"])
+                        };
                     }
                 }
+
+                // Optional: Read the output message and error code (if needed)
+                int errorCode = Convert.ToInt32(cmd.Parameters["@ErrorCode"].Value);
+                string errorMessage = cmd.Parameters["@ErrorMessage"].Value.ToString();
+                // You can log or handle errorCode/message as needed
             }
-            
+
             return product;
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Banner Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -327,3 +327,125 @@
     </script>
 }
 
+ *@
+
+@model List<AdminDyanamoEnterprises.DTOs.Master.BannerImage>
+@{
+    ViewData["Title"] = "Banner Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.Any())
+{
+    <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="@Url.Content("~/uploads/" + Model[i].Image)" class="d-block w-100" style="height:760px;object-fit:cover;" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model[i].BannerType</h5>
+                    </div>
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+}
+
+<div class="container-fluid">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Upload Banner</h5>
+            </div>
+            <div class="card-body row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Banner Type</label>
+                    <select class="form-select" name="bannerType" required>
+                        <option value="">-- Select Type --</option>
+                        @foreach (var type in ViewBag.BannerTypes as List<string>)
+                        {
+                            <option value="@type" selected="@(ViewBag.BannerType == type)">
+                                @type
+                            </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Banner Images</label>
+                    <input type="file" name="ImageFile" class="form-control" multiple required />
+                    <small class="text-muted">Upload JPG/PNG images. Max 5MB each.</small>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end mt-3">
+                    <button type="submit" class="btn btn-success">
+                        <i class="las la-upload me-1"></i> Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Uploaded Banners</h5>
+        </div>
+        <div class="card-body table-responsive">
+            @if (Model != null && Model.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>BannerType</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var banner in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="~/uploads/@banner.Image" class="img-thumbnail" style="width:100px;height:40px;object-fit:cover;" />
+                                </td>
+                                <td>@banner.BannerType</td>
+                                <td>@banner.CreatedDate.ToShortDateString()</td>
+                                <td>
+                                    @if (banner.Active)
+                                    {
+                                        <span class="badge bg-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Delete" asp-route-id="@banner.BannerID" class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Delete this banner?')">
+                                        <i class="las la-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="text-center text-muted py-4">No banners uploaded yet.</div>
+            }
+        </div>
+    </div>
+</div>

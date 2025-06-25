@@ -32,7 +32,7 @@ namespace AdminDyanamoEnterprises.Controllers
         // ✅ Add banner (GET)
         public IActionResult Create()
         {
-            ViewBag.BannerTypes = new List<string> { "Home", "Category", "SubCategory", "Product", "Fabric" ,"Pattern" ,"Colors" };
+            ViewBag.BannerTypes = new List<string> { "Home", "Category", "SubCategory", "Product", "Fabric", "Pattern", "Colors" };
             return View();
         }
 
@@ -55,7 +55,7 @@ namespace AdminDyanamoEnterprises.Controllers
                     _repo.AddBanner(fileName, bannerType);
                 }
 
-                return RedirectToAction("Index", new { type = bannerType });
+                return RedirectToAction("Banner","Banner", new { type = bannerType });
             }
 
             TempData["Error"] = "Please select image(s) and banner type.";
@@ -66,7 +66,7 @@ namespace AdminDyanamoEnterprises.Controllers
         public IActionResult Delete(int id)
         {
             _repo.DeleteBanner(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Banner", "Banner");
         }
     }
 }

@@ -363,6 +363,9 @@ namespace AdminDyanamoEnterprises.Controllers
         }
         #endregion
 
-
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }

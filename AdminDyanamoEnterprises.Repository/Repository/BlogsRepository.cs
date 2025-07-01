@@ -24,7 +24,7 @@ namespace AdminDyanamoEnterprises.Repository
 
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con)
+                SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -56,7 +56,7 @@ namespace AdminDyanamoEnterprises.Repository
             BlogsModel blog = null;
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con);
+                SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Action", "GETBYID");
                 cmd.Parameters.AddWithValue("@BlogId", id);
@@ -85,7 +85,7 @@ namespace AdminDyanamoEnterprises.Repository
         {
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con)
+                SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -109,7 +109,7 @@ namespace AdminDyanamoEnterprises.Repository
         {
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.SP_ManageBlogs", con);
+                SqlCommand cmd = new SqlCommand("SP_ManageBlogs", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Action", "UPDATE");
                 cmd.Parameters.AddWithValue("@BlogId", model.BlogId);

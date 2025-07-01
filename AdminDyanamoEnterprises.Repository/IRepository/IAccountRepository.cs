@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace AdminDyanamoEnterprises.Repository
     public interface IAccountRepository
     {
         public bool CheckLogin(LoginType loginType);
-
+        public (int ErrorCode, string ErrorMessage) RegisterUser(RegisterType registerType);
     }
 }

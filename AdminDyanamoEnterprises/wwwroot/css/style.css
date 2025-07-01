@@ -1,0 +1,444 @@
+﻿/* Basic Resets & Global Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* A modern, clean font - you might need to link this from Google Fonts */
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll issues */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center the container */
+    padding: 0 15px; /* Add some padding on the sides */
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent by default */
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
+}
+
+.section_tittle {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+    .section_tittle h2 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #2c2c2c;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+        .section_tittle h2 span {
+            color: #ff6a00; /* Example accent color */
+        }
+
+/* --- Header Part --- */
+.main_menu {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand img {
+    height: 40px; /* Adjust logo size */
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #333;
+    font-weight: 500;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+}
+
+    .navbar-nav .nav-item .nav-link:hover,
+    .navbar-nav .nav-item.active .nav-link {
+        color: #ff6a00; /* Hover and active link color */
+    }
+
+.navbar-nav .nav-item.dropdown .dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-item {
+    padding: 10px 20px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+    .navbar-nav .nav-item.dropdown .dropdown-item:hover {
+        background-color: #f8f8f8;
+        color: #ff6a00;
+    }
+
+.hearer_icon a {
+    font-size: 20px;
+    color: #333;
+    margin-left: 20px;
+    transition: all 0.3s ease;
+}
+
+    .hearer_icon a:hover {
+        color: #ff6a00;
+    }
+
+.hearer_icon .cart .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.search_input {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001; /* Above the header */
+}
+
+.search-inner {
+    width: 60%;
+    max-width: 600px;
+    position: relative;
+}
+
+    .search-inner input {
+        width: 100%;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .search-inner button {
+        background-color: #ff6a00;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        font-size: 18px;
+        width: 80px; /* Adjust button width */
+    }
+
+    .search-inner .ti-close {
+        position: absolute;
+        top: -30px;
+        right: 0;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+
+/* --- Banner Part --- */
+.banner_part {
+    background-color: #f5f5f5; /* Light background for the banner */
+    padding: 100px 0;
+    position: relative; /* For the slider-counter */
+}
+
+.banner_slider .single_banner_slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner_text_iner h1 {
+    font-size: 60px;
+    font-weight: 700;
+    color: #2c2c2c;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.banner_text_iner p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn_2 {
+    display: inline-block;
+    background-color: #ff6a00;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn_2:hover {
+        background-color: #e65c00;
+    }
+
+.banner_img {
+    text-align: right;
+}
+
+    .banner_img img {
+        max-height: 500px; /* Adjust image height */
+        object-fit: contain;
+    }
+
+.slider-counter {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #999;
+}
+
+/* Owl Carousel Customizations (assuming you're using Owl Carousel) */
+/* You'll likely have specific Owl Carousel CSS files, but here are some overrides */
+.owl-theme .owl-nav.disabled + .owl-dots {
+    margin-top: 20px;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    background: #ccc;
+    width: 10px;
+    height: 10px;
+    margin: 5px 7px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: #ff6a00;
+}
+
+
+/* --- Feature Part --- */
+.feature_part {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
+.single_feature_post_text {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px; /* Space between feature boxes */
+}
+
+    .single_feature_post_text img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .single_feature_post_text p {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .single_feature_post_text h3 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c2c2c;
+        margin-bottom: 15px;
+    }
+
+.feature_btn {
+    display: inline-flex;
+    align-items: center;
+    color: #ff6a00;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+    .feature_btn i {
+        margin-left: 10px;
+        font-size: 14px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .feature_btn:hover {
+        color: #e65c00;
+    }
+
+        .feature_btn:hover i {
+            margin-left: 15px;
+        }
+
+/* --- Product List Part --- */
+.product_list {
+    padding: 100px 0;
+    background-color: #f9f9f9;
+}
+
+.single_product_item {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .single_product_item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .single_product_item img {
+        max-height: 200px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+.single_product_text h4 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.single_product_text h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff6a00;
+    margin-bottom: 15px;
+}
+
+.single_product_text .add_cart {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .single_product_text .add_cart:hover {
+        background-color: #ff6a00;
+        color: #fff;
+    }
+
+    .single_product_text .add_cart i {
+        margin-left: 8px;
+        font-size: 16px;
+    }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        padding: 10px 15px;
+    }
+
+    .banner_text_iner h1 {
+        font-size: 40px;
+    }
+
+    .banner_img {
+        display: none !important; /* Hide banner image on smaller screens */
+    }
+
+    .feature_part .col-lg-7,
+    .feature_part .col-lg-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .single_feature_post_text {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section_tittle h2 {
+        font-size: 30px;
+    }
+
+    .banner_part {
+        padding: 60px 0;
+    }
+
+    .banner_text_iner h1 {
+        font-size: 32px;
+    }
+
+    .banner_text_iner p {
+        font-size: 14px;
+    }
+
+    .btn_2 {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+
+    .slider-counter {
+        display: none; /* Hide counter on very small screens */
+    }
+
+    .product_list {
+        padding: 60px 0;
+    }
+
+    .single_product_item {
+        padding: 15px;
+    }
+
+        .single_product_item img {
+            max-height: 150px;
+        }
+
+    .single_product_text h3 {
+        font-size: 18px;
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Account;
 using AdminDyanamoEnterprises.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Http;
@@ -36,7 +37,7 @@ namespace AdminDyanamoEnterprises.Controllers
                     if (isValidUser)
                     {
                         _notyf.Success("Login successful!");
-                        return RedirectToAction("CategoryType", "Master");
+                        return RedirectToAction("Dashboard", "Master");
                     }
                 }
                 else
@@ -52,5 +53,27 @@ namespace AdminDyanamoEnterprises.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Registration(RegisterType registerType)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _iaccountRepository.RegisterUser(registerType);
+
+                if (result.ErrorCode == 0)
+                {
+                   
+                    _notyf.Success(result.ErrorMessage);
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError(nameof(registerType.Emailid), result.ErrorMessage);
+                }
+            }
+
+            return View(registerType);
+        }
+
     }
 }

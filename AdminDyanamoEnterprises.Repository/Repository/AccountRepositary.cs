@@ -1,4 +1,5 @@
 ﻿using AdminDyanamoEnterprises.DTOs;
+using AdminDyanamoEnterprises.DTOs.Account;
 using AdminDyanamoEnterprises.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,44 @@ namespace AdminDyanamoEnterprises.Repository
                 }
             }
         }
+
+        public (int ErrorCode, string ErrorMessage) RegisterUser(RegisterType registerType)
+        {
+            using (SqlConnection con = new SqlConnection(sqlConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_InsertUser", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Fullname", registerType.Fullname);
+                    cmd.Parameters.AddWithValue("@Emailid", registerType.Emailid);
+                    cmd.Parameters.AddWithValue("@mobileno", registerType.mobileno);
+                    cmd.Parameters.AddWithValue("@password", registerType.password);
+
+                    // Define output parameters
+                    SqlParameter errorCodeParam = new SqlParameter("@ErrorCode", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(errorCodeParam);
+
+                    SqlParameter returnMessageParam = new SqlParameter("@ReturnMessage", SqlDbType.NVarChar, 200)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(returnMessageParam);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                    int errorCode = (int)errorCodeParam.Value;
+                    string errorMessage = returnMessageParam.Value.ToString();
+
+                    return (errorCode, errorMessage);
+                }
+            }
+        }
+
 
     }
 }

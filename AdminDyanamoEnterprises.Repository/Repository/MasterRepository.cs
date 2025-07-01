@@ -28,7 +28,7 @@ namespace AdminDyanamoEnterprises.Repository
 
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeleteCategory", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteCategory", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -69,7 +69,7 @@ namespace AdminDyanamoEnterprises.Repository
             List<CategoryType> categorynames = new List<CategoryType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeleteCategory", con);
+                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeleteCategory", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@CategoryID", DBNull.Value);
@@ -121,7 +121,7 @@ namespace AdminDyanamoEnterprises.Repository
 
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con))
+                using (SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeletePattern", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -160,7 +160,7 @@ namespace AdminDyanamoEnterprises.Repository
             List<PatternType> patternNames = new List<PatternType>();
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                SqlCommand cmd = new SqlCommand("Dynamo.Sp_InsertOrUpdateOrDeletePattern", con);
+                SqlCommand cmd = new SqlCommand("Sp_InsertOrUpdateOrDeletePattern", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Pass appropriate values for 'select' action
@@ -315,7 +315,7 @@ namespace AdminDyanamoEnterprises.Repository
 
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT SubCategoryId, CategoryId, SubCategoryName FROM [DynamoEnterprise].[Dynamo].[MasterSubCategory] WHERE CategoryId = @CategoryId", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT SubCategoryId, CategoryId, SubCategoryName FROM [MasterSubCategory] WHERE CategoryId = @CategoryId", con))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@CategoryId", categoryId);

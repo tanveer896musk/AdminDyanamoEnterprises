@@ -1,0 +1,756 @@
+﻿
+<head>
+    <style>
+        .hero {
+            background: url('~/images/Productimages/01.png') center center/cover no-repeat;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-icons a {
+            color: #fff;
+            margin: 0 8px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .hero-icons a:hover {
+                color: #00aced; /* change color on hover */
+            }
+
+        .hero-button {
+            margin-top: 20px;
+            background-color: #28a745; /* green */
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+
+    </style>
+</head>
+    
+<body data-sidebar-size="collapsed">
+
+  
+    <section class="hero">
+        <img src="~/images/Productimages/01.png" alt="Background" class="hero-bg">
+        <div class="hero-content text-center text-white">
+            <h1 class="hero-title">Gladys P. Davidson</h1>
+            <p class="hero-subtitle">I'm Product Designer</p>
+            <div class="hero-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+            <a href="#" class="btn btn-primary hero-button">Check Our Product</a>
+        </div>
+    </section>
+    <div class="page-wrapper">
+
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
+                            <h4 class="page-title">Dashboard</h4>
+                            <div class="">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="#">Mifty</a>
+                                    </li><!--end nav-item-->
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </div>                            
+                        </div><!--end page-title-box-->
+                    </div><!--end col-->
+                </div><!--end row-->
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
+                                        <i class="iconoir-dollar-circle fs-4"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-truncate">
+                                        <p class="text-dark mb-0 fw-semibold fs-14">Total Revenue</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">8.5%</span>
+                                            Increase from last month</p>
+                                    </div><!--end media-body-->
+                                </div><!--end media-->
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col">                                        
+                                        <h3 class="mt-2 mb-0 fw-bold">$8365.00</h3>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col align-self-center">
+                                        <img src="~/images/favicon.png" alt="" class="img-fluid">
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="flex-shrink-0 bg-info-subtle text-info thumb-md rounded-circle">
+                                        <i class="iconoir-cart fs-4"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-truncate">
+                                        <p class="text-dark mb-0 fw-semibold fs-14">New Order</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">1.7%</span>
+                                            Increase from last month</p>
+                                    </div><!--end media-body-->
+                                </div><!--end media-->
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col">                                        
+                                        <h3 class="mt-2 mb-0 fw-bold">865</h3>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col align-self-center">
+                                        <img src="~/images/favicon.png" alt="" class="img-fluid">
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="flex-shrink-0 bg-warning-subtle text-warning thumb-md rounded-circle">
+                                        <i class="iconoir-percentage-circle fs-4"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-truncate">
+                                        <p class="text-dark mb-0 fw-semibold fs-14">Sessions</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-danger">0.7%</span>
+                                            Decrease from last month</p>
+                                    </div><!--end media-body-->
+                                </div><!--end media-->
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col">                                        
+                                        <h3 class="mt-2 mb-0 fw-bold">155</h3>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col align-self-center">
+                                        <img src="~/images/favicon.png" alt="" class="img-fluid">
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="flex-shrink-0 bg-danger-subtle text-danger thumb-md rounded-circle">
+                                        <i class="iconoir-hexagon-dice fs-4"></i>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2 text-truncate">
+                                        <p class="text-dark mb-0 fw-semibold fs-14">Avg. Order value</p>
+                                        <p class="mb-0 text-truncate text-muted"><span class="text-success">2.7%</span>
+                                            Increase from last month</p>
+                                    </div><!--end media-body-->
+                                </div><!--end media-->
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col">                                        
+                                        <h3 class="mt-2 mb-0 fw-bold">$12550.00</h3>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col align-self-center">
+                                        <img src="~/images/favicon.png" alt="" class="img-fluid">
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->                    
+                </div>
+                <!--end row-->
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">                      
+                                        <h4 class="card-title">Monthly Avg. Income</h4>                      
+                                    </div><!--end col-->
+                                    <div class="col-auto"> 
+                                        <div class="dropdown">
+                                            <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="icofont-calendar fs-5 me-1"></i> This Month<i class="las la-angle-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Today</a>
+                                                <a class="dropdown-item" href="#">Last Week</a>
+                                                <a class="dropdown-item" href="#">Last Month</a>
+                                                <a class="dropdown-item" href="#">This Year</a>
+                                            </div>
+                                        </div>               
+                                    </div><!--end col-->
+                                </div>  <!--end row-->                                  
+                            </div><!--end card-header-->
+                            <div class="card-body pt-0">
+                                <div id="monthly_income" class="apex-charts" style="min-height: 305px;"><div id="apexcharts1ipplnrr" class="apexcharts-canvas apexcharts1ipplnrr apexcharts-theme-light" style="width: 314px; height: 290px;"><svg id="SvgjsSvg1181" width="314" height="290" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg apexcharts-zoomable" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><foreignObject x="0" y="0" width="314" height="290"><div class="apexcharts-legend apexcharts-align-right apx-legend-position-top" xmlns="http://www.w3.org/1999/xhtml" style="right: 0px; position: absolute; left: 0px; top: 4px; max-height: 145px;"><div class="apexcharts-legend-series" rel="1" seriesname="NewxVisits" data:collapsed="false" style="margin: 2px 5px;"><span class="apexcharts-legend-marker" rel="1" data:collapsed="false" style="background: rgb(42, 119, 244) !important; color: rgb(42, 119, 244); height: 12px; width: 12px; left: 0px; top: 0px; border-width: 0px; border-color: rgb(255, 255, 255); border-radius: 12px;"></span><span class="apexcharts-legend-text" rel="1" i="0" data:default-text="New%20Visits" data:collapsed="false" style="color: rgb(55, 61, 63); font-size: 12px; font-weight: 400; font-family: Helvetica, Arial, sans-serif;">New Visits</span></div><div class="apexcharts-legend-series" rel="2" seriesname="UniquexVisits" data:collapsed="false" style="margin: 2px 5px;"><span class="apexcharts-legend-marker" rel="2" data:collapsed="false" style="background: rgba(42, 118, 244, 0.4) !important; color: rgba(42, 118, 244, 0.4); height: 12px; width: 12px; left: 0px; top: 0px; border-width: 0px; border-color: rgb(255, 255, 255); border-radius: 12px;"></span><span class="apexcharts-legend-text" rel="2" i="1" data:default-text="Unique%20Visits" data:collapsed="false" style="color: rgb(55, 61, 63); font-size: 12px; font-weight: 400; font-family: Helvetica, Arial, sans-serif;">Unique Visits</span></div></div><style type="text/css">
+      .apexcharts-legend {
+        display: flex;
+        overflow: auto;
+        padding: 0 10px;
+      }
+      .apexcharts-legend.apx-legend-position-bottom, .apexcharts-legend.apx-legend-position-top {
+        flex-wrap: wrap
+      }
+      .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+        flex-direction: column;
+        bottom: 0;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-left, .apexcharts-legend.apx-legend-position-top.apexcharts-align-left, .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+        justify-content: flex-start;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-center, .apexcharts-legend.apx-legend-position-top.apexcharts-align-center {
+        justify-content: center;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right, .apexcharts-legend.apx-legend-position-top.apexcharts-align-right {
+        justify-content: flex-end;
+      }
+      .apexcharts-legend-series {
+        cursor: pointer;
+        line-height: normal;
+      }
+      .apexcharts-legend.apx-legend-position-bottom .apexcharts-legend-series, .apexcharts-legend.apx-legend-position-top .apexcharts-legend-series{
+        display: flex;
+        align-items: center;
+      }
+      .apexcharts-legend-text {
+        position: relative;
+        font-size: 14px;
+      }
+      .apexcharts-legend-text *, .apexcharts-legend-marker * {
+        pointer-events: none;
+      }
+      .apexcharts-legend-marker {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 3px;
+        border-style: solid;
+      }
+
+      .apexcharts-legend.apexcharts-align-right .apexcharts-legend-series, .apexcharts-legend.apexcharts-align-left .apexcharts-legend-series{
+        display: inline-block;
+      }
+      .apexcharts-legend-series.apexcharts-no-click {
+        cursor: auto;
+      }
+      .apexcharts-legend .apexcharts-hidden-zero-series, .apexcharts-legend .apexcharts-hidden-null-series {
+        display: none !important;
+      }
+      .apexcharts-inactive-legend {
+        opacity: 0.45;
+      }</style></foreignObject><rect id="SvgjsRect1186" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1274" class="apexcharts-yaxis" rel="0" transform="translate(15.359375, 0)"><g id="SvgjsG1275" class="apexcharts-yaxis-texts-g"><text id="SvgjsText1277" font-family="Helvetica, Arial, sans-serif" x="20" y="51.5" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1278">250</tspan><title>250</title></text><text id="SvgjsText1280" font-family="Helvetica, Arial, sans-serif" x="20" y="91.9696" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1281">200</tspan><title>200</title></text><text id="SvgjsText1283" font-family="Helvetica, Arial, sans-serif" x="20" y="132.4392" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1284">150</tspan><title>150</title></text><text id="SvgjsText1286" font-family="Helvetica, Arial, sans-serif" x="20" y="172.90879999999999" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1287">100</tspan><title>100</title></text><text id="SvgjsText1289" font-family="Helvetica, Arial, sans-serif" x="20" y="213.3784" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1290">50</tspan><title>50</title></text><text id="SvgjsText1292" font-family="Helvetica, Arial, sans-serif" x="20" y="253.848" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1293">0</tspan><title>0</title></text></g></g><g id="SvgjsG1183" class="apexcharts-inner apexcharts-graphical" transform="translate(33.359375, 50)"><defs id="SvgjsDefs1182"><clipPath id="gridRectMask1ipplnrr"><rect id="SvgjsRect1188" width="272.470703125" height="206.348" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMask1ipplnrr"></clipPath><clipPath id="nonForecastMask1ipplnrr"></clipPath><clipPath id="gridRectMarkerMask1ipplnrr"><rect id="SvgjsRect1189" width="272.470703125" height="206.348" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1194" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1195" stop-opacity="1" stop-color="rgba(42,119,244,1)" offset="1"></stop><stop id="SvgjsStop1196" stop-opacity="1" stop-color="rgba(255,255,255,1)" offset="1"></stop><stop id="SvgjsStop1197" stop-opacity="1" stop-color="rgba(255,255,255,1)" offset="1"></stop></linearGradient><linearGradient id="SvgjsLinearGradient1203" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1204" stop-opacity="0.4" stop-color="rgba(42,118,244,0.4)" offset="1"></stop><stop id="SvgjsStop1205" stop-opacity="1" stop-color="rgba(255,255,255,1)" offset="1"></stop><stop id="SvgjsStop1206" stop-opacity="1" stop-color="rgba(255,255,255,1)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1187" x1="0" y1="0" x2="0" y2="202.348" stroke="#b6b6b6" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="202.348" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><line id="SvgjsLine1213" x1="0" y1="203.348" x2="0" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1214" x1="24.406427556818183" y1="203.348" x2="24.406427556818183" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1215" x1="48.81285511363637" y1="203.348" x2="48.81285511363637" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1216" x1="73.21928267045455" y1="203.348" x2="73.21928267045455" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1217" x1="97.62571022727273" y1="203.348" x2="97.62571022727273" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1218" x1="122.03213778409092" y1="203.348" x2="122.03213778409092" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1219" x1="146.4385653409091" y1="203.348" x2="146.4385653409091" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1220" x1="170.84499289772728" y1="203.348" x2="170.84499289772728" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1221" x1="195.25142045454547" y1="203.348" x2="195.25142045454547" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1222" x1="219.65784801136365" y1="203.348" x2="219.65784801136365" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1223" x1="244.06427556818184" y1="203.348" x2="244.06427556818184" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><line id="SvgjsLine1224" x1="268.470703125" y1="203.348" x2="268.470703125" y2="209.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-linecap="butt" class="apexcharts-xaxis-tick"></line><g id="SvgjsG1209" class="apexcharts-grid"><g id="SvgjsG1210" class="apexcharts-gridlines-horizontal"><line id="SvgjsLine1226" x1="0" y1="40.4696" x2="268.470703125" y2="40.4696" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1227" x1="0" y1="80.9392" x2="268.470703125" y2="80.9392" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1228" x1="0" y1="121.4088" x2="268.470703125" y2="121.4088" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1229" x1="0" y1="161.8784" x2="268.470703125" y2="161.8784" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line></g><g id="SvgjsG1211" class="apexcharts-gridlines-vertical"></g><line id="SvgjsLine1232" x1="0" y1="202.348" x2="268.470703125" y2="202.348" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line><line id="SvgjsLine1231" x1="0" y1="1" x2="0" y2="202.348" stroke="transparent" stroke-dasharray="0" stroke-linecap="butt"></line></g><g id="SvgjsG1212" class="apexcharts-grid-borders"><line id="SvgjsLine1225" x1="0" y1="0" x2="268.470703125" y2="0" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1230" x1="0" y1="202.348" x2="268.470703125" y2="202.348" stroke="#e0e0e0" stroke-dasharray="3" stroke-linecap="butt" class="apexcharts-gridline"></line><line id="SvgjsLine1273" x1="0" y1="203.348" x2="268.470703125" y2="203.348" stroke="#e0e0e0" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt"></line></g><g id="SvgjsG1190" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1200" class="apexcharts-series" zIndex="1" seriesName="UniquexVisits" data:longestSeries="true" rel="2" data:realIndex="1"><path id="SvgjsPath1207" d="M 0 202.348 L 0 186.16016000000002 L 24.406427556818183 105.22096000000002 L 48.81285511363637 32.37568 L 73.21928267045455 121.40880000000001 L 97.62571022727273 105.22095999999999 L 122.0321377840909 137.59664 L 146.4385653409091 129.50272 L 170.84499289772728 153.78448000000003 L 195.25142045454547 153.78448 L 219.65784801136363 178.06624000000002 L 244.0642755681818 174.01928 L 268.470703125 202.348 L 268.470703125 202.348M 268.470703125 202.348z" fill="url(#SvgjsLinearGradient1203)" fill-opacity="1" stroke-opacity="1" stroke-linecap="round" stroke-width="0" stroke-dasharray="4" class="apexcharts-area" index="1" clip-path="url(#gridRectMask1ipplnrr)" pathTo="M 0 202.348 L 0 186.16016000000002 L 24.406427556818183 105.22096000000002 L 48.81285511363637 32.37568 L 73.21928267045455 121.40880000000001 L 97.62571022727273 105.22095999999999 L 122.0321377840909 137.59664 L 146.4385653409091 129.50272 L 170.84499289772728 153.78448000000003 L 195.25142045454547 153.78448 L 219.65784801136363 178.06624000000002 L 244.0642755681818 174.01928 L 268.470703125 202.348 L 268.470703125 202.348M 268.470703125 202.348z" pathFrom="M -1 202.348 L -1 202.348 L 24.406427556818183 202.348 L 48.81285511363637 202.348 L 73.21928267045455 202.348 L 97.62571022727273 202.348 L 122.0321377840909 202.348 L 146.4385653409091 202.348 L 170.84499289772728 202.348 L 195.25142045454547 202.348 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348"></path><path id="SvgjsPath1208" d="M 0 186.16016000000002 L 24.406427556818183 105.22096000000002 L 48.81285511363637 32.37568 L 73.21928267045455 121.40880000000001 L 97.62571022727273 105.22095999999999 L 122.0321377840909 137.59664 L 146.4385653409091 129.50272 L 170.84499289772728 153.78448000000003 L 195.25142045454547 153.78448 L 219.65784801136363 178.06624000000002 L 244.0642755681818 174.01928 L 268.470703125 202.348" fill="none" fill-opacity="1" stroke-opacity="1" stroke-linecap="round" stroke-width="0" stroke-dasharray="4" class="apexcharts-area" index="1" clip-path="url(#gridRectMask1ipplnrr)" pathTo="M 0 186.16016000000002 L 24.406427556818183 105.22096000000002 L 48.81285511363637 32.37568 L 73.21928267045455 121.40880000000001 L 97.62571022727273 105.22095999999999 L 122.0321377840909 137.59664 L 146.4385653409091 129.50272 L 170.84499289772728 153.78448000000003 L 195.25142045454547 153.78448 L 219.65784801136363 178.06624000000002 L 244.0642755681818 174.01928 L 268.470703125 202.348" pathFrom="M -1 202.348 L -1 202.348 L 24.406427556818183 202.348 L 48.81285511363637 202.348 L 73.21928267045455 202.348 L 97.62571022727273 202.348 L 122.0321377840909 202.348 L 146.4385653409091 202.348 L 170.84499289772728 202.348 L 195.25142045454547 202.348 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348" fill-rule="evenodd"></path><g id="SvgjsG1201" class="apexcharts-series-markers-wrap apexcharts-hidden-element-shown" data:realIndex="1"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1298" r="0" cx="0" cy="0" class="apexcharts-marker wjijplts9 no-pointer-events" stroke="#ffffff" fill="rgba(42, 118, 244, .4)" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1191" class="apexcharts-series" zIndex="0" seriesName="NewxVisits" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1198" d="M 0 202.348 L 0 202.348 L 24.406427556818183 169.97232000000002 L 48.81285511363637 129.50272 L 73.21928267045455 169.97232000000002 L 97.62571022727273 161.8784 L 122.0321377840909 178.06624000000002 L 146.4385653409091 174.01928 L 170.84499289772728 186.16016000000002 L 195.25142045454547 194.25408000000002 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348 L 268.470703125 202.348M 268.470703125 202.348z" fill="url(#SvgjsLinearGradient1194)" fill-opacity="1" stroke-opacity="1" stroke-linecap="round" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask1ipplnrr)" pathTo="M 0 202.348 L 0 202.348 L 24.406427556818183 169.97232000000002 L 48.81285511363637 129.50272 L 73.21928267045455 169.97232000000002 L 97.62571022727273 161.8784 L 122.0321377840909 178.06624000000002 L 146.4385653409091 174.01928 L 170.84499289772728 186.16016000000002 L 195.25142045454547 194.25408000000002 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348 L 268.470703125 202.348M 268.470703125 202.348z" pathFrom="M -1 202.348 L -1 202.348 L 24.406427556818183 202.348 L 48.81285511363637 202.348 L 73.21928267045455 202.348 L 97.62571022727273 202.348 L 122.0321377840909 202.348 L 146.4385653409091 202.348 L 170.84499289772728 202.348 L 195.25142045454547 202.348 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348"></path><path id="SvgjsPath1199" d="M 0 202.348 L 24.406427556818183 169.97232000000002 L 48.81285511363637 129.50272 L 73.21928267045455 169.97232000000002 L 97.62571022727273 161.8784 L 122.0321377840909 178.06624000000002 L 146.4385653409091 174.01928 L 170.84499289772728 186.16016000000002 L 195.25142045454547 194.25408000000002 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348" fill="none" fill-opacity="1" stroke-opacity="1" stroke-linecap="round" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask1ipplnrr)" pathTo="M 0 202.348 L 24.406427556818183 169.97232000000002 L 48.81285511363637 129.50272 L 73.21928267045455 169.97232000000002 L 97.62571022727273 161.8784 L 122.0321377840909 178.06624000000002 L 146.4385653409091 174.01928 L 170.84499289772728 186.16016000000002 L 195.25142045454547 194.25408000000002 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348" pathFrom="M -1 202.348 L -1 202.348 L 24.406427556818183 202.348 L 48.81285511363637 202.348 L 73.21928267045455 202.348 L 97.62571022727273 202.348 L 122.0321377840909 202.348 L 146.4385653409091 202.348 L 170.84499289772728 202.348 L 195.25142045454547 202.348 L 219.65784801136363 202.348 L 244.0642755681818 202.348 L 268.470703125 202.348" fill-rule="evenodd"></path><g id="SvgjsG1192" class="apexcharts-series-markers-wrap apexcharts-hidden-element-shown" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1297" r="0" cx="0" cy="0" class="apexcharts-marker wvw5jb8cc no-pointer-events" stroke="#ffffff" fill="#2a77f4" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1202" class="apexcharts-datalabels" data:realIndex="1"></g><g id="SvgjsG1193" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1233" x1="0" y1="0" x2="268.470703125" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1234" x1="0" y1="0" x2="268.470703125" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1235" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1236" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"><text id="SvgjsText1238" font-family="Helvetica, Arial, sans-serif" x="0" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1239">Jan</tspan><title>Jan</title></text><text id="SvgjsText1241" font-family="Helvetica, Arial, sans-serif" x="24.40642755681818" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1242">Feb</tspan><title>Feb</title></text><text id="SvgjsText1244" font-family="Helvetica, Arial, sans-serif" x="48.81285511363636" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1245">Mar</tspan><title>Mar</title></text><text id="SvgjsText1247" font-family="Helvetica, Arial, sans-serif" x="73.21928267045455" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1248">Apr</tspan><title>Apr</title></text><text id="SvgjsText1250" font-family="Helvetica, Arial, sans-serif" x="97.62571022727273" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1251">May</tspan><title>May</title></text><text id="SvgjsText1253" font-family="Helvetica, Arial, sans-serif" x="122.0321377840909" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1254">Jun</tspan><title>Jun</title></text><text id="SvgjsText1256" font-family="Helvetica, Arial, sans-serif" x="146.4385653409091" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1257">Jul</tspan><title>Jul</title></text><text id="SvgjsText1259" font-family="Helvetica, Arial, sans-serif" x="170.84499289772728" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1260">Aug</tspan><title>Aug</title></text><text id="SvgjsText1262" font-family="Helvetica, Arial, sans-serif" x="195.25142045454547" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1263">Sep</tspan><title>Sep</title></text><text id="SvgjsText1265" font-family="Helvetica, Arial, sans-serif" x="219.65784801136365" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1266">Oct</tspan><title>Oct</title></text><text id="SvgjsText1268" font-family="Helvetica, Arial, sans-serif" x="244.06427556818184" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1269">Nov</tspan><title>Nov</title></text><text id="SvgjsText1271" font-family="Helvetica, Arial, sans-serif" x="268.47070312500006" y="231.348" text-anchor="middle" dominant-baseline="auto" font-size="12px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-xaxis-label " style="font-family: Helvetica, Arial, sans-serif;"><tspan id="SvgjsTspan1272">Dec</tspan><title>Dec</title></text></g></g><g id="SvgjsG1294" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1295" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1296" class="apexcharts-point-annotations"></g><rect id="SvgjsRect1299" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-zoom-rect"></rect><rect id="SvgjsRect1300" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe" class="apexcharts-selection-rect"></rect></g></svg><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-title" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"></div><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(42, 119, 244);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 2;"><span class="apexcharts-tooltip-marker" style="background-color: rgba(42, 118, 244, 0.4);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-xaxistooltip apexcharts-xaxistooltip-bottom apexcharts-theme-light"><div class="apexcharts-xaxistooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>                                
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">                      
+                                        <h4 class="card-title">Customers</h4>                      
+                                    </div><!--end col-->
+                                    <div class="col-auto">                                    
+                                        <div class="img-group d-flex">
+                                            <a class="user-avatar position-relative d-inline-block" href="#">
+                                                <img src="~/images/favicon.png" alt="avatar" class="thumb-md shadow-sm rounded-circle">
+                                            </a>
+                                            <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
+                                                <img src="~/images/favicon.png" alt="avatar" class="thumb-md shadow-sm rounded-circle">
+                                            </a>
+                                            <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
+                                                <img src="~/images/favicon.png" alt="avatar" class="thumb-md shadow-sm rounded-circle">
+                                            </a>
+                                            <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
+                                                <img src="~/images/favicon.png" alt="avatar" class="thumb-md shadow-sm rounded-circle">
+                                            </a>
+                                            <a href="" class="user-avatar position-relative d-inline-block ms-1">
+                                                <span class="thumb-md shadow-sm justify-content-center d-flex align-items-center bg-info-subtle rounded-circle fw-semibold fs-6">+6</span>
+                                            </a>                    
+                                        </div>                 
+                                    </div><!--end col-->
+                                </div>  <!--end row-->                                  
+                            </div>
+                            <div class="card-body pt-0">
+                                <div id="customers" class="apex-charts" style="min-height: 217.7px;"><div id="apexchartsao63ykh8h" class="apexcharts-canvas apexchartsao63ykh8h apexcharts-theme-light" style="width: 314px; height: 217.7px;"><svg id="SvgjsSvg1162" width="314" height="217.7" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><foreignObject x="0" y="0" width="314" height="217.7"><div class="apexcharts-legend apexcharts-align-center apx-legend-position-bottom" xmlns="http://www.w3.org/1999/xhtml" style="inset: auto 0px 5px 20px; position: absolute; max-height: 125px;"><div class="apexcharts-legend-series" rel="1" seriesname="Currenet" data:collapsed="false" style="margin: 2px 5px;"><span class="apexcharts-legend-marker" rel="1" data:collapsed="false" style="background: rgb(111, 106, 248) !important; color: rgb(111, 106, 248); height: 12px; width: 12px; left: 0px; top: 0px; border-width: 0px; border-color: rgb(255, 255, 255); border-radius: 12px;"></span><span class="apexcharts-legend-text" rel="1" i="0" data:default-text="Currenet" data:collapsed="false" style="color: rgb(55, 61, 63); font-size: 13px; font-weight: 400; font-family: &quot;Be Vietnam Pro&quot;, sans-serif;">Currenet</span></div><div class="apexcharts-legend-series" rel="2" seriesname="New" data:collapsed="false" style="margin: 2px 5px;"><span class="apexcharts-legend-marker" rel="2" data:collapsed="false" style="background: rgb(8, 176, 231) !important; color: rgb(8, 176, 231); height: 12px; width: 12px; left: 0px; top: 0px; border-width: 0px; border-color: rgb(255, 255, 255); border-radius: 12px;"></span><span class="apexcharts-legend-text" rel="2" i="1" data:default-text="New" data:collapsed="false" style="color: rgb(55, 61, 63); font-size: 13px; font-weight: 400; font-family: &quot;Be Vietnam Pro&quot;, sans-serif;">New</span></div><div class="apexcharts-legend-series" rel="3" seriesname="Retargeted" data:collapsed="false" style="margin: 2px 5px;"><span class="apexcharts-legend-marker" rel="3" data:collapsed="false" style="background: rgb(255, 199, 40) !important; color: rgb(255, 199, 40); height: 12px; width: 12px; left: 0px; top: 0px; border-width: 0px; border-color: rgb(255, 255, 255); border-radius: 12px;"></span><span class="apexcharts-legend-text" rel="3" i="2" data:default-text="Retargeted" data:collapsed="false" style="color: rgb(55, 61, 63); font-size: 13px; font-weight: 400; font-family: &quot;Be Vietnam Pro&quot;, sans-serif;">Retargeted</span></div></div><style type="text/css">
+      .apexcharts-legend {
+        display: flex;
+        overflow: auto;
+        padding: 0 10px;
+      }
+      .apexcharts-legend.apx-legend-position-bottom, .apexcharts-legend.apx-legend-position-top {
+        flex-wrap: wrap
+      }
+      .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+        flex-direction: column;
+        bottom: 0;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-left, .apexcharts-legend.apx-legend-position-top.apexcharts-align-left, .apexcharts-legend.apx-legend-position-right, .apexcharts-legend.apx-legend-position-left {
+        justify-content: flex-start;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-center, .apexcharts-legend.apx-legend-position-top.apexcharts-align-center {
+        justify-content: center;
+      }
+      .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-right, .apexcharts-legend.apx-legend-position-top.apexcharts-align-right {
+        justify-content: flex-end;
+      }
+      .apexcharts-legend-series {
+        cursor: pointer;
+        line-height: normal;
+      }
+      .apexcharts-legend.apx-legend-position-bottom .apexcharts-legend-series, .apexcharts-legend.apx-legend-position-top .apexcharts-legend-series{
+        display: flex;
+        align-items: center;
+      }
+      .apexcharts-legend-text {
+        position: relative;
+        font-size: 14px;
+      }
+      .apexcharts-legend-text *, .apexcharts-legend-marker * {
+        pointer-events: none;
+      }
+      .apexcharts-legend-marker {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        margin-right: 3px;
+        border-style: solid;
+      }
+
+      .apexcharts-legend.apexcharts-align-right .apexcharts-legend-series, .apexcharts-legend.apexcharts-align-left .apexcharts-legend-series{
+        display: inline-block;
+      }
+      .apexcharts-legend-series.apexcharts-no-click {
+        cursor: auto;
+      }
+      .apexcharts-legend .apexcharts-hidden-zero-series, .apexcharts-legend .apexcharts-hidden-null-series {
+        display: none !important;
+      }
+      .apexcharts-inactive-legend {
+        opacity: 0.45;
+      }</style></foreignObject><g id="SvgjsG1164" class="apexcharts-inner apexcharts-graphical" transform="translate(12, 0)"><defs id="SvgjsDefs1163"><clipPath id="gridRectMaskao63ykh8h"><rect id="SvgjsRect1165" width="298" height="191" x="-3" y="-3" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="forecastMaskao63ykh8h"></clipPath><clipPath id="nonForecastMaskao63ykh8h"></clipPath><clipPath id="gridRectMarkerMaskao63ykh8h"><rect id="SvgjsRect1166" width="296" height="189" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath></defs><g id="SvgjsG1167" class="apexcharts-pie"><g id="SvgjsG1168" transform="translate(0, 0) scale(1)"><circle id="SvgjsCircle1169" r="67.39512195121952" cx="146" cy="92.5" fill="transparent"></circle><g id="SvgjsG1170" class="apexcharts-slices"><g id="SvgjsG1171" class="apexcharts-series apexcharts-pie-series" seriesName="Currenet" rel="1" data:realIndex="0"><path id="SvgjsPath1172" d="M 146 8.256097560975604 A 84.2439024390244 84.2439024390244 0 0 1 146 176.7439024390244 L 146 159.89512195121952 A 67.39512195121952 67.39512195121952 0 0 0 146 25.104878048780478 L 146 8.256097560975604 z " fill="rgba(111,106,248,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-0" index="0" j="0" data:angle="180" data:startAngle="0" data:strokeWidth="2" data:value="50" data:pathOrig="M 146 8.256097560975604 A 84.2439024390244 84.2439024390244 0 0 1 146 176.7439024390244 L 146 159.89512195121952 A 67.39512195121952 67.39512195121952 0 0 0 146 25.104878048780478 L 146 8.256097560975604 z " stroke="transparent"></path></g><g id="SvgjsG1173" class="apexcharts-series apexcharts-pie-series" seriesName="New" rel="2" data:realIndex="1"><path id="SvgjsPath1174" d="M 146 176.7439024390244 A 84.2439024390244 84.2439024390244 0 0 1 61.756097560975604 92.50000000000001 L 78.60487804878048 92.50000000000001 A 67.39512195121952 67.39512195121952 0 0 0 146 159.89512195121952 L 146 176.7439024390244 z " fill="rgba(8,176,231,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-1" index="0" j="1" data:angle="90" data:startAngle="180" data:strokeWidth="2" data:value="25" data:pathOrig="M 146 176.7439024390244 A 84.2439024390244 84.2439024390244 0 0 1 61.756097560975604 92.50000000000001 L 78.60487804878048 92.50000000000001 A 67.39512195121952 67.39512195121952 0 0 0 146 159.89512195121952 L 146 176.7439024390244 z " stroke="transparent"></path></g><g id="SvgjsG1175" class="apexcharts-series apexcharts-pie-series" seriesName="Retargeted" rel="3" data:realIndex="2"><path id="SvgjsPath1176" d="M 61.756097560975604 92.50000000000001 A 84.2439024390244 84.2439024390244 0 0 1 145.98529666535174 8.25609884408361 L 145.9882373322814 25.10487907526688 A 67.39512195121952 67.39512195121952 0 0 0 78.60487804878048 92.50000000000001 L 61.756097560975604 92.50000000000001 z " fill="rgba(255,199,40,1)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="2" stroke-dasharray="0" class="apexcharts-pie-area apexcharts-donut-slice-2" index="0" j="2" data:angle="90" data:startAngle="270" data:strokeWidth="2" data:value="25" data:pathOrig="M 61.756097560975604 92.50000000000001 A 84.2439024390244 84.2439024390244 0 0 1 145.98529666535174 8.25609884408361 L 145.9882373322814 25.10487907526688 A 67.39512195121952 67.39512195121952 0 0 0 78.60487804878048 92.50000000000001 L 61.756097560975604 92.50000000000001 z " stroke="transparent"></path></g></g></g></g><line id="SvgjsLine1177" x1="0" y1="0" x2="292" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" stroke-linecap="butt" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1178" x1="0" y1="0" x2="292" y2="0" stroke-dasharray="0" stroke-width="0" stroke-linecap="butt" class="apexcharts-ycrosshairs-hidden"></line></g></svg><div class="apexcharts-tooltip apexcharts-theme-dark"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(111, 106, 248);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 2;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(8, 176, 231);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div><div class="apexcharts-tooltip-series-group" style="order: 3;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(255, 199, 40);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-y-label"></span><span class="apexcharts-tooltip-text-y-value"></span></div><div class="apexcharts-tooltip-goals-group"><span class="apexcharts-tooltip-text-goals-label"></span><span class="apexcharts-tooltip-text-goals-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div></div></div> 
+                                <div class="bg-light py-3 px-2 mb-0 mt-3 text-center rounded">                                                                                       
+                                    <h6 class="mb-0"><i class="icofont-calendar fs-5 me-1"></i>  01 January 2024 to 31 December 2024</h6>                                                                       
+                                </div> 
+                            </div><!--end card-body--> 
+                        </div><!--end card--> 
+                    </div> <!--end col--> 
+                </div>
+                <!--end row-->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">                      
+                                        <h4 class="card-title">Top Selling by Country</h4>                      
+                                    </div><!--end col-->
+                                    <div class="col-auto"> 
+                                        <div class="dropdown">
+                                            <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="icofont-calendar fs-5 me-1"></i> This Month<i class="las la-angle-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Today</a>
+                                                <a class="dropdown-item" href="#">Last Week</a>
+                                                <a class="dropdown-item" href="#">Last Month</a>
+                                                <a class="dropdown-item" href="#">This Year</a>
+                                            </div>
+                                        </div>               
+                                    </div><!--end col-->
+                                </div>  <!--end row-->                                  
+                            </div><!--end card-header-->
+                            <div class="card-body pt-0">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <tbody>
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">USA</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 85%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">85%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$5860.00</span></td>  
+                                            </tr><!--end tr-->  
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">Spain</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 78%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">78%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$5422.00</span></td>  
+                                            </tr><!--end tr--> 
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">French</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 71%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">71%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$4587.00</span></td>  
+                                            </tr><!--end tr--> 
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">Germany</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">65%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$3655.00</span></td>  
+                                            </tr><!--end tr--> 
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">Bahamas</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 48%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">48%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$3325.00</span></td>  
+                                            </tr><!--end tr-->
+                                            <tr class="">                                                        
+                                                <td class="px-0">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/favicon.png" class="me-2 align-self-center thumb-md rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0 text-truncate">Russia</h6>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress bg-primary-subtle w-100" style="height:4px;" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                    <div class="progress-bar bg-primary" style="width: 35%"></div>
+                                                                </div> 
+                                                                <small class="flex-shrink-1 ms-1">35%</small>
+                                                            </div>                                                                                    
+                                                        </div><!--end media body-->
+                                                    </div><!--end media-->
+                                                </td>
+                                                <td class="px-0 text-end"><span class="text-body ps-2 align-self-center text-end fw-medium">$2275.00</span></td>  
+                                            </tr><!--end tr-->       
+                                        </tbody>
+                                    </table> <!--end table-->                                               
+                                </div><!--end /div-->                           
+                            </div><!--end card-body--> 
+                        </div><!--end card--> 
+                    </div> <!--end col--> 
+                    <div class="col-md-6 col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">                      
+                                        <h4 class="card-title">Popular Products</h4>                      
+                                    </div><!--end col-->
+                                    <div class="col-auto"> 
+                                        <div class="dropdown">
+                                            <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="icofont-calendar fs-5 me-1"></i> This Year<i class="las la-angle-down ms-1"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="#">Today</a>
+                                                <a class="dropdown-item" href="#">Last Week</a>
+                                                <a class="dropdown-item" href="#">Last Month</a>
+                                                <a class="dropdown-item" href="#">This Year</a>
+                                            </div>
+                                        </div>               
+                                    </div><!--end col-->
+                                </div>  <!--end row-->                                  
+                            </div><!--end card-header-->
+                            <div class="card-body pt-0">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="border-top-0">Product</th>
+                                                <th class="border-top-0">Price</th>
+                                                <th class="border-top-0">Sell</th>
+                                                <th class="border-top-0">Status</th>
+                                                <th class="border-top-0">Action</th>
+                                            </tr><!--end tr-->
+                                        </thead>
+                                        <tbody>
+                                            <tr>                                                        
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/productimages/01.png" height="40" class="me-3 align-self-center rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0">History Book</h6>
+                                                            <a href="#" class="fs-12 text-primary">ID: A3652</a>                                                                                           
+                                                        </div><!--end media body-->
+                                                    </div>
+                                                </td>
+                                                <td>$50 <del class="text-muted fs-10">$70</del></td>                                   
+                                                <td>450 <small class="text-muted">(550)</small></td>
+                                                <td><span class="badge bg-primary-subtle text-primary px-2">Stock</span></td>
+                                                <td>                                                       
+                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
+                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                </td>
+                                            </tr><!--end tr-->     
+                                            <tr>                                                        
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/productimages/02.png" height="40" class="me-3 align-self-center rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0">Colorful Pots</h6>
+                                                            <a href="#" class="fs-12 text-primary">ID: A5002</a>                                                                                          
+                                                        </div><!--end media body-->
+                                                    </div>
+                                                </td>
+                                                <td>$99 <del class="text-muted fs-10">$150</del></td>                                   
+                                                <td>750 <small class="text-muted">(00)</small></td>
+                                                <td><span class="badge bg-danger-subtle text-danger px-2">Out of Stock</span></td>
+                                                <td>                                                       
+                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
+                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                </td>
+                                            </tr><!--end tr-->    
+                                            <tr>                                                        
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/productimages/03.png" height="40" class="me-3 align-self-center rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0">Pearl Bracelet</h6>
+                                                            <a href="#" class="fs-12 text-primary">ID: A6598</a>                                                                                           
+                                                        </div><!--end media body-->
+                                                    </div>
+                                                </td>
+                                                <td>$199 <del class="text-muted fs-10">$250</del></td>                                   
+                                                <td>280 <small class="text-muted">(220)</small></td>
+                                                <td><span class="badge bg-primary-subtle text-primary px-2">Stock</span></td>
+                                                <td>                                                       
+                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
+                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                </td>
+                                            </tr><!--end tr-->    
+                                            <tr>                                                        
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/productimages/04.png" height="40" class="me-3 align-self-center rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0">Dancing Man</h6>
+                                                            <a href="#" class="fs-12 text-primary">ID: A9547</a>                                                                                            
+                                                        </div><!--end media body-->
+                                                    </div>
+                                                </td>
+                                                <td>$40 <del class="text-muted fs-10">$49</del></td>                                   
+                                                <td>500 <small class="text-muted">(1000)</small></td>
+                                                <td><span class="badge bg-danger-subtle text-danger px-2">Out of Stock</span></td>
+                                                <td>                                                       
+                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
+                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                </td>
+                                            </tr><!--end tr-->    
+                                            <tr>                                                        
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="~/images/productimages/05.png" height="40" class="me-3 align-self-center rounded" alt="...">
+                                                        <div class="flex-grow-1 text-truncate"> 
+                                                            <h6 class="m-0">Fire Lamp</h6>
+                                                            <a href="#" class="fs-12 text-primary">ID: A2047</a>                                                                                            
+                                                        </div><!--end media body-->
+                                                    </div>
+                                                </td>
+                                                <td>$80 <del class="text-muted fs-10">$59</del></td>                                   
+                                                <td>800 <small class="text-muted">(2000)</small></td>
+                                                <td><span class="badge bg-danger-subtle text-danger px-2">Out of Stock</span></td>
+                                                <td>                                                       
+                                                    <a href="#"><i class="las la-pen text-secondary fs-18"></i></a>
+                                                    <a href="#"><i class="las la-trash-alt text-secondary fs-18"></i></a>
+                                                </td>
+                                            </tr><!--end tr-->                           
+                                        </tbody>
+                                    </table> <!--end table-->                                               
+                                </div><!--end /div-->
+                            </div><!--end card-body--> 
+                        </div><!--end card--> 
+                    </div> <!--end col-->            
+                </div><!--end row-->
+            </div><!-- container -->
+
+            <!--Start Rightbar-->
+            <!--Start Rightbar/offcanvas-->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="Appearance" aria-labelledby="AppearanceLabel">
+                <div class="offcanvas-header border-bottom justify-content-between">
+                  <h5 class="m-0 font-14" id="AppearanceLabel">Appearance</h5>
+                  <button type="button" class="btn-close text-reset p-0 m-0 align-self-center" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">  
+                    <h6>Account Settings</h6>
+                    <div class="p-2 text-start mt-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch1">
+                            <label class="form-check-label" for="settings-switch1">Auto updates</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch2" checked="">
+                            <label class="form-check-label" for="settings-switch2">Location Permission</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="settings-switch3">
+                            <label class="form-check-label" for="settings-switch3">Show offline Contacts</label>
+                        </div><!--end form-switch-->
+                    </div><!--end /div-->
+                    <h6>General Settings</h6>
+                    <div class="p-2 text-start mt-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch4">
+                            <label class="form-check-label" for="settings-switch4">Show me Online</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch5" checked="">
+                            <label class="form-check-label" for="settings-switch5">Status visible to all</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="settings-switch6">
+                            <label class="form-check-label" for="settings-switch6">Notifications Popup</label>
+                        </div><!--end form-switch-->
+                    </div><!--end /div-->               
+                </div><!--end offcanvas-body-->
+            </div>
+            <!--end Rightbar/offcanvas-->
+            <!--end Rightbar-->
+            <!--Start Footer-->
+            
+          
+
+          
+        </div>
+        <!-- end page content -->
+    </div>
+
+    <section class="hero">
+        <div class="hero-content text-center text-white">
+            <h1 class="hero-title">Gladys P. Davidson</h1>
+            <p class="hero-subtitle">I'm Product Designer</p>
+            <div class="hero-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+            <a href="#" class="btn btn-primary hero-button">Download Now</a>
+        </div>
+    </section>
+
+    <!-- end page-wrapper -->
+
+    <!-- Javascript  -->
+    <!-- vendor js -->
+    
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="https://apexcharts.com/samples/assets/stock-prices.js"></script>
+    <script src="assets/js/pages/index.init.js"></script>
+    <script src="assets/js/app.js"></script>
+
+
+
+<svg id="SvgjsSvg1138" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1139"></defs><polyline id="SvgjsPolyline1140" points="0,0"></polyline><path id="SvgjsPath1141" d="M-1 202.348L-1 202.348L53.40642755681818 202.348L106.81285511363636 202.348L160.21928267045453 202.348L213.62571022727272 202.348L267.0321377840909 202.348L320.43856534090907 202.348L373.84499289772725 202.348L427.25142045454544 202.348L480.6578480113636 202.348L534.0642755681818 202.348L587.470703125 202.348C587.470703125 202.348 587.470703125 202.348 587.470703125 202.348 "></path></svg></body>

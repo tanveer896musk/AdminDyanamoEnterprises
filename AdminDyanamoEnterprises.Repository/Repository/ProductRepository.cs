@@ -32,7 +32,7 @@ namespace AdminDyanamoEnterprises.Repository
             
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.SP_ProductDetails", con))
+                using (SqlCommand cmd = new SqlCommand("SP_ProductDetails", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     
@@ -85,7 +85,7 @@ namespace AdminDyanamoEnterprises.Repository
             
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.SP_ProductDetails", con))
+                using (SqlCommand cmd = new SqlCommand("SP_ProductDetails", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     
@@ -137,7 +137,7 @@ namespace AdminDyanamoEnterprises.Repository
             
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.SP_ProductDetails", con))
+                using (SqlCommand cmd = new SqlCommand("SP_ProductDetails", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     
@@ -185,7 +185,7 @@ namespace AdminDyanamoEnterprises.Repository
             
             using (SqlConnection con = new SqlConnection(sqlConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("Dynamo.SP_ProductDetails", con))
+                using (SqlCommand cmd = new SqlCommand("SP_ProductDetails", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     
@@ -223,7 +223,7 @@ namespace AdminDyanamoEnterprises.Repository
             AddProductType product = null;
 
             using (SqlConnection con = new SqlConnection(sqlConnection()))
-            using (SqlCommand cmd = new SqlCommand("[Dynamo].[SP_ProductDetails]", con))
+            using (SqlCommand cmd = new SqlCommand("[SP_ProductDetails]", con))
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Mode", "EDIT");

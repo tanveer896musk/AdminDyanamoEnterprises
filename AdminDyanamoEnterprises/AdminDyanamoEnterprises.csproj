@@ -22,4 +22,10 @@
     <Folder Include="wwwroot\images\BannerImage\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\css\.DS_Store" />
+    <None Include="wwwroot\css\css\mixins\.DS_Store" />
+    <None Include="wwwroot\js\js\.DS_Store" />
+  </ItemGroup>
+
 </Project>

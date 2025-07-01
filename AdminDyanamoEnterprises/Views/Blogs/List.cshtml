@@ -1,56 +1,211 @@
 ﻿@model IEnumerable<AdminDyanamoEnterprises.DTOs.BlogsModel>
 
-<input type="text" id="search" placeholder="Search..." class="form-control mb-2" />
-<a href="/Blogs/AddBlog" class="btn btn-success mb-2">+ Add New Blog</a>
+@{
+    ViewData["Title"] = "Manage Blogs";
+}
 
-<table class="table table-bordered" id="blogsTable">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Published</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <img src="@Url.Content("~/" + item.ImageUrl)" alt="Blog Image"
-                         width="50" height="50" style="object-fit:cover; margin-right:10px;" />
-                    @item.Title
-                </td>
-                <td>@item.Category</td>
-                <td>@item.Author</td>
-                <td>
-                    <input type="checkbox" class="publish-toggle" data-id="@item.BlogId" @(item.Published ? "checked" : "") />
-                    <span class="publish-status @(item.Published ? "text-success" : "text-danger")">
-                        @(item.Published ? "Published" : "Not Published")
-                    </span>
-                </td>
-                <td>
-                    <a href="@Url.Action("EditBlog", "Blogs", new { id = item.BlogId })" class="btn btn-primary btn-sm mb-2">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    |
-                    <button type="button"
-                            class="btn btn-danger btn-sm mb-2"
-                            data-bs-toggle="modal"
-                            data-bs-target="#confirmModal"
-                            data-blog-id="@item.BlogId"
-                            data-blog-title="@item.Title">
-                        <i class="fas fa-trash-alt"></i> Delete
-                    </button>
-                </td>
+<style>
+    /* Custom CSS for enhanced attractiveness */
 
-            </tr>
+    body {
+        background-color: #f8f9fa; /* Light background for the page */
+    }
+
+    .header-section {
+        background: linear-gradient(to right, #4e73df, #224abe); /* Blue gradient header */
+        color: white;
+        padding: 30px 0;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .header-section h2 {
+            font-weight: 700;
         }
-    </tbody>
-</table>
 
-<!-- Delete Confirmation Modal -->
+    .search-input-group .form-control {
+        border-radius: 0.5rem;
+        border: 1px solid #ced4da;
+        padding: 0.75rem 1rem;
+    }
+
+    .search-input-group .input-group-text {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        background-color: #e9ecef;
+        border-right: none;
+    }
+
+    .blog-card-img {
+        height: 220px; /* Slightly taller for better visual impact */
+        object-fit: cover;
+        width: 100%;
+        border-top-left-radius: calc(0.75rem - 1px); /* Match card border-radius */
+        border-top-right-radius: calc(0.75rem - 1px);
+    }
+
+    .card {
+        border-radius: 0.75rem; /* More rounded corners for cards */
+        overflow: hidden; /* Ensure image corners respect card radius */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Stronger initial shadow */
+    }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.01); /* More pronounced lift and slight scale */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Much stronger shadow on hover */
+        }
+
+    .card-title {
+        font-size: 1.35rem; /* Larger title */
+        font-weight: 600;
+        color: #343a40; /* Darker title color */
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text small {
+        color: #6c757d; /* Muted text for details */
+    }
+
+    .badge {
+        font-size: 0.85em; /* Slightly larger badge */
+        padding: 0.4em 0.7em;
+        border-radius: 0.3rem;
+    }
+
+    .publish-status {
+        font-weight: 600; /* Bolder status text */
+    }
+
+    .card-footer-actions {
+        border-top: 1px solid #e9ecef; /* Separator for actions */
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+
+    .modal-header.bg-danger {
+        background-color: #dc3545 !important; /* Ensure Bootstrap red */
+    }
+
+    .btn-outline-primary {
+        color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+    /* Adjustments for switch label alignment */
+    .form-check-label.publish-status {
+        margin-left: 0.75rem; /* Add space between switch and text */
+        line-height: 1.5; /* Align text vertically with switch */
+    }
+</style>
+
+<div class="container-fluid pt-0">
+    <div class="header-section text-center mb-5">
+        <h3 class="mb-0">
+            <i class="fas fa-blog me-2"></i>Admin Blog Dashboard
+        </h3>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4 px-3">
+        <h4 class="mb-0 text-secondary">
+            <i class="fas fa-grip-horizontal me-2"></i>Your Blog Posts
+        </h4>
+        <a href="/Blogs/AddBlog" class="btn btn-success btn-lg shadow-sm">
+            <i class="fas fa-plus-circle me-2"></i>Add New Blog
+        </a>
+    </div>
+
+    <div class="row mb-5 justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="input-group search-input-group shadow-sm">
+                <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="text" id="search" placeholder="Search blogs by title, category, or author..."
+                       class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info alert-dismissible fade show m-4 text-center" role="alert">
+            <h4 class="alert-heading">No Blogs Found!</h4>
+            <p>It looks like there are no blogs to display yet. Let's create some amazing content!</p>
+            <hr>
+            <p class="mb-0">Click the "Add New Blog" button above to get started.</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="blogsGrid">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="@Url.Content("~/" + item.ImageUrl)" class="card-img-top blog-card-img" alt="Blog Image: @item.Title" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-truncate" title="@item.Title">@item.Title</h5>
+                            <p class="card-text mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-layer-group me-1"></i>Category: <span class="badge bg-primary">@item.Category</span>
+                                </small>
+                            </p>
+                            <p class="card-text mb-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-feather-alt me-1"></i>Author: @item.Author
+                                </small>
+                            </p>
+
+                            <div class="card-footer-actions mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check form-switch d-flex align-items-center">
+                                        <input class="form-check-input publish-toggle" type="checkbox"
+                                               role="switch" data-id="@item.BlogId"
+                                               @(item.Published ? "checked" : "") id="publishSwitch_@item.BlogId">
+                                        <label class="form-check-label publish-status @(item.Published ? "text-success" : "text-danger")" for="publishSwitch_@item.BlogId">
+                                            @(item.Published ? "Published" : "Draft")
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a href="@Url.Action("EditBlog", "Blogs", new { id = item.BlogId })"
+                                       class="btn btn-outline-primary btn-sm" title="Edit Blog">
+                                        <i class="fas fa-edit me-1"></i> Edit
+                                    </a>
+                                    <button type="button" class="btn btn-outline-danger btn-sm"
+                                            data-bs-toggle="modal" data-bs-target="#confirmModal"
+                                            data-blog-id="@item.BlogId" data-blog-title="@item.Title"
+                                            title="Delete Blog">
+                                        <i class="fas fa-trash-alt me-1"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -59,15 +214,21 @@
                 <input type="hidden" name="id" id="deleteBlogId" />
 
                 <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="confirmModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Confirm Deletion
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center">
-                    <p>Are you sure you want to delete <strong id="blogTitle"></strong>?</p>
+                <div class="modal-body text-center py-4">
+                    <p class="lead">Are you sure you want to delete the blog "<strong id="blogTitle" class="text-danger"></strong>"?</p>
+                    <p class="text-muted">This action cannot be undone.</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger px-4">
+                        <i class="fas fa-trash-alt me-2"></i>Delete Forever
+                    </button>
                 </div>
             </form>
         </div>
@@ -77,10 +238,10 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // 🔍 Search filter
+            // 🔍 Search filter for grid
             $("#search").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $("#blogsTable tbody tr").filter(function () {
+                $("#blogsGrid .col").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                 });
             });
@@ -90,22 +251,24 @@
                 var checkbox = $(this);
                 var blogId = checkbox.data('id');
                 var isChecked = checkbox.is(':checked');
+                var statusLabel = checkbox.siblings('.publish-status'); // Target the label for text update
 
                 $.ajax({
-                    url: '/Blogs/TogglePublish',
+                    url: '/Blogs/TogglePublish', // Ensure this URL is correct for your controller
                     type: 'POST',
                     data: { id: blogId, published: isChecked },
                     success: function () {
-                        var status = checkbox.closest('td').find('.publish-status');
                         if (isChecked) {
-                            status.text('Published').removeClass('text-danger').addClass('text-success');
+                            statusLabel.text('Published').removeClass('text-danger').addClass('text-success');
                         } else {
-                            status.text('Not Published').removeClass('text-success').addClass('text-danger');
+                            statusLabel.text('Draft').removeClass('text-success').addClass('text-danger');
                         }
+                        // Optionally add a toast notification here
                     },
-                    error: function () {
-                        alert('Failed to update publish status.');
-                        checkbox.prop('checked', !isChecked);
+                    error: function (xhr, status, error) {
+                        alert('Failed to update publish status. Please try again.');
+                        checkbox.prop('checked', !isChecked); // Revert checkbox state on error
+                        console.error("AJAX Error: ", status, error, xhr.responseText);
                     }
                 });
             });
@@ -125,4 +288,3 @@
         });
     </script>
 }
-
